@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const profile_setting = () => {
+const Profile_Setting = () => {
   const [updating, setUpdating] = useState(false);
   const [username, setUsername] = useState("");
   
@@ -68,4 +68,4 @@ const profile_setting = () => {
   )
 }
 
-export default profile_setting
+export default Profile_Setting;

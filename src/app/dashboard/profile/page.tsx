@@ -1,9 +1,9 @@
 'use client'
 
 import { createClient } from "@/lib/supabase"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { useCallback, useEffect, useState } from "react"
 
 type Profile = {
     id: string
@@ -20,11 +20,7 @@ const ProfilePage = () => {
     const supabase = createClient();
     const router = useRouter();
 
-    useEffect(() => {
-        getProfile();
-    }, []);
-
-    const getProfile = async () => {
+    const getProfile = useCallback(async () => {
         try {
             setLoading(true);
 
@@ -51,7 +47,11 @@ const ProfilePage = () => {
         } finally {
             setLoading(false);
         }
-    }
+    }, [router, supabase]);
+
+    useEffect(() => {
+        getProfile();
+    }, [getProfile]);
 
     if (loading) {
         return <div>loading...</div>
