@@ -1,10 +1,15 @@
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 const withVanillaExtract = createVanillaExtractPlugin();
 
-module.exports = withVanillaExtract({
+const nextConfig = {
   reactStrictMode: true,
-  webpack: (config) => {
+  images: {
+    domains: ["cdn2.thecatapi.com"],
+  },
+  webpack: (config: { cache: boolean; }) => {
     config.cache = false;
     return config;
   },
-});
+};
+
+module.exports = withVanillaExtract(nextConfig);
