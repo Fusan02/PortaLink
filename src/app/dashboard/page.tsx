@@ -18,6 +18,7 @@ export default async function DashboardPage() {
       <Link href="/dashboard/profile">プロフィール</Link>
       <ul>サービス一覧
         <li><Link href="/dashboard/ToDoApp">ToDoApp</Link></li>
+        <li><Link href="/dashboard/catgen">猫画像ジェネレーター</Link></li>
       </ul>      
       <Logout />
     </div>
