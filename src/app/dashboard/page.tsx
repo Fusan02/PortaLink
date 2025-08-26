@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import Logout from './components/Logout'
+import LogoutButton from './components/LogoutButton'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -20,7 +20,7 @@ export default async function DashboardPage() {
         <li><Link href="/dashboard/ToDoApp">ToDoApp</Link></li>
         <li><Link href="/dashboard/catgen">猫画像ジェネレーター</Link></li>
       </ul>      
-      <Logout />
+      <LogoutButton />
     </div>
   )
 }

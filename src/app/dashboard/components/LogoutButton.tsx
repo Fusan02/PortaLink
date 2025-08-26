@@ -2,7 +2,7 @@
 import { createClient } from '@/lib/supabase'
 import { redirect } from 'next/navigation'
 
-const Logout = () => {
+const LogoutButton = () => {
   const supabase = createClient()
 
   const handleLogout = async () => {
@@ -15,4 +15,4 @@ const Logout = () => {
   )
 }
 
-export default Logout
+export default LogoutButton
