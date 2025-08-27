@@ -17,7 +17,7 @@ const useUpdateProfile = () => {
             await updateProfile(username);
 
             alert("プロフィールを更新しました!");
-            router.push("/dashboard/profile");
+            router.push("/dashboard");
         } catch (e) {
             console.error(e);
             setError("プロフィールの更新に失敗しました。");

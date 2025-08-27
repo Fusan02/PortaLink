@@ -11,10 +11,19 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
+  // Profileテーブルからusernameを取得
+  const { data: profile } = await supabase
+    .from('Profile')
+    .select('username')
+    .eq('id', user.id)
+    .single()
+
+  const username = profile?.username || user.email
+
   return (
     <div>
       <h1>ダッシュボード</h1>
-      <p>ようこそ、{user.email}さん</p>
+      <p>ようこそ、{username}さん</p>
       <Link href="/dashboard/profile">プロフィール</Link>
       <ul>サービス一覧
         <li><Link href="/dashboard/ToDoApp">ToDoApp</Link></li>
