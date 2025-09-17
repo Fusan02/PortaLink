@@ -11,6 +11,11 @@ const useUpdateProfile = () => {
     const router = useRouter();
 
     const submit = useCallback(async () => {
+        if (!username.trim()) {
+            alert("ユーザー名を入力してください");
+            return;
+        }
+
         try {
             setError(null);
             setUpdating(true);

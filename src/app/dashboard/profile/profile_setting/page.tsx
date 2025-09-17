@@ -3,8 +3,10 @@
 import useUpdateProfile from "@/app/hooks/useUpdateProfile";
 import BackButton from "../../components/BackButton";
 import { page } from "../../styles/view.css";
-import { button, h1 } from "../styles/profile.css";
-import { input, label } from "./styles/p_setting.css";
+import styles from "../styles/profile.css";
+import setting_styles from "./styles/p_setting.css";
+import { TextLabel, TilteText } from "@/components/texts";
+import { Button, InputButton } from "@/components/buttons";
 
 const Profile_Setting = () => {
     const { username, setUsername, updating, submit } = useUpdateProfile();
@@ -12,25 +14,25 @@ const Profile_Setting = () => {
     return (
         <div className={page}>
             <div>
-                <h1 className={h1}>プロフィール設定</h1>
-                <label htmlFor="username" className={label}>ユーザー名</label>
-                <input 
-                    id="username"
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                <TilteText className={styles.title} text="プロフィール設定" />
+                <TextLabel className={setting_styles.label} text="ユーザー名" htmlFor="username" />
+                <InputButton 
+                    className={setting_styles.input} 
+                    id="username" 
+                    type="text" 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)} 
                     placeholder="ユーザー名を入力"
-                    className={input}
                 />
             </div>
             
             <div>
-                <button 
-                    onClick={() => submit()} disabled={updating}
-                    className={button}  
-                >
-                    {updating ? "更新中..." : "プロフィール更新"}
-                </button>
+                <Button
+                    className={styles.button}
+                    onClick={submit}
+                    disabled={updating || !username.trim()}
+                    text= {updating ? "更新中..." : "プロフィール更新"}
+                />
             </div>
             <BackButton />
         </div>

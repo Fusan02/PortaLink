@@ -1,21 +1,26 @@
 import { style } from "@vanilla-extract/css";
 
-export const h1 = style({
+const title = style({
     margin: "20px 0",
 })
 
-export const name = style({
+const subTitle = style({
+    fontSize: "16px",
+    fontWeight: 'bold',
+})
+
+const name = style({
     margin: "10px 0",
     fontSize: "32px"
 })
 
-export const time = style({
+const time = style({
     textAlign: "right",
     width: "100%",
     color: "#a5a5a5ff"
 })
 
-export const button = style({
+const button = style({
     marginTop: "10px",
     padding: "10px",
     borderRadius: "10px",
@@ -24,7 +29,17 @@ export const button = style({
     transition: "background-color 0.3s ease",
     selectors: {
         "&:hover": {
-            backgroundColor: "#f0f0f0",
+            backgroundColor: "#cececeff",
         }
     }
 })
+
+const styles = {
+    title,
+    subTitle,
+    name,
+    time,
+    button
+}
+
+export default styles;

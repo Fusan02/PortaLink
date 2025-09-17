@@ -10,7 +10,7 @@ export const button = style({
     transition: "background-color 0.3s ease",
     selectors: {
         "&:hover": {
-            backgroundColor: "#f0f0f0",
+            backgroundColor: "#cececeff",
         }
     }
 })
