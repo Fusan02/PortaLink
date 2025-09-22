@@ -11,12 +11,30 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  // Profileテーブルからusernameを取得
-  const { data: profile } = await supabase
+  // Profileテーブルからusernameを取得（なければ次に作成）
+  let { data: profile } = await supabase
     .from('Profile')
     .select('username')
     .eq('id', user.id)
     .single()
+
+  // プロフィールが存在しない場合は作成
+  if (!profile) {
+    const { data: newProfile } = await supabase
+      .from('Profile')
+      .insert([
+        {
+          id: user.id,
+          username: user.email?.split('@')[0] || 'User',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+      ])
+      .select()
+      .single()
+
+    profile = newProfile
+  }
 
   const username = profile?.username || user.email
 

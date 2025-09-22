@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { RegisterButton, button, container, form, input, page, title } from './styles/login.css'
+import styles from './styles/login.css'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -53,17 +53,23 @@ export default function LoginPage() {
     }
   }
 
+  const fillTestAccount = () => {
+    setEmail('testuser@test.com')
+    setPassword('test123')
+    setIsSignUp(false)
+  }
+
   return (
-    <div className={page}>
-      <div className={container}>
-        <h2 className={title}>ログイン</h2>
-        <form onSubmit={isSignUp ? handleSignUp : handleLogin} className={form}>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <h2 className={styles.title}>Login</h2>
+        <form onSubmit={isSignUp ? handleSignUp : handleLogin} className={styles.form}>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className={input}
+            className={styles.input}
             required
           />
           <input
@@ -71,14 +77,28 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className={input}
+            className={styles.input}
             required
           />
-          <button type="submit" className={button}>{isSignUp ? '新規登録' : 'ログイン'}</button>
+          <button type="submit" className={styles.button}>{isSignUp ? 'Sign Up' : 'Sign In'}</button>
         </form>
-        <a onClick={() => setIsSignUp(!isSignUp)} className={RegisterButton}>
-          {isSignUp ? 'ログインに切り替え' : '新規登録に切り替え'}
+        <a onClick={() => setIsSignUp(!isSignUp)} className={styles.RegisterButton}>
+          {isSignUp ? 'Sign In' : 'Sign Up'}
         </a>
+        <div className={styles.testLoginBox}>
+          <p className={styles.pTitle}>Try Here!:</p>
+          <button
+            type="button"
+            onClick={fillTestAccount}
+            className={styles.testLoginButton}
+          >
+            Click to Try
+          </button>
+          <p className={styles.pAccount}>
+            Email: testuser@test.com<br/>
+            Password: test123
+          </p>
+        </div>
       </div>
     </div>
   )
