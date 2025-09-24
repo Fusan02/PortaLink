@@ -48,7 +48,7 @@ export default async function DashboardPage() {
   return (
     <div className={`${page} ${styles.pageAdd}`}>
       <h1>DashBoard</h1>
-      <p>ようこそ、{username}さん</p>
+      <p>ようこそ、<span className={styles.username}>{username}</span>さん</p>
       <div className={styles.contents}>
         { /* プロフォール */ }
         <Link href="/dashboard/profile" className={styles.LinkSetting}>
@@ -58,6 +58,7 @@ export default async function DashboardPage() {
           </div>
         </Link>
 
+        <h2>App Services</h2>
         { /* サービス一覧 */ }
         <div className={styles.services}>
           <Link href="/dashboard/ToDoApp" className={styles.LinkSetting}>

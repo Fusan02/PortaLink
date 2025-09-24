@@ -1,6 +1,7 @@
 'use client';
 import { createClient } from '@/lib/supabase';
 import { redirect } from 'next/navigation';
+import styles from './styles/logout.css';
 
 export const LogoutButton = () => {
   const supabase = createClient();
@@ -11,6 +12,6 @@ export const LogoutButton = () => {
   };
 
   return (
-    <button onClick={handleLogout}>ログアウト</button>
+    <button className={styles.logout} onClick={handleLogout}>logout</button>
   );
 };

@@ -9,6 +9,11 @@ const LinkSetting = style({
     textDecoration: 'none',
 });
 
+const username = style({
+    color: '#4CAF50',
+    fontWeight: 'bold',
+});
+
 const icon = style({
     height: '40px',
     color: '#CFCFCF',
@@ -16,6 +21,8 @@ const icon = style({
 
 const contents = style({
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     gap: '20px',
     marginTop: '40px',
     marginBottom: '40px',
@@ -28,14 +35,14 @@ const prifileBox = style({
     alignItems: 'center',
     textAlign: 'center',
     gap: '10px',    
-    width: '150px',
-    height: '200px',
+    width: '130px',
+    height: '180px',
     backgroundColor: '#333333',
     borderRadius: '12px',
 });
 
 const services = style({
-    display: 'flex',    
+    display: 'flex', 
     gap: '20px',
 });
 
@@ -46,8 +53,8 @@ const serviceBox = style({
     alignItems: 'center',
     textAlign: 'center',
     gap: '10px',
-    width: '150px',
-    height: '200px',
+    width: '130px',
+    height: '180px',
     backgroundColor: '#333333',
     borderRadius: '12px',    
 });
@@ -55,6 +62,7 @@ const serviceBox = style({
 const styles = {
     pageAdd,
     LinkSetting,
+    username,
     icon,
     contents,
     prifileBox,
