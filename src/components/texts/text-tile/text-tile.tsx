@@ -1,5 +1,5 @@
-import { toClassNames } from "@/utils/toClassNames_utils";
-import styles from "./text-title.css";
+import { toClassNames } from '@/utils/toClassNames_utils';
+import styles from './text-title.css';
 
 export const TilteText = ({
     className,
@@ -17,5 +17,5 @@ export const TilteText = ({
         >   
             {text}
         </h1>
-    )
-}
+    );
+};

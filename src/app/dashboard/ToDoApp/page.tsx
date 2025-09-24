@@ -1,9 +1,9 @@
-import ToDoApp from "./components/ToDoApp"
+import ToDoApp from './components/ToDoApp';
 
 const page = () => {
   return (
     <ToDoApp />
-  )
-}
+  );
+};
 
-export default page
+export default page;

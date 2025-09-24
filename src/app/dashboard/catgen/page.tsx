@@ -9,7 +9,7 @@ const CatGenerator = async () => {
     <div>
       <CatImage url={catimage.url}/>
     </div>
-  )
-}
+  );
+};
 
 export default CatGenerator;

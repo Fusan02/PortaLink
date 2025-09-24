@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import fetchImage from '../api/fetch-image';
 import { button, catButton, frame, frame_cat, img, page } from '../styles/catgen.css';
 import { useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ const CatImage = ({ url }: CatImageProps) => {
   const [imageUrl, setImageUrl] = useState(url);
 
   const refreshImage = async () => {
-    setImageUrl("");
+    setImageUrl('');
     const image = await fetchImage();
     setImageUrl(image.url);
   };
@@ -38,7 +38,7 @@ const CatImage = ({ url }: CatImageProps) => {
         もどる
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default CatImage;

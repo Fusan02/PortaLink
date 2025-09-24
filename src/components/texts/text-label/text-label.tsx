@@ -1,4 +1,4 @@
-import { toClassNames } from "@/utils/toClassNames_utils";
+import { toClassNames } from '@/utils/toClassNames_utils';
 
 export const TextLabel = ({
     className,
@@ -18,5 +18,5 @@ export const TextLabel = ({
         >
             {text}
         </label>
-    )
-}
+    );
+};

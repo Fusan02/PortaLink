@@ -1,27 +1,27 @@
-'use client'
+'use client';
 
-import { createClient } from '@/lib/supabase'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import styles from './styles/login.css'
+import { createClient } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import styles from './styles/login.css';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSignUp, setIsSignUp] = useState(false)
-  const router = useRouter()
-  const supabase = createClient()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
+  const router = useRouter();
+  const supabase = createClient();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    })
+    });
     if (!error) {
-      router.push('/dashboard')
+      router.push('/dashboard');
     }
-  }
+  };
 
   // Googleログインはコメントアウト。必要に応じて有効化。
   // const handleGoogleLogin = async () => {
@@ -34,30 +34,30 @@ export default function LoginPage() {
   // }
 
   const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       }
-    })
+    });
     if (!error) {
       if (data.user && data.user.identities?.length === 0) {
-        alert('このメールアドレスは既に登録されています。')
+        alert('このメールアドレスは既に登録されています。');
       } else {
-        alert('確認メールを送信しました。メールを確認してください。')
+        alert('確認メールを送信しました。メールを確認してください。');
       }
     } else {
-      alert(`エラー: ${error.message}`)
+      alert(`エラー: ${error.message}`);
     }
-  }
+  };
 
   const fillTestAccount = () => {
-    setEmail('testuser@test.com')
-    setPassword('test123')
-    setIsSignUp(false)
-  }
+    setEmail('testuser@test.com');
+    setPassword('test123');
+    setIsSignUp(false);
+  };
 
   return (
     <div className={styles.page}>
@@ -101,5 +101,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

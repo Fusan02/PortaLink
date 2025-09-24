@@ -1,4 +1,4 @@
-import { toClassNames } from "@/utils/toClassNames_utils";
+import { toClassNames } from '@/utils/toClassNames_utils';
 
 export const Button = ({
     className,
@@ -21,5 +21,5 @@ export const Button = ({
         >
             {text}
         </button>
-    )
-}
+    );
+};

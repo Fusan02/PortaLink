@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase";
+import { createClient } from '@/lib/supabase';
 
 export type Profile = {
     id: string;
@@ -14,20 +14,20 @@ const fetchProfile = async () => {
     if (!user) return { user: null, profile: null };
 
     const { data, error } = await supabase
-        .from("Profile")
-        .select("*")
-        .eq("id", user.id)
+        .from('Profile')
+        .select('*')
+        .eq('id', user.id)
         .single();
 
     if (error) throw error;
     return { user, profile: data as Profile};
-}
+};
 
 const updateProfile = async (username: string) => {
     const supabase = createClient();
 
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) throw new Error("Not authenticated");
+    if (!user) throw new Error('Not authenticated');
 
     const updates = {
         id: user.id,
@@ -35,10 +35,10 @@ const updateProfile = async (username: string) => {
         updated_at: new Date().toISOString(),
     };
 
-    const { error } = await supabase.from("Profile").upsert(updates);
+    const { error } = await supabase.from('Profile').upsert(updates);
     if (error) throw error;
 
     return { ok: true };
-}
+};
 
 export {fetchProfile, updateProfile};

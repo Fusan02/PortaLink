@@ -1,5 +1,4 @@
-import { toClassNames } from "@/utils/toClassNames_utils";
-import { ReactElement } from "react";
+import { toClassNames } from '@/utils/toClassNames_utils';
 
 export const InputButton = ({
     className,
@@ -27,5 +26,5 @@ export const InputButton = ({
             onChange={onChange}
             placeholder={placeholder}
         />
-    )
-}
+    );
+};

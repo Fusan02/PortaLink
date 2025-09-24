@@ -1,5 +1,5 @@
-import { toClassNames } from "@/utils/toClassNames_utils"
-import styles from "./text.css"
+import { toClassNames } from '@/utils/toClassNames_utils';
+import styles from './text.css';
 
 export const Texts = ({
     className,

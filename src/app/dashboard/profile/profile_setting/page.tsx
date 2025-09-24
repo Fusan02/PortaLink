@@ -1,12 +1,11 @@
 'use client';
 
-import useUpdateProfile from "@/app/hooks/useUpdateProfile";
-import BackButton from "../../components/BackButton";
-import { page } from "../../styles/view.css";
-import styles from "../styles/profile.css";
-import setting_styles from "./styles/p_setting.css";
-import { TextLabel, TilteText } from "@/components/texts";
-import { Button, InputButton } from "@/components/buttons";
+import useUpdateProfile from '@/app/hooks/useUpdateProfile';
+import { page } from '../../styles/view.css';
+import styles from '../styles/profile.css';
+import setting_styles from './styles/p_setting.css';
+import { TextLabel, TilteText } from '@/components/texts';
+import { BackButton, Button, InputButton } from '@/components/buttons';
 
 const Profile_Setting = () => {
     const { username, setUsername, updating, submit } = useUpdateProfile();
@@ -31,12 +30,12 @@ const Profile_Setting = () => {
                     className={styles.button}
                     onClick={submit}
                     disabled={updating || !username.trim()}
-                    text= {updating ? "更新中..." : "プロフィール更新"}
+                    text= {updating ? '更新中...' : 'プロフィール更新'}
                 />
             </div>
             <BackButton />
         </div>
-    )
-}
+    );
+};
 
 export default Profile_Setting;
