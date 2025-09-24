@@ -1,66 +1,111 @@
-import { style } from "@vanilla-extract/css";
+import { style } from '@vanilla-extract/css';
 
-export const page = style({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "100vh",
-    flexDirection: "column",
-})
+const page = style({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100vh',
+    flexDirection: 'column',
+});
 
-export const container = style({
-    width: "400px", 
-    padding: "80px",
-    borderRadius: "24px",
-    background: "#a9a8a861",
-})
+const container = style({
+    width: '400px', 
+    padding: '80px',
+    borderRadius: '24px',
+    background: '#181818',
+});
 
-export const title = style({
-    marginBottom: "20px",
-    textAlign: "center",
-    color: "#171717ff"
-})
+const title = style({
+    marginBottom: '20px',
+    fontSize: '40px',
+    fontFamily: 'serif',
+});
 
-export const form = style({
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-    marginBottom: "10px",
-})
+const form = style({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    marginBottom: '10px',
+});
 
-export const input = style({
-    width: "100%",
-    padding: "10px",
-    border: "none",
-    backgroundColor: "#ffffffe0",
-    borderRadius: "5px",
-    fontSize: "16px"
-})
+const input = style({
+    width: '100%',
+    padding: '10px',
+    color: '#EAEAEA',
+    border: '2px solid #333333',
+    backgroundColor: '#222222',
+    borderRadius: '5px',
+    fontSize: '16px'
+});
 
-export const button = style({
-    width: "100%",
-    padding: "10px",
-    color: "#171717ff",
-    border: "none",
-    backgroundColor: "#f9f9f9",
-    borderRadius: "5px",
-    fontSize: "16px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    transition: "background-color 0.3s ease",
+const button = style({
+    width: '100%',
+    padding: '10px',
+    color: '#FFFFFF',
+    border: 'none',
+    backgroundColor: '#A47D52',
+    borderRadius: '5px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
     selectors: {
-        "&:hover": {
-            backgroundColor: "#eaeaeaea"
+        '&:hover': {
+            backgroundColor: '#725639ff'
         }
     }
-})
+});
 
-export const RegisterButton = style({
-    display: "block",
-    textAlign: "right",
-    width: "100%",
-    cursor: "pointer",
-    color: "#2a2a2a81",
-    fontSize: "14px",
-    textDecoration: "underline",
-})
+const RegisterButton = style({
+    display: 'block',
+    textAlign: 'right',
+    width: '100%',
+    cursor: 'pointer',
+    fontSize: '14px',
+    textDecoration: 'underline',
+});
+
+const testLoginBox = style({
+    marginTop: '20px', 
+    padding: '10px', 
+    backgroundColor: '#222222', 
+    border: '2px solid #333333',
+    borderRadius: '5px' 
+});
+
+const pTitle = style({
+    fontSize: '14px', 
+    color: '#bbb'
+});
+
+const testLoginButton = style({
+    marginTop: '5px',
+    padding: '5px 10px',
+    backgroundColor: '#5a442dff',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer'
+});
+
+const pAccount = style({
+    fontSize: '12px', 
+    color: '#aaa', 
+    marginTop: '5px'
+});
+
+const styles = {
+    page,
+    container,
+    title,
+    form,
+    input,
+    button,
+    RegisterButton,
+    testLoginBox,
+    pTitle,
+    testLoginButton,
+    pAccount,
+};
+
+export default styles;

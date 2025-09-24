@@ -1,8 +1,10 @@
-import { useRouter } from 'next/navigation'
-import React from 'react'
+'use client';
+
+import { useRouter } from 'next/navigation';
+import React from 'react';
 import { button } from './styles/backbutton.css';
 
-const BackButton = () => {
+export const BackButton = () => {
   const router = useRouter();
   return (
     <div>
@@ -13,7 +15,5 @@ const BackButton = () => {
         もどる
       </button>
     </div>
-  )
-}
-
-export default BackButton
+  );
+};

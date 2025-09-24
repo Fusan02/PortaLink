@@ -4,7 +4,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["cdn2.thecatapi.com"],
+    domains: ['cdn2.thecatapi.com'],
   },
   webpack: (config: { cache: boolean; }) => {
     config.cache = false;

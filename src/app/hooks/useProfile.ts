@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
-import { fetchProfile, type Profile} from "../services/profile";
+import { useCallback, useEffect, useState } from 'react';
+import { fetchProfile, type Profile} from '../services/profile';
 
 
 const useProfile = () => {
     const [profile, setProfile] = useState<Profile | null>(null);
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<unknown>(null);
 
@@ -17,11 +17,11 @@ const useProfile = () => {
             const { user, profile } = await fetchProfile();
             if (!user) {
                 setProfile(null);
-                setUsername("");
+                setUsername('');
                 return;
             }
             setProfile(profile);
-            setUsername(profile?.username ?? "");
+            setUsername(profile?.username ?? '');
         } catch (e) {
             setError(e);
         } finally {
@@ -34,6 +34,6 @@ const useProfile = () => {
     }, [reload]);
 
     return { profile, username, loading, error, reload };
-}
+};
 
 export default useProfile;
