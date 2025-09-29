@@ -14,7 +14,7 @@ const logout = style({
     overflow: 'hidden',
     selectors: {
         '&:before': {
-            content: '""',
+            content: '',
             position: 'absolute',
             background: 'rgba(255,255,255,0.5)',
             width: '60px',
@@ -26,7 +26,7 @@ const logout = style({
             transform: 'translateX(-100px) skewX(-15deg)',
         },
         '&:after': {
-            content: '""',
+            content: '',
             position: 'absolute',
             background: 'rgba(255,255,255,0.2)',
             width: '30px',

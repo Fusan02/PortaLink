@@ -8,6 +8,7 @@ import styles from './styles/dashboard.css';
 import { page } from './styles/view.css';
 import { faCat } from '@fortawesome/free-solid-svg-icons';
 import { LogoutButton } from '@/components/buttons';
+import { toClassNames } from '@/utils/toClassNames_utils';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -52,7 +53,10 @@ export default async function DashboardPage() {
       <div className={styles.contents}>
         { /* プロフォール */ }
         <Link href="/dashboard/profile" className={styles.LinkSetting}>
-          <div className={styles.prifileBox}>
+          <div className={toClassNames([
+            styles.prifileBox,
+            styles.boxAnimation,
+          ])}>
             <FontAwesomeIcon icon={faUser} className={styles.icon} />
             Profile
           </div>
@@ -62,13 +66,20 @@ export default async function DashboardPage() {
         { /* サービス一覧 */ }
         <div className={styles.services}>
           <Link href="/dashboard/ToDoApp" className={styles.LinkSetting}>
-            <div className={styles.serviceBox}>
+            <div 
+              className={toClassNames([
+                styles.serviceBox,
+                styles.boxAnimation,
+            ])}>
               <FontAwesomeIcon icon={faCheckCircle} className={styles.icon} />
               ToDoApp
             </div>
           </Link>
           <Link href="/dashboard/catgen" className={styles.LinkSetting}>
-            <div className={styles.serviceBox}>
+            <div className={toClassNames([
+              styles.serviceBox,
+              styles.boxAnimation,
+            ])}>
               <FontAwesomeIcon icon={faCat} className={styles.icon} />
               Cat Imgae Generator
             </div>
