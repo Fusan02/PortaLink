@@ -37,7 +37,7 @@ const prifileBox = style({
     gap: '10px',    
     width: '130px',
     height: '180px',
-    backgroundColor: '#333333',
+    backgroundColor: '#3D033D',
     borderRadius: '12px',
 });
 
@@ -59,6 +59,21 @@ const serviceBox = style({
     borderRadius: '12px',    
 });
 
+const boxAnimation = style({
+    transition: '0.8s',
+    selectors: {
+        '&:before': {
+            position: 'absolute',
+            background: 'rgba(255,255,255,0.5)',
+            width: '60px',
+            height: '100%',
+        },
+        '&:hover': {
+            background: '803333ff'
+        }
+    }
+});
+
 const styles = {
     pageAdd,
     LinkSetting,
@@ -68,6 +83,7 @@ const styles = {
     prifileBox,
     services,
     serviceBox,
+    boxAnimation,
 };
 
 export default styles;
