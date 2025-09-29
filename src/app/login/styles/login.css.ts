@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, keyframes } from '@vanilla-extract/css';
 
 const page = style({
     display: 'flex',
@@ -12,7 +12,7 @@ const container = style({
     width: '400px', 
     padding: '80px',
     borderRadius: '24px',
-    background: '#181818',
+    background: 'radial-gradient(circle at top left, #8e8b9546, #132343, #8e8b9546)',
 });
 
 const title = style({
@@ -33,7 +33,7 @@ const input = style({
     padding: '10px',
     color: '#EAEAEA',
     border: '2px solid #333333',
-    backgroundColor: '#222222',
+    backgroundColor: '#09171F',
     borderRadius: '5px',
     fontSize: '16px'
 });
@@ -68,7 +68,7 @@ const RegisterButton = style({
 const testLoginBox = style({
     marginTop: '20px', 
     padding: '10px', 
-    backgroundColor: '#222222', 
+    backgroundColor: '#09171F', 
     border: '2px solid #333333',
     borderRadius: '5px' 
 });
@@ -94,6 +94,36 @@ const pAccount = style({
     marginTop: '5px'
 });
 
+const loadingBox = style({
+    display: 'flex',
+    position: 'absolute',
+    width: '600px',
+    height: '300px',
+    opacity: '0.8',
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '12px',
+});
+
+const dots = keyframes({
+    '0%, 20%': { content: '""' },
+    '40%': { content: '"."' },
+    '60%': { content: '".."' },
+    '80%, 100%': { content: '"..."' },
+});
+
+const loadingText = style({
+    color: '#FFFFFF',
+    fontSize: '18px',
+    selectors: {
+        '&::after': {
+            content: '""',
+            animation: `${dots} 1.5s infinite`,
+        },
+    },
+});
+
 const styles = {
     page,
     container,
@@ -106,6 +136,9 @@ const styles = {
     pTitle,
     testLoginButton,
     pAccount,
+    
+    loadingBox,
+    loadingText,
 };
 
 export default styles;

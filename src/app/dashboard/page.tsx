@@ -53,7 +53,10 @@ export default async function DashboardPage() {
       <div className={styles.contents}>
         { /* プロフォール */ }
         <Link href="/dashboard/profile" className={styles.LinkSetting}>
-          <div className={styles.prifileBox}>
+          <div className={toClassNames([
+            styles.prifileBox,
+            styles.boxAnimation,
+          ])}>
             <FontAwesomeIcon icon={faUser} className={styles.icon} />
             Profile
           </div>
@@ -73,7 +76,10 @@ export default async function DashboardPage() {
             </div>
           </Link>
           <Link href="/dashboard/catgen" className={styles.LinkSetting}>
-            <div className={styles.serviceBox}>
+            <div className={toClassNames([
+              styles.serviceBox,
+              styles.boxAnimation,
+            ])}>
               <FontAwesomeIcon icon={faCat} className={styles.icon} />
               Cat Imgae Generator
             </div>

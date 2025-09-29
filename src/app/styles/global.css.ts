@@ -10,8 +10,21 @@ globalStyle('html', {
 
 globalStyle('body', {
     minHeight: '100vh',
-    fontFamily: 'system-ui, sans-serif',
-    background: 'radial-gradient(circle at top left, #09171F, #3E4E5A, #09171F)',
+    background: 'radial-gradient(circle at top left, #3e4e5a60, #09171F, #3E4E5A60)',
     color: '#EAEAEA',
     overflow: 'hidden'
+});
+
+globalStyle('h1', {
+    color: '#F0F4F8',
+    fontFamily: 'sans-serif',
+});
+
+globalStyle('h2', {
+    color: '#F0F4F8',
+    fontFamily: 'sans-serif',
+});
+
+globalStyle('p', {
+    fontFamily: 'sans-serif',
 });

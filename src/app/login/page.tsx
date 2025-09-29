@@ -11,8 +11,10 @@ export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
   const supabase = createClient();
+  const [visible, setVisible] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
+    setVisible(true);
     e.preventDefault();
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -81,6 +83,8 @@ export default function LoginPage() {
             required
           />
           <button type="submit" className={styles.button}>{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+          {/* ローディングモーダルようのテストボタン↓ 必要に応じて使用して。*/}
+          {/* <button onClick={() => setVisible(true)}>テスト</button> */}
         </form>
         <a onClick={() => setIsSignUp(!isSignUp)} className={styles.RegisterButton}>
           {isSignUp ? 'Sign In' : 'Sign Up'}
@@ -100,6 +104,27 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
+      <LoadingModal 
+        visible={visible}
+      />
     </div>
   );
 }
+
+
+// ローディング画面のモーダル
+const LoadingModal = ({
+  visible,
+}: {
+  visible: boolean;
+}) => {
+  if (visible) {
+    return (
+      <div className={styles.loadingBox}>
+        <div className={styles.loadingText}>
+          Loading
+        </div>
+      </div>
+    );
+  }
+};
