@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faUser } from '@fortawesome/free-regular-svg-icons';
 import styles from './styles/dashboard.css';
 import { page } from './styles/view.css';
-import { faCat } from '@fortawesome/free-solid-svg-icons';
+import { faCat, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { LogoutButton } from '@/components/buttons';
 import { toClassNames } from '@/utils/toClassNames_utils';
 
@@ -82,6 +82,15 @@ export default async function DashboardPage() {
             ])}>
               <FontAwesomeIcon icon={faCat} className={styles.icon} />
               Cat Imgae Generator
+            </div>
+          </Link>
+          <Link href="/dashboard/invader" className={styles.LinkSetting}>
+            <div className={toClassNames([
+              styles.serviceBox,
+              styles.boxAnimation,
+            ])}>
+              <FontAwesomeIcon icon={faGamepad} className={styles.icon} />
+              Invader
             </div>
           </Link>
         </div>
