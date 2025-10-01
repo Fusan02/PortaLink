@@ -4,11 +4,12 @@ import { useState } from 'react';
 import styles from './startScreen.css';
 
 interface StartScreenProps {
-    onStart: (difficulty: number) => void;
+    onStart: (difficulty: number, isCheating: boolean) => void;
 }
 
 export default function StartScreen({ onStart }: StartScreenProps) {
     const [selectedDifficulty, setSelectedDifficulty] = useState(1); // 0: Easy, 1: Normal, 2: Hard
+    const [IsCheating, setIsCheating] = useState(false);
 
     return (
         <div className={styles.container}>
@@ -19,6 +20,8 @@ export default function StartScreen({ onStart }: StartScreenProps) {
                 <p>← → : 左右に動く</p>
                 <p>スペース : 撃つ</p>
                 <p>敵を全て倒せ！</p>
+
+                <button className={styles.cheatButton} onClick={() => setIsCheating(!IsCheating)}>連射モードを{IsCheating ? 'OFF' : 'ON'} にする</button>
             </div>
 
             <div className={styles.difficultySection}>
@@ -45,7 +48,7 @@ export default function StartScreen({ onStart }: StartScreenProps) {
                 </div>
             </div>
 
-            <button className={styles.startButton} onClick={() => onStart(selectedDifficulty)}>
+            <button className={styles.startButton} onClick={() => onStart(selectedDifficulty, IsCheating)}>
                 START GAME
             </button>
 

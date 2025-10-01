@@ -17,13 +17,15 @@ export default function Game() {
     const [, setScore] = useState(0);
     const [, setLives] = useState(3);
     const [gameStartKey, setGameStartKey] = useState(0);
-    const [difficulty, setDifficulty] = useState(1);  // 難易度を保持
+    const [difficulty, setDifficulty] = useState(1);
+    const [ischeating, setIsCheating] = useState(false);
 
-    const handleStart = (selectedDifficulty: number) => {
+    const handleStart = (selectedDifficulty: number, IsCheating: boolean) => {
         setGameState(GameState.PLAYING);
         setScore(0);
         setLives(3);
         setDifficulty(selectedDifficulty);
+        setIsCheating(IsCheating);
         setGameStartKey(prev => prev + 1);
     };
 
@@ -48,7 +50,7 @@ export default function Game() {
         const bullets: Bullet[] = [];
         const enemyBullets: Bullet[] = [];
         // スペース長押しで弾発射できるかできないか。
-        const isCheating = false;
+        const isCheating = ischeating;
 
         // ... スコア ... 
         let currentScore = 0;
@@ -242,7 +244,7 @@ export default function Game() {
 
                 const aliveEnemies = enemies.filter(e => e.isAlive);
                 if (aliveEnemies.length > 0) {
-                    const randomEnemy = aliveEnemies[Math.floor(Math.random() * aliveEnemies. length)];     //ランダムに敵から１匹選ぶ
+                    const randomEnemy = aliveEnemies[Math.floor(Math.random() * aliveEnemies.length)];     //ランダムに敵から１匹選ぶ
                     enemyBullets.push(randomEnemy.shoot());     // 敵の弾を発射
                 }
             }
