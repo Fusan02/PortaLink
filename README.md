@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PortaLink
 
-## Getting Started
+Next.jsとSupabaseを使用したフルスタックWebアプリケーション。ToDoアプリ、猫画像ジェネレーター、インベーダーゲームなど複数のサービスを提供します。
 
-First, run the development server:
+## 技術スタック
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### フロントエンド
+- **Next.js 15.5.0** - Reactベースのフルスタックフレームワーク
+- **React 19.1.0** - UIライブラリ
+- **TypeScript 5** - 型安全な開発
+- **Vanilla Extract** - タイプセーフなCSS-in-JS
+  - `@vanilla-extract/css` - スタイル定義
+  - `@vanilla-extract/next-plugin` - Next.js統合
+
+### バックエンド・認証
+- **Supabase** - バックエンドサービス
+  - `@supabase/supabase-js` - Supabase JavaScript クライアント
+  - `@supabase/ssr` - サーバーサイドレンダリング対応
+  - PostgreSQLデータベース
+  - 認証・認可機能
+
+### アイコン
+- **Font Awesome** - アイコンライブラリ
+  - `@fortawesome/fontawesome-svg-core` - コアライブラリ
+  - `@fortawesome/free-solid-svg-icons` - ソリッドアイコン
+  - `@fortawesome/free-regular-svg-icons` - レギュラーアイコン
+  - `@fortawesome/react-fontawesome` - React統合
+
+### 開発ツール
+- **ESLint** - コードリンター
+  - `eslint-config-next` - Next.js用設定
+  - `@typescript-eslint/eslint-plugin` - TypeScript対応
+  - `eslint-plugin-react` - React対応
+- **Prettier** - コードフォーマッター
+- **Jest** - テストフレームワーク
+  - `@testing-library/react` - Reactコンポーネントテスト
+  - `@testing-library/jest-dom` - DOM matcher
+  - `jest-environment-jsdom` - ブラウザ環境シミュレート
+
+## 主な機能
+
+### 1. 認証システム
+- メール認証によるユーザー登録・ログイン
+- Supabase Authを使用したセキュアな認証
+- プロフィール管理
+
+### 2. ToDoアプリ (開発中)
+- タスクの作成・編集・削除
+- リアルタイムデータ同期（Supabase）
+- ユーザーごとのタスク管理
+
+### 3. 猫画像ジェネレーター
+- The Cat APIを使用したランダム猫画像生成
+- Canvas APIによる画像表示
+
+### 4. インベーダーゲーム
+- HTML5 Canvasを使用したレトロゲーム
+- 3段階の難易度設定（Easy/Normal/Hard）
+- 連射モード（チートモード）搭載
+- スコアシステム
+
+## プロジェクト構成
+
+```
+src/
+├── app/                          # Next.js App Router
+│   ├── dashboard/                # ダッシュボード
+│   │   ├── ToDoApp/              # ToDoアプリ
+│   │   ├── catgen/               # 猫画像ジェネレーター
+│   │   ├── invader/              # インベーダーゲーム
+│   │   │   ├── components/       # ゲームコンポーネント
+│   │   │   ├── constants/        # ゲーム設定
+│   │   │   └── game/             # ゲームロジック
+│   │   └── profile/              # プロフィール
+│   ├── login/                    # ログインページ
+│   └── styles/                   # グローバルスタイル
+├── components/                   # 共通コンポーネント
+│   └── buttons/                  # ボタンコンポーネント
+└── lib/                          # ユーティリティ
+    └── supabase/                 # Supabase設定
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ライセンス
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+MIT License
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 開発者
 
-## Learn More
+Fusan02
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+クロード・コードと共に作成しています。
+Generated with Claude Code
