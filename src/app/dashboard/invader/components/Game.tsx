@@ -86,14 +86,14 @@ export default function Game() {
 
             if (!isCheating) {
                 // プレイ中のみスペースキーで弾発射
-                if (e.key === ' ' && currentGameState === GameState.PLAYING) {
+                if (e.key === ' ' || e.key === 'Enter' && currentGameState === GameState.PLAYING) {
                     bullets.push(player.shoot());
                 }
+            }
 
-                // リスタート (Rキー)
-                if (e.key === 'r' && currentGameState !== GameState.PLAYING) {
-                    setGameState(GameState.START);  // スタート画面に戻る
-                }
+            // リスタート (Rキー)
+            if (e.key === 'r' && currentGameState !== GameState.PLAYING) {
+                setGameState(GameState.START);  // スタート画面に戻る
             }
         };
 
@@ -146,32 +146,28 @@ export default function Game() {
                 ctx.fillStyle = 'white';
                 ctx.fillText(restartText, (canvas.width - restartWidth) / 2, canvas.height / 2 + 50);
 
-                // スコアと残機表示
+                // スコア表示
                 ctx.font = '24px Arial';
-                ctx.fillText(`Score: ${currentScore}`, (canvas.width) / 2 - 50, canvas.height / 2 + 100);
+                const scoreText = `Score: ${currentScore}`;
+                const scoreWidth = ctx.measureText(scoreText).width;
+                ctx.fillText(scoreText, (canvas.width - scoreWidth) / 2, canvas.height / 2 + 100);
 
                 animationFrameId = requestAnimationFrame(gameLoop);
                 return;
             }
 
             // プレイヤーの移動
-            if (keys['ArrowLeft']) {
+            if (keys['ArrowLeft'] || keys['a']) {
                 player.moveLeft();
             } 
-            if (keys['ArrowRight']) {
+            if (keys['ArrowRight'] || keys['d']) {
                 player.moveRight(canvas.width);
             }
 
-            // ... 弾 ...
+            // 弾を連射できるようにする。ここに書けば連射可能
             if (isCheating) {
-                // プレイ中のみスペースキーで弾発射
-                if (keys[' '] && currentGameState === GameState.PLAYING) {
+                if (keys[' '] || keys['Enter'] && currentGameState === GameState.PLAYING) {
                     bullets.push(player.shoot());
-                }
-
-                // リスタート (Rキー)
-                if (keys['r'] && currentGameState !== GameState.PLAYING) {
-                    setGameState(GameState.START);
                 }
             }
             

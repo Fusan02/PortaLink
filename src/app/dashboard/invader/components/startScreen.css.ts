@@ -10,14 +10,13 @@ const container = style({
     backgroundColor: 'black',
     color: 'white',
     border: '1px solid white',
-    padding: '40px 20px',
     boxSizing: 'border-box',
     overflow: 'hidden',
 });
 
 
 const title = style({
-    fontSize: '56px',
+    fontSize: '80px',
     fontWeight: 'bold',
     marginBottom: '20px',
     color: '#00ff00',
@@ -27,7 +26,7 @@ const title = style({
 const instructions = style({
     textAlign: 'center',
     marginBottom: '20px',
-    fontSize: '16px',
+    fontSize: '20px',
     lineHeight: '1.5',
 });
 
@@ -65,12 +64,12 @@ const difficultySection = style({
 
 const difficultyButtons = style({
     display: 'flex',
-    gap: '12px',
+    gap: '24px',
     marginTop: '10px',
 });
 
 const difficultyButton = style({
-    padding: '8px 20px',
+    padding: '12px 24px',
     fontSize: '16px',
     color: 'white',
     backgroundColor: '#333',
@@ -98,7 +97,7 @@ const difficultyButtonActive = style({
 });
 
 const cheatButton = style({
-    padding: '6px 16px',
+    padding: '3px 10px',
     fontSize: '14px',
     color: 'white',
     backgroundColor: '#ff4444',

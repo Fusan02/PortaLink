@@ -17,9 +17,9 @@ export default function StartScreen({ onStart }: StartScreenProps) {
 
             <div className={styles.instructions}>
                 <h2>How to Play</h2>
-                <p>← → : 左右に動く</p>
-                <p>スペース : 撃つ</p>
-                <p>敵を全て倒せ！</p>
+                <p>← → or a(左) d(右): 左右に動く</p>
+                <p>Space or Enter: 撃つ</p>
+                <p style={{color: 'orange'}}>敵を全て倒せ！</p>
 
                 <button className={styles.cheatButton} onClick={() => setIsCheating(!IsCheating)}>連射モードを{IsCheating ? 'OFF' : 'ON'} にする</button>
             </div>
