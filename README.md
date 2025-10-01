@@ -32,10 +32,6 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
   - `@typescript-eslint/eslint-plugin` - TypeScript対応
   - `eslint-plugin-react` - React対応
 - **Prettier** - コードフォーマッター
-- **Jest** - テストフレームワーク
-  - `@testing-library/react` - Reactコンポーネントテスト
-  - `@testing-library/jest-dom` - DOM matcher
-  - `jest-environment-jsdom` - ブラウザ環境シミュレート
 
 ## 主な機能
 
