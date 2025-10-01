@@ -47,7 +47,6 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
 
 ### 3. 猫画像ジェネレーター
 - The Cat APIを使用したランダム猫画像生成
-- Canvas APIによる画像表示
 
 ### 4. インベーダーゲーム
 - HTML5 Canvasを使用したレトロゲーム
