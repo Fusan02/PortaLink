@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 const label = style({
     display: 'block',
+    color: '#4CAF50',
     margin: '5px 0',
 });
 

@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 const title = style({
     margin: '20px 0',
+    fontSize: '48px'
 });
 
 const subTitle = style({
@@ -11,7 +12,7 @@ const subTitle = style({
 
 const name = style({
     margin: '10px 0',
-    fontSize: '32px'
+    fontSize: '36px'
 });
 
 const time = style({
@@ -34,12 +35,42 @@ const button = style({
     }
 });
 
+const contentInfo = style({
+    alignSelf: 'flex-start',
+    marginLeft: '35vw',
+    marginBottom: '20px',
+});
+
+const content = style({
+    color: '#4CAF50',
+    fontSize: '24px'
+});
+
+const contentText = style({
+    color: '#EAEAEA',
+    fontSize: '24px'
+});
+
+const icon = style({
+    margin: '30px 0',
+    border: '8px solid #EAEAEA',
+    borderRadius: '50%',
+    padding: '40px',
+    width: '100px',
+    height: '100px',
+});
+
 const styles = {
     title,
     subTitle,
     name,
     time,
-    button
+    button,
+
+    contentInfo,
+    content,
+    contentText,
+    icon,    
 };
 
 export default styles;

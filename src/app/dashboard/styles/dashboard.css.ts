@@ -15,8 +15,9 @@ const username = style({
 });
 
 const icon = style({
-    height: '40px',
     color: '#EAEAEA',
+    width: '50px',
+    height: '50px',
 });
 
 const contents = style({
