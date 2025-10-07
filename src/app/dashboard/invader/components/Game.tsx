@@ -325,7 +325,7 @@ export default function Game() {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [gameStartKey, difficulty]);
+    }, [gameStartKey, difficulty, ischeating]);
 
     return (
         <div>
