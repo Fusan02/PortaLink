@@ -13,8 +13,8 @@ const Profile_Setting = () => {
     return (
         <div className={page}>
             <div>
-                <TilteText className={styles.title} text="プロフィール設定" />
-                <TextLabel className={setting_styles.label} text="ユーザー名" htmlFor="username" />
+                <TilteText className={styles.title} text="Profile Setting" />
+                <TextLabel className={setting_styles.label} text="User Name" htmlFor="username" />
                 <InputButton 
                     className={setting_styles.input} 
                     id="username" 

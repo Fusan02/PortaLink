@@ -7,6 +7,10 @@ export type Profile = {
     updated_at: string;
 }
 
+export type ProfileWithEmail = Profile & {
+    email: string | null;
+}
+
 const fetchProfile = async () => {
     const supabase = createClient();
 
@@ -20,7 +24,13 @@ const fetchProfile = async () => {
         .single();
 
     if (error) throw error;
-    return { user, profile: data as Profile};
+
+    const profileWithEmail: ProfileWithEmail = {
+        ...data as Profile,
+        email: user.email ?? null,
+    };
+
+    return { user, profile: profileWithEmail };
 };
 
 const updateProfile = async (username: string) => {
