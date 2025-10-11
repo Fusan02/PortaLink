@@ -12,7 +12,8 @@ const subTitle = style({
 
 const name = style({
     margin: '10px 0',
-    fontSize: '36px'
+    fontSize: '36px',
+    color: '#4CAF50'
 });
 
 const time = style({
@@ -22,15 +23,20 @@ const time = style({
 });
 
 const button = style({
-    marginTop: '10px',
-    padding: '10px',
-    borderRadius: '10px',
-    backgroundColor: '#f9f9f9',
+    position: 'relative',
+    marginTop: '50px',
+    background: '#1E362D',
+    color: '#ccc',
+    width: '250px',
+    height: '50px',
+    border: '0',
+    fontSize: '14px',
+    borderRadius: '5px',
+    fontFamily: 'sans-serif',
     cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
     selectors: {
         '&:hover': {
-            backgroundColor: '#cececeff',
+            backgroundColor: '#155c2f',
         }
     }
 });

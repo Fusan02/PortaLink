@@ -9,6 +9,7 @@ import { page } from './styles/view.css';
 import { faCat, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { LogoutButton } from '@/components/buttons';
 import { toClassNames } from '@/utils/toClassNames_utils';
+import { boxAnimation } from '@/animation/css';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -55,7 +56,7 @@ export default async function DashboardPage() {
         <Link href="/dashboard/profile" className={styles.LinkSetting}>
           <div className={toClassNames([
             styles.prifileBox,
-            styles.boxAnimation,
+            boxAnimation
           ])}>
             <FontAwesomeIcon icon={faUser} className={styles.icon} />
             Profile
@@ -69,7 +70,7 @@ export default async function DashboardPage() {
             <div 
               className={toClassNames([
                 styles.serviceBox,
-                styles.boxAnimation,
+                boxAnimation,
             ])}>
               <FontAwesomeIcon icon={faCheckCircle} className={styles.icon} />
               ToDoApp
@@ -78,7 +79,7 @@ export default async function DashboardPage() {
           <Link href="/dashboard/catgen" className={styles.LinkSetting}>
             <div className={toClassNames([
               styles.serviceBox,
-              styles.boxAnimation,
+              boxAnimation,
             ])}>
               <FontAwesomeIcon icon={faCat} className={styles.icon} />
               Cat Imgae Generator
@@ -87,7 +88,7 @@ export default async function DashboardPage() {
           <Link href="/dashboard/invader" className={styles.LinkSetting}>
             <div className={toClassNames([
               styles.serviceBox,
-              styles.boxAnimation,
+              boxAnimation,
             ])}>
               <FontAwesomeIcon icon={faGamepad} className={styles.icon} />
               Invader
@@ -95,7 +96,7 @@ export default async function DashboardPage() {
           </Link>
         </div>
       </div>
-      <LogoutButton />
+      <LogoutButton className={boxAnimation}/>
     </div>
   );
 }

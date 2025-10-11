@@ -1,16 +1,20 @@
 import { style } from '@vanilla-extract/css';
 
 export const button = style({
-    margin: '10px 0',
-    padding: '10px',
-    borderRadius: '10px',
-    backgroundColor: '#f9f9f9',
+    position: 'relative',
+    margin: '20px 0',
+    background: '#1E362D',
     color: 'red',
+    width: '250px',
+    height: '50px',
+    border: '0',
+    fontSize: '14px',
+    borderRadius: '5px',
+    fontFamily: 'sans-serif',
     cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
     selectors: {
         '&:hover': {
-            backgroundColor: '#cececeff',
+            backgroundColor: '#155c2f',
         }
     }
 });

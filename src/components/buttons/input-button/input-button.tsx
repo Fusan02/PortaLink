@@ -25,6 +25,7 @@ export const InputButton = ({
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            required
         />
     );
 };
