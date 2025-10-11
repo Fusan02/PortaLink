@@ -20,7 +20,7 @@ export const BackButton = ({
           button,
         ])}
       >
-        もどる
+        Back
       </button>
     </div>
   );

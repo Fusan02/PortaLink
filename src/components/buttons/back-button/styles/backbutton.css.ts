@@ -4,7 +4,7 @@ export const button = style({
     position: 'relative',
     margin: '20px 0',
     background: '#1E362D',
-    color: 'red',
+    color: '#cc4b90ff',
     width: '250px',
     height: '50px',
     border: '0',
