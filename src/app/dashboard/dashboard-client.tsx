@@ -30,7 +30,7 @@ export const DashboardClient =({
           onClick={() => {
             setSideMenuModalVisible((prev) => {
               return !prev;
-            })
+            });
           }}
         >
           <span className={styles.menuBar}></span>
@@ -94,4 +94,4 @@ export const DashboardClient =({
       <LogoutButton className={boxAnimation}/>
     </div>
   );
-}
+};

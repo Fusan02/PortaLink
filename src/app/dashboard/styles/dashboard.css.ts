@@ -9,7 +9,7 @@ const sideMenu = style({
     left: '20px',
     top: '20px',
     zIndex: '10',
-})
+});
 
 const menuButton = style({
     width: '50px',
@@ -30,7 +30,7 @@ const menuButton = style({
             backgroundColor: '#067b30ff',
         }
     }
-})
+});
 
 const menuBar = style({
     width: '24px',
@@ -38,16 +38,16 @@ const menuBar = style({
     backgroundColor: '#EAEAEA',
     borderRadius: '2px',
     transition: 'all 0.3s ease',
-})
+});
 
 const sideMenuModal = style({
     zIndex: '10',
-})
+});
 
 const hide = style({
     opacity: '0',
     pointerEvents: 'none',
-})
+});
 
 const LinkSetting = style({
     color: '#EAEAEA',

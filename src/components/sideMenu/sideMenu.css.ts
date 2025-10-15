@@ -4,14 +4,14 @@ const menuPosition = style({
     position: 'fixed',
     top: '0',
     left: '0',
-})
+});
 
 const menuBack = style({
     width: '400px',
     height: '100vh',
     backgroundColor: '#000000ff',
     color: '#ccc',
-})
+});
 
 const closeButton = style({
     position: 'fixed',
@@ -29,12 +29,12 @@ const closeButton = style({
             backgroundColor: '#803333ff',
         }
     }
-})
+});
 
 const styles = {
     menuPosition,
     menuBack,
     closeButton,
-}
+};
 
 export default styles;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { SideInAnimation } from '@/animation/sideInAnimetion/side-in-animation';
 import { SideOutAnimation } from '@/animation/sideOutAnimation/side-out-animation';
@@ -74,10 +74,10 @@ const Wrapper = ({
 };
 
 const SideMenu = ({
-    className,
+    //className,
     onClick,
 }: {
-    className?: string;
+    //className?: string;
     onClick: () => void;
 }) => {
     return (
