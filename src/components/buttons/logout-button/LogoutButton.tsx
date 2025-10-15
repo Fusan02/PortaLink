@@ -2,8 +2,13 @@
 import { createClient } from '@/lib/supabase';
 import { redirect } from 'next/navigation';
 import styles from './styles/logout.css';
+import { toClassNames } from '@/utils/toClassNames_utils';
 
-export const LogoutButton = () => {
+export const LogoutButton = ({
+  className,
+}: {
+  className?: string;
+}) => {
   const supabase = createClient();
 
   const handleLogout = async () => {
@@ -12,6 +17,14 @@ export const LogoutButton = () => {
   };
 
   return (
-    <button className={styles.logout} onClick={handleLogout}>logout</button>
+    <button 
+      className={toClassNames([
+        className,
+        styles.logout
+      ])} 
+      onClick={handleLogout}
+    >
+      logout
+    </button>
   );
 };

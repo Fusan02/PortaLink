@@ -9,6 +9,8 @@ import { Texts, TilteText } from '@/components/texts';
 import { FadeInAnimation } from '@/animation/fadeInAnimation/fade-in-animation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { toClassNames } from '@/utils/toClassNames_utils';
+import { boxAnimation } from '@/animation/css';
 
 const Profile = () => {
     const router = useRouter();
@@ -35,8 +37,12 @@ const Profile = () => {
                 </div>
                 <Texts className={styles.time} text={`登録日: ${new Date(profile.created_at).toLocaleString('ja-JP')}`} />
                 <Texts className={styles.time} text={`最終更新: ${new Date(profile.updated_at).toLocaleString('ja-JP')}`} />
-                <Button className={styles.button} text="プロフィールを更新" onClick={() => router.push('/dashboard/profile/profile_setting')} />
-                <BackButton />
+                <Button 
+                    className={toClassNames([styles.button, boxAnimation])}
+                    text="プロフィールを更新" 
+                    onClick={() => router.push('/dashboard/profile/profile_setting')} 
+                />
+                <BackButton className={boxAnimation}/>
             </div>
         </FadeInAnimation>
     );

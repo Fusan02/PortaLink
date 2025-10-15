@@ -4,6 +4,51 @@ const pageAdd = style({
     minHeight: '75vh',
 });
 
+const sideMenu = style({
+    position: 'fixed',
+    left: '20px',
+    top: '20px',
+    zIndex: '10',
+});
+
+const menuButton = style({
+    width: '50px',
+    height: '50px',
+    backgroundColor: '#106f4cff',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '6px',
+    padding: '8px',
+    selectors: {
+        '&:hover': {
+            backgroundColor: '#067b30ff',
+        }
+    }
+});
+
+const menuBar = style({
+    width: '24px',
+    height: '3px',
+    backgroundColor: '#EAEAEA',
+    borderRadius: '2px',
+    transition: 'all 0.3s ease',
+});
+
+const sideMenuModal = style({
+    zIndex: '10',
+});
+
+const hide = style({
+    opacity: '0',
+    pointerEvents: 'none',
+});
+
 const LinkSetting = style({
     color: '#EAEAEA',
     textDecoration: 'none',
@@ -42,6 +87,11 @@ const prifileBox = style({
     backgroundColor: '#1E362D',
     borderRadius: '12px',
     fontFamily: 'sans-serif',
+    selectors: {
+        '&:hover': {
+            background: '#155c2f',
+        },
+    }
 });
 
 const services = style({
@@ -63,54 +113,20 @@ const serviceBox = style({
     borderRadius: '12px',   
     border: '0' ,
     fontFamily: 'sans-serif',
-});
-
-const boxAnimation = style({
-    transition: '0.8s',
-    overflow: 'hidden',
     selectors: {
-        '&:before': {
-            content: '',
-            position: 'absolute',
-            background: 'rgba(255,255,255,0.5)',
-            width: '60px',
-            height: '100%',
-            left: '0',
-            top: '0',
-            opacity: '.5',
-            filter: 'blur(30px)',
-            transform: 'translateX(-150px) skewX(-15deg)',
-        },
-        '&:after': {
-            content: '',
-            position: 'absolute',
-            background: 'rgba(255,255,255,0.2)',
-            width: '30px',
-            height: '100%',
-            left: '30px',
-            top: '0',
-            opacity: '0',
-            filter: 'blur(5px)',
-            transform: 'translateX(-150px) skewX(-15deg)',
-        },
         '&:hover': {
             background: '#155c2f',
         },
-        '&:hover::before': {
-            transform: 'translateX(300px)  skewX(-15deg)',
-            opacity: '0.6',
-            transition: '1.5s',
-        },
-        '&:hover::after': {
-            transform: 'translateX(300px)  skewX(-15deg)',
-            opacity: '1',
-            transition: '1.5s',
-        }                        
     }
 });
 
 const styles = {
     pageAdd,
+    sideMenu,
+    menuButton,
+    menuBar,
+    sideMenuModal,
+    hide,
     LinkSetting,
     username,
     icon,
@@ -118,7 +134,6 @@ const styles = {
     prifileBox,
     services,
     serviceBox,
-    boxAnimation,
 };
 
 export default styles;

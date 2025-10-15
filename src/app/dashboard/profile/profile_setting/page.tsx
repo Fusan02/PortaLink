@@ -6,6 +6,8 @@ import styles from '../styles/profile.css';
 import setting_styles from './styles/p_setting.css';
 import { TextLabel, TilteText } from '@/components/texts';
 import { BackButton, Button, InputButton } from '@/components/buttons';
+import { toClassNames } from '@/utils/toClassNames_utils';
+import { boxAnimation } from '@/animation/css';
 
 const Profile_Setting = () => {
     const { username, setUsername, updating, submit } = useUpdateProfile();
@@ -19,7 +21,7 @@ const Profile_Setting = () => {
                     className={setting_styles.input} 
                     id="username" 
                     type="text" 
-                    value={username} 
+                    value={username.trim()} 
                     onChange={(e) => setUsername(e.target.value)} 
                     placeholder="ユーザー名を入力"
                 />
@@ -27,13 +29,16 @@ const Profile_Setting = () => {
             
             <div>
                 <Button
-                    className={styles.button}
+                    className={toClassNames([
+                        styles.button,
+                        boxAnimation,
+                    ])}
                     onClick={submit}
-                    disabled={updating || !username.trim()}
+                    disabled={updating}
                     text= {updating ? '更新中...' : 'プロフィール更新'}
                 />
+                <BackButton className={boxAnimation}/>                
             </div>
-            <BackButton />
         </div>
     );
 };
