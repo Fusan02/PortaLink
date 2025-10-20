@@ -67,22 +67,22 @@ export default function LoginPage() {
         <h2 className={styles.title}>Login</h2>
         <form onSubmit={isSignUp ? handleSignUp : handleLogin} className={styles.form}>
           <input
-            type="email"
+            type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            placeholder='Email'
             className={styles.input}
             required
           />
           <input
-            type="password"
+            type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder='Password'
             className={styles.input}
             required
           />
-          <button type="submit" className={styles.button}>{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+          <button type='submit' className={styles.button}>{isSignUp ? 'Sign Up' : 'Sign In'}</button>
           {/* ローディングモーダルようのテストボタン↓ 必要に応じて使用して。*/}
           {/* <button onClick={() => setVisible(true)}>テスト</button> */}
         </form>
@@ -92,7 +92,7 @@ export default function LoginPage() {
         <div className={styles.testLoginBox}>
           <p className={styles.pTitle}>Try Here!:</p>
           <button
-            type="button"
+            type='button'
             onClick={fillTestAccount}
             className={styles.testLoginButton}
           >

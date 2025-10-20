@@ -24,7 +24,7 @@ const Profile = () => {
     return (
         <FadeInAnimation>
             <div className={page}>
-                <TilteText className={styles.title} text="Profile"/>
+                <TilteText className={styles.title} text='Profile'/>
                 <FontAwesomeIcon icon={faUser} className={styles.icon} />
                 <Texts className={styles.name} text={`${username} さん`} />
                 <div className={styles.contentInfo}>
@@ -39,7 +39,7 @@ const Profile = () => {
                 <Texts className={styles.time} text={`最終更新: ${new Date(profile.updated_at).toLocaleString('ja-JP')}`} />
                 <Button 
                     className={toClassNames([styles.button, boxAnimation])}
-                    text="プロフィールを更新" 
+                    text='プロフィールを更新' 
                     onClick={() => router.push('/dashboard/profile/profile_setting')} 
                 />
                 <BackButton className={boxAnimation}/>

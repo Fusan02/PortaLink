@@ -48,7 +48,7 @@ export const DashboardClient =({
       </div>
       <div className={styles.contents}>
         { /* プロフォール */ }
-        <Link href="/dashboard/profile" className={styles.LinkSetting}>
+        <Link href='/dashboard/profile' className={styles.LinkSetting}>
           <div className={toClassNames([
             styles.prifileBox,
             boxAnimation
@@ -61,7 +61,7 @@ export const DashboardClient =({
         <h2>App Services</h2>
         { /* サービス一覧 */ }
         <div className={styles.services}>
-          <Link href="/dashboard/ToDoApp" className={styles.LinkSetting}>
+          <Link href='/dashboard/ToDoApp' className={styles.LinkSetting}>
             <div
               className={toClassNames([
                 styles.serviceBox,
@@ -71,7 +71,7 @@ export const DashboardClient =({
               ToDoApp
             </div>
           </Link>
-          <Link href="/dashboard/catgen" className={styles.LinkSetting}>
+          <Link href='/dashboard/catgen' className={styles.LinkSetting}>
             <div className={toClassNames([
               styles.serviceBox,
               boxAnimation,
@@ -80,7 +80,7 @@ export const DashboardClient =({
               Cat Imgae Generator
             </div>
           </Link>
-          <Link href="/dashboard/invader" className={styles.LinkSetting}>
+          <Link href='/dashboard/invader' className={styles.LinkSetting}>
             <div className={toClassNames([
               styles.serviceBox,
               boxAnimation,

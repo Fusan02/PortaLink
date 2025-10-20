@@ -12,4 +12,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withVanillaExtract(nextConfig);
+export default withVanillaExtract(nextConfig);

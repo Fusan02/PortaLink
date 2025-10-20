@@ -3,23 +3,12 @@ import typescript from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-import { FlatCompat } from '@eslint/eslintrc';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
 
 const eslintConfig = [
   {
     ignores: ['.next/**', 'node_modules/**', '.vercel/**', 'out/**', 'build/**'],
   },
   js.configs.recommended,
-  ...compat.extends('next/core-web-vitals'),
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
@@ -61,10 +50,13 @@ const eslintConfig = [
     rules: {
       'quotes': ['error', 'single', { 'avoidEscape': true }],
       'semi': ['error', 'always'],
+      'jsx-quotes': ['error', 'prefer-single'],
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['warn'],
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
     },
     settings: {
       react: {
