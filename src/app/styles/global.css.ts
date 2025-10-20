@@ -5,14 +5,14 @@ globalStyle('*', { boxSizing: 'border-box', margin: 0, padding: 0 });
 globalStyle('html', {
     minHeight: '100%',
     backgroundColor: '#09171F',
-    overflow: 'hidden'
+    
 });
 
 globalStyle('body', {
     minHeight: '100vh',
     background: 'radial-gradient(circle at top left, #3e4e5a60, #09171F, #3E4E5A60)',
     color: '#EAEAEA',
-    overflow: 'hidden'
+    
 });
 
 globalStyle('h1', {
