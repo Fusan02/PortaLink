@@ -5,6 +5,7 @@ import { TabType } from './types';
 import pageStyles from './styles/page.css';
 import BottomNav from './components/Layout/BottomNav';
 import HomePage from './components/homePage';
+import StatsPage from './components/statsPage';
 
 const SupportTimer = () => {
     // タブの状態管理
@@ -14,7 +15,7 @@ const SupportTimer = () => {
         <div className={pageStyles.page}>
             <main className={pageStyles.mainContetns}>
                 {activeTab === 'home' && (<HomePage />)}
-                {activeTab === 'stats'}
+                {activeTab === 'stats' && (<StatsPage />)}
                 {activeTab === 'history'}
                 {activeTab === 'settings'}
             </main>
