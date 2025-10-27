@@ -6,6 +6,7 @@ import pageStyles from './styles/page.css';
 import BottomNav from './components/Layout/BottomNav';
 import HomePage from './components/homePage';
 import StatsPage from './components/statsPage';
+import HistoryPage from './components/historyPage';
 
 const SupportTimer = () => {
     // タブの状態管理
@@ -16,7 +17,7 @@ const SupportTimer = () => {
             <main className={pageStyles.mainContetns}>
                 {activeTab === 'home' && (<HomePage />)}
                 {activeTab === 'stats' && (<StatsPage />)}
-                {activeTab === 'history'}
+                {activeTab === 'history' && (<HistoryPage />)}
                 {activeTab === 'settings'}
             </main>
 

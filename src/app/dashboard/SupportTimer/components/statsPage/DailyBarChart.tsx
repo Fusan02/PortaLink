@@ -11,7 +11,7 @@ interface DailyBarChartProps {
 
 const DailyBarChart = ({ data }: DailyBarChartProps) => {
     // 最大値を取得してグラフの高さを正規化
-    const maxMinutes = Math.max(...data.map((d) => d.minutes), 1);
+    const maxMinutes = Math.max(...data.map((d) => d.minutes), 1); // 0の除算を防ぐため配列の最後に1を追加
     const maxHeight = 150; // バーの最大高さ
 
     return (
