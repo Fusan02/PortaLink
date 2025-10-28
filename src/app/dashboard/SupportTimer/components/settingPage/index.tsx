@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Settings, AITone } from '../../types';
+import type { Settings } from '../../types';
 // import ToneSelector from './ToneSelector';
 import GoalInput from './GoalInput';
 // import NotificationSelector from './NotificationSelector';
