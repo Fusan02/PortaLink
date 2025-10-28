@@ -4,7 +4,7 @@
 export type AITone = 'gentle' | 'normal' | 'energetic';
 
 // ユーザー設定情報
-export interface Setting {
+export interface Settings {
     aiTone: AITone;
     dailyGoalMinutes: number;
     notificationStartTime: string;
@@ -12,7 +12,7 @@ export interface Setting {
 }
 
 // 初期設定値
-export const DEFAULT_SETTINGS: Setting = {
+export const DEFAULT_SETTINGS: Settings = {
     aiTone: 'normal',
     dailyGoalMinutes: 60,
     notificationStartTime: '08:00',
