@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { createClient } from '@/lib/supabase';
 import type { Stats, WeeklyStats, DailyStats } from '../types';
 
@@ -18,8 +18,60 @@ export const useStats = (): UseStatsReturn => {
     const [error, setError] = useState<string | null>(null);
     const supabase = createClient();
 
+    // 連続日数を計算
+    const calculateStreak = useCallback(async (): Promise<number> => {
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) return 0;
+
+            // 過去60日分のセッションを取得
+            const sixtyDaysAgo = new Date();
+            sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+
+            const { data: sessionData } = await supabase
+                .from('sessions')
+                .select('start_time')
+                .eq('user_id', user.id)
+                .gte('start_time', sixtyDaysAgo.toISOString())
+                .order('start_time', { ascending: false });
+
+            if (!sessionData || sessionData.length === 0) return 0;
+
+            // 日付ごとにユニークな日付を取得
+            const uniqueDates = new Set(
+                sessionData.map((session) =>
+                    new Date(session.start_time).toISOString().split('T')[0]
+                )
+            );
+
+            // 今日から遡って連続している日数をカウント
+            let streak = 0;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            for (let i = 0; i < 60; i++) {
+                const checkDate = new Date(today);
+                checkDate.setDate(today.getDate() - i);
+                const dateStr = checkDate.toISOString().split('T')[0];
+
+                if (uniqueDates.has(dateStr)) {
+                    streak++;
+                } else {
+                // 連続が途切れた
+                    break;
+                }
+            }
+
+            return streak;
+        } catch (err) {
+            console.error('連続日数の計算エラー:', err);
+            return 0;
+        }
+    }, [supabase]);
+
     // 週間統計を取得
-    const fetchWeeklyStats = async (): Promise<void> => {
+    const fetchWeeklyStats = useCallback(async (): Promise<void> => {
         setLoading(true);
         setError(null);
 
@@ -145,59 +197,7 @@ export const useStats = (): UseStatsReturn => {
         } finally {
             setLoading(false);
         }
-    };
-
-    // 連続日数を計算
-    const calculateStreak = async (): Promise<number> => {
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-
-            if (!user) return 0;
-
-            // 過去60日分のセッションを取得
-            const sixtyDaysAgo = new Date();
-            sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
-
-            const { data: sessionData } = await supabase
-                .from('sessions')
-                .select('start_time')
-                .eq('user_id', user.id)
-                .gte('start_time', sixtyDaysAgo.toISOString())
-                .order('start_time', { ascending: false });
-
-            if (!sessionData || sessionData.length === 0) return 0;
-
-            // 日付ごとにユニークな日付を取得
-            const uniqueDates = new Set(
-                sessionData.map((session) =>
-                    new Date(session.start_time).toISOString().split('T')[0]
-                )
-            );
-
-            // 今日から遡って連続している日数をカウント
-            let streak = 0;
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            for (let i = 0; i < 60; i++) {
-                const checkDate = new Date(today);
-                checkDate.setDate(today.getDate() - i);
-                const dateStr = checkDate.toISOString().split('T')[0];
-
-                if (uniqueDates.has(dateStr)) {
-                    streak++;
-                } else {
-                // 連続が途切れた
-                    break;
-                }
-            }
-
-            return streak;
-        } catch (err) {
-            console.error('連続日数の計算エラー:', err);
-            return 0;
-        }
-    };
+    }, [supabase, calculateStreak]);
 
     return {
         stats,

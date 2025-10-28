@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Session, SessionInput } from '../types';
 import { createClient } from '@/lib/supabase';
 
@@ -20,52 +20,8 @@ export const useSession = (): UseSessionReturn => {
     const [error, setError] = useState<string | null>(null);
     const supabase = createClient();
 
-    // セッションを作成
-    const createSession = async (input: SessionInput): Promise<boolean> => {
-        setLoading(true);
-        setError(null);
-
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-
-            if (!user) {
-                setError('ユーザーが認証されていません');
-                return false;
-            }
-
-            const now = new Date();
-            const startTime = new Date(now.getTime() - input.duration * 1000);
-
-            const { error: inserError } = await supabase
-                .from('sessions')
-                .insert({
-                    user_id: user.id,
-                    start_time: startTime.toISOString(),
-                    end_time: now.toISOString(),
-                    duration: input.duration,
-                    memo: input.memo,
-                    tag: input.tag,
-                    ai_comment: '',
-                });
-            
-            if (inserError) {
-                setError(inserError.message);
-                return false;
-            }
-
-            // 作成後、セッション一覧を取得
-            await fetchSessions();
-            return true;
-        } catch (err) {
-            setError(err instanceof Error ? err.message : '不明なエラー');
-            return false;
-        } finally {
-            setLoading(false);
-        }
-    };
-
     // セッション一覧を取得
-    const fetchSessions = async (limit: number = 50): Promise<void> => {
+    const fetchSessions = useCallback(async (limit: number = 50): Promise<void> => {
         setLoading(true);
         setError(null);
 
@@ -106,10 +62,54 @@ export const useSession = (): UseSessionReturn => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [supabase]);
+
+    // セッションを作成
+    const createSession = useCallback(async (input: SessionInput): Promise<boolean> => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) {
+                setError('ユーザーが認証されていません');
+                return false;
+            }
+
+            const now = new Date();
+            const startTime = new Date(now.getTime() - input.duration * 1000);
+
+            const { error: inserError } = await supabase
+                .from('sessions')
+                .insert({
+                    user_id: user.id,
+                    start_time: startTime.toISOString(),
+                    end_time: now.toISOString(),
+                    duration: input.duration,
+                    memo: input.memo,
+                    tag: input.tag,
+                    ai_comment: '',
+                });
+            
+            if (inserError) {
+                setError(inserError.message);
+                return false;
+            }
+
+            // 作成後、セッション一覧を取得
+            await fetchSessions();
+            return true;
+        } catch (err) {
+            setError(err instanceof Error ? err.message : '不明なエラー');
+            return false;
+        } finally {
+            setLoading(false);
+        }
+    }, [supabase, fetchSessions]);
 
     // 日付範囲でセッションを取得
-    const fetchSessionsByDateRange = async (
+    const fetchSessionsByDateRange = useCallback(async (
         startDate: Date,
         endDate: Date,
     ): Promise<void> => {
@@ -153,10 +153,10 @@ export const useSession = (): UseSessionReturn => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [supabase]);
 
     // セッションを削除
-    const deleteSession = async (id: string): Promise<boolean> => {
+    const deleteSession = useCallback(async (id: string): Promise<boolean> => {
         setLoading(true);
         setError(null);
 
@@ -180,7 +180,7 @@ export const useSession = (): UseSessionReturn => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [supabase, fetchSessions]);
 
     return {
         sessions,

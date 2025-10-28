@@ -45,12 +45,44 @@ const toast = style({
     zIndex: 3000,   
 });
 
+const loadingContainer = style({
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    textAlign: 'center',
+    paddingTop: '100px',
+});
+
+const loading = style({
+    fontSize: '18px',
+    color: '#666',
+});
+
+const errorContainer = style({
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    textAlign: 'center',
+    paddingTop: '100px',
+});
+
+const error = style({
+    backgroundColor: '#FFEBEE',
+    color: '#C62828',
+    padding: '16px',
+    borderRadius: '8px',
+});
+
 const index = {
     page,
     h1,
     container,
     button,
     toast,
+    loadingContainer,
+    loading,
+    errorContainer,
+    error,
 };
 
 export default index;

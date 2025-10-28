@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/lib/supabase';
 import type { Settings } from '../types';
-import { DEFAULT_SETTINGS } from '../types';
+import { DEFAULT_SETTINGS, DEFAULT_TAG_COLOR } from '../types';
 
 
 interface UseSettingsReturn {
@@ -12,6 +12,8 @@ interface UseSettingsReturn {
     error: string | null;
     fetchSettings: () => Promise<void>;
     saveSettings: (newSettings: Settings) => Promise<boolean>;
+    updateTagColor: (tagName: string, color: string) => Promise<boolean>;
+    getTagColor: (tagName?: string) => string;
 }
 
 export const useSettings = (): UseSettingsReturn => {
@@ -42,6 +44,7 @@ export const useSettings = (): UseSettingsReturn => {
                     daily_goal_minutes: newSettings.dailyGoalMinutes,
                     notification_start_time: newSettings.notificationStartTime,
                     notification_end_time: newSettings.notificationEndTime,
+                    tag_colors: newSettings.tagColors,
                 }, {
                     onConflict: 'user_id',
                 });
@@ -100,6 +103,7 @@ export const useSettings = (): UseSettingsReturn => {
                 dailyGoalMinutes: data.daily_goal_minutes,
                 notificationStartTime: data.notification_start_time,
                 notificationEndTime: data.notification_end_time,
+                tagColors: data.tag_colors || DEFAULT_SETTINGS.tagColors,
             };
 
             setSettings(loadedSettings);
@@ -110,6 +114,25 @@ export const useSettings = (): UseSettingsReturn => {
             setLoading(false);
         }
     }, [supabase, saveSettings]);
+
+    const getTagColor = useCallback((tagName?: string): string => {
+        if (!tagName) return DEFAULT_TAG_COLOR;
+        return settings.tagColors[tagName] || DEFAULT_TAG_COLOR;
+    }, [settings.tagColors]);
+
+    const updateTagColor = useCallback(async (
+        tagName: string,
+        color: string,
+    ): Promise<boolean> => {
+        const newSettings: Settings = {
+            ...settings,
+            tagColors: {
+                ...settings.tagColors,
+                [tagName]: color,
+            },
+        };
+        return await saveSettings(newSettings);
+    }, [settings, saveSettings]);
 
     // 初回マウント時に設定を取得
     useEffect(() => {
@@ -122,5 +145,7 @@ export const useSettings = (): UseSettingsReturn => {
         error,
         fetchSettings,
         saveSettings,
+        getTagColor,
+        updateTagColor,        
     };
 };

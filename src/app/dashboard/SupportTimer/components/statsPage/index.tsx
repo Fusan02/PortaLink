@@ -2,14 +2,17 @@
 
 import { useEffect } from 'react';
 import { useStats } from '../../hooks/useStats';
+import { useSettings } from '../../hooks/useSettings';
 import statsPage from '../../styles/statsPage/statsPage.css';
 import DailyBarChart from './DailyBarChart';
 import StreakBadge from './StreakBadge';
 import SummaryCard from './SummaryCard';
+import GoalProgress from '../common/GoalProgress';
 
 
 const StatsPage = () => {
     const { stats, loading, error, fetchWeeklyStats} = useStats();
+    const { settings } = useSettings();
 
     // 初回マウント次に統計を取得
     useEffect(() => {
@@ -62,17 +65,34 @@ const StatsPage = () => {
         minutes: day.totalMinutes,
     }));
 
+    // 今日の作業時間を計算
+    const now = new Date();
+    const todayDateStr = now.toISOString().split('T')[0];
+
+    // 今日のデータを日付文字列で検索
+    const todayData = stats.weekly.days.find(day => day.date === todayDateStr);
+    const todayMinutes = todayData?.totalMinutes || 0;
+
     return (
         <div className={statsPage.page}>
             <h1 className={statsPage.h1}>
                 📊 今週の記録
             </h1>
 
+            {/* 目標達成状況 */}
+            <GoalProgress
+                currentMinutes={todayMinutes}
+                goalMinutes={settings.dailyGoalMinutes}
+                showAchievementBanner={true}
+            />
+
             {/* 棒グラフ */}
             <DailyBarChart data={chartData} />
 
             {/* 連続記録バッジ */}
-            <StreakBadge streak={stats.weekly.streak} />
+            {stats.weekly.streak > 0 &&
+                <StreakBadge streak={stats.weekly.streak} />
+            }
 
             {/* サマリーカード */}
             <div className={statsPage.summaryCard}>

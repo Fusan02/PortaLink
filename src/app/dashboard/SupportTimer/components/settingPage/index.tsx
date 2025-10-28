@@ -1,23 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Settings, AITone } from '../../types';
-import { DEFAULT_SETTINGS } from '../../types';
-import ToneSelector from './ToneSelector';
+// import ToneSelector from './ToneSelector';
 import GoalInput from './GoalInput';
 // import NotificationSelector from './NotificationSelector';
 import index from '../../styles/settingPage/index.css';
+import { useSettings } from '../../hooks/useSettings';
+import TagColorEditor from './TagColorEditor';
 
 const SettingsPage = () => {
-    const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
-    const [showToast, setShowToast] = useState(false);
+    const { settings, loading, error, saveSettings } = useSettings();
 
+    const [localSettings, setLocalSettings] = useState<Settings>(settings);
+    const [showToast, setShowToast] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+
+    useEffect(() => {
+        setLocalSettings(settings);
+    }, [settings]);
+
+    {/*
     const handleToneChange = (tone: AITone) => {
-        setSettings((prev) => ({ ...prev, aiTone: tone }));
+        setLocalSettings((prev) => ({ ...prev, aiTone: tone }));
     };
+    */}
 
     const handleGoalChange = (minutes: number) => {
-        setSettings((prev) => ({ ...prev, dailyGoalMinutes: minutes }));
+        setLocalSettings((prev) => ({ ...prev, dailyGoalMinutes: minutes }));
     };
 
     {/* 
@@ -30,16 +40,55 @@ const SettingsPage = () => {
     };
     */}
 
-    const handleSave = () => {
-        // 後でSupabaseに保存
-        console.log('設定を保存:', settings);
+    const handleSave = async () => {
+        setIsSaving(true);
 
-        // トースト表示
-        setShowToast(true);
-        window.setTimeout(() => {
-            setShowToast(false);
-        }, 3000);
+        const success = await saveSettings(localSettings);
+
+        if (success) {
+            // トースト表示
+            setShowToast(true);
+            window.setTimeout(() => {
+                setShowToast(false);
+            }, 3000);
+        } else {
+            // エラー表示
+            alert('設定の保存に失敗しました');
+        }
+        setIsSaving(false);
     };
+
+    const handleTagColorChange = (tagName: string, color: string) => {
+        setLocalSettings((prev) => ({
+            ...prev,
+            tagColors: {
+                ...prev.tagColors,
+                [tagName]: color,
+            },
+        }));
+    };
+
+    // ローディング中
+    if (loading) {
+        return (
+            <div className={index.loadingContainer}>
+                <div className={index.loading}>
+                    読み込み中...
+                </div>
+            </div>
+        );
+    }
+
+    // エラー時
+    if (error) {
+        return (
+            <div className={index.errorContainer}>
+                <div className={index.error}>
+                    ⚠️ {error}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={index.page}>
@@ -49,15 +98,23 @@ const SettingsPage = () => {
 
             <div className={index.container}>
                 {/* AIのトーン設定 */}
-                <ToneSelector
-                    selectedTone={settings.aiTone}
+                {/* 
+                    <ToneSelector
+                    selectedTone={localSettings.aiTone}
                     onToneChange={handleToneChange}
                 />
+                */}
 
                 {/* 1日の目標時間 */}
                 <GoalInput
-                    goalMinutes={settings.dailyGoalMinutes}
+                    goalMinutes={localSettings.dailyGoalMinutes}
                     onGoalChange={handleGoalChange}
+                />
+
+                {/* タグ色設定 */}
+                <TagColorEditor
+                    tagColors={localSettings.tagColors}
+                    onColorChange={handleTagColorChange}
                 />
 
                 {/* 通知時間帯 */}
@@ -76,7 +133,7 @@ const SettingsPage = () => {
                     onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.98)'}
                     onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
-                    💾 保存
+                    {isSaving ? '保存中...' : '💾 保存'}
                 </button>
             </div>
 

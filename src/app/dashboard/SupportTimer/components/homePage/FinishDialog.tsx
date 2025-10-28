@@ -17,7 +17,7 @@ const FinishDialog = ({ duration, onSave, onClose, loading, error }: FinishDialo
 
     const formatDuration = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
-        return `${minutes}分 ${seconds}秒`;
+        return `${minutes}分 ${minutes !== 0 ? seconds % (60 * minutes) : seconds}秒`;
     };
 
     const handleSave = () => {

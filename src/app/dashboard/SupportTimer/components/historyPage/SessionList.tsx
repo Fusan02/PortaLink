@@ -2,12 +2,15 @@
 
 import sessionList from '../../styles/historyPage/sessionList.css';
 import type { Session } from '../../types';
+import { useSettings } from '../../hooks/useSettings';
 
 interface SessionListProps {
     sessions: Session[];
 }
 
 const SessionList = ({ sessions }: SessionListProps) => {
+    const { getTagColor } = useSettings();
+    
     const formatDate = (date: Date): string => {
         return new Intl.DateTimeFormat('ja-JP', {
             year: 'numeric',
@@ -19,17 +22,6 @@ const SessionList = ({ sessions }: SessionListProps) => {
     const formatDuration = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
         return `${minutes}分`;
-    };
-
-    // タグごとの色設定
-    const getTagColor = (tag?: string): string => {
-        const tagColors: { [key: string]: string } = {
-            '開発': '#2196F3',
-            '学習': '#4CAF50',
-            '企画': '#FF9800',
-            'デザイン': '#9C27B0',
-        };
-        return tag ? (tagColors[tag] || '#757575') : '#757575';
     };
 
     return (

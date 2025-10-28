@@ -1,54 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import type { Session } from '../../types';
+import { useEffect, useState } from 'react';
 import FilterBar from './FilterBar';
 import SessionList from './SessionList';
 import index from '../../styles/historyPage/index.css';
+import { useSession } from '../../hooks/useSession';
 
 const HistoryPage = () => {
+    const { sessions, loading, error, fetchSessions } = useSession();
     const [searchQuery, setSearchQuery] = useState('');
     const [filterTag, setFilterTag] = useState('');
 
-    // 仮データ (後でSupabaseに設定)
-    const sessions: Session[] = [
-        {
-            id: '1',
-            startTime: new Date('2025-10-20T14:00:00'),
-            endTime: new Date('2025-10-20T14:25:00'),
-            duration: 1500, // 25分 = 1500秒
-            memo: '英語の勉強',
-            tag: '学習',
-            aiComment: 'えらい！',
-        },
-        {
-            id: '2',
-            startTime: new Date('2025-10-19T10:30:00'),
-            endTime: new Date('2025-10-19T11:15:00'),
-            duration: 2700, // 45分 = 2700秒
-            memo: 'React練習',
-            tag: '開発',
-            aiComment: 'いい調子だね！',
-        },
-        {
-            id: '3',
-            startTime: new Date('2025-10-18T15:00:00'),
-            endTime: new Date('2025-10-18T16:00:00'),
-            duration: 3600, // 60分 = 3600秒
-            memo: 'TypeScript型定義の整理',
-            tag: '開発',
-            aiComment: '',
-        },
-        {
-            id: '4',
-            startTime: new Date('2025-10-17T09:00:00'),
-            endTime: new Date('2025-10-17T09:30:00'),
-            duration: 1800, // 30分 = 1800秒
-            memo: 'プロジェクト設計書作成',
-            tag: '企画',
-            aiComment: '素晴らしい集中力！',
-        },
-    ];
+    // 初回マウント時にセッションを取得
+    useEffect(() => {
+        fetchSessions();
+    }, [fetchSessions]);
 
     // フィルタリング処理
     const filteredSessions = sessions.filter((session) => {
@@ -66,6 +32,28 @@ const HistoryPage = () => {
         )
     );
 
+    // ローディング中
+    if (loading) {
+        return (
+            <div className={index.loadingContainer}>
+                <div className={index.loading}>
+                    読み込み中...
+                </div>
+            </div>
+        );
+    }
+
+    // エラー時
+    if (error) {
+        return (
+            <div className={index.errorContainer}>
+                <div className={index.error}>
+                    ⚠️ {error}
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={index.page}>
             <h1 className={index.h1}>
@@ -82,11 +70,23 @@ const HistoryPage = () => {
             />
 
             {/* セッション一覧 */}
-            {filteredSessions.length > 0 ? (
+            {sessions.length === 0 ? (
+                <div className={index.nonSessionContainer}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>
+                        📝
+                    </div>
+                    <div style={{ fontSize: '16px' }}>
+                        まだセッションがありません
+                    </div>
+                    <div style={{ fontSize: '14px', marginTop: '8px' }}>
+                        タイマーを使って作業を記録しよう！
+                    </div>
+                </div>
+            ) : filteredSessions.length > 0 ? (
                 <SessionList sessions={filteredSessions} />
             ) : (
-                <div className={index.session}>
-                    セッションが見つかりませんでした
+                <div className={index.nonSearchSession}>
+                    検索条件に一致するセッションが見つかりませんでした
                 </div>
             )}
         </div>
