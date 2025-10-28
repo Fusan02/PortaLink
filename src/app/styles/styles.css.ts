@@ -6,7 +6,6 @@ export const app = style({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
-  height: '100vh',
 });
 
 export const inputText = style({

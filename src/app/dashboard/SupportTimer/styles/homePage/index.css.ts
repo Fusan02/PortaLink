@@ -6,7 +6,7 @@ const container = style({
     alignItems: 'center',
     padding: '20px',
     gap: '30px',
-    minHeight: 'calc(100vh - 80px)',
+    
 });
 
 const startStopContainer = style({
@@ -40,11 +40,78 @@ const stopButton = style({
     transition: 'transform 0.2s',
 });
 
+const description = style({
+    maxWidth: '800px',
+    margin: '0 auto',
+    padding: '40px 20px',
+    color: '#333',
+    lineHeight: '1.8',
+});
+
+const descriptionTitle = style({
+    fontSize: '28px',
+    fontWeight: 'bold',
+    marginBottom: '30px',
+    color: '#1E362D',
+    textAlign: 'center',
+});
+
+const descriptionSection = style({
+    marginBottom: '30px',
+});
+
+const descriptionSectionTitle = style({
+    fontSize: '20px',
+    fontWeight: 'bold',
+    marginBottom: '12px',
+    color: '#1E362D',
+    borderLeft: '4px solid #4CAF50',
+    paddingLeft: '12px',
+});
+
+const descriptionText = style({
+    fontSize: '16px',
+    color: '#555',
+    marginBottom: '8px',
+});
+
+const descriptionList = style({
+    listStyle: 'none',
+    padding: '0',
+    margin: '0',
+});
+
+const descriptionListItem = style({
+    fontSize: '16px',
+    color: '#555',
+    marginBottom: '12px',
+    paddingLeft: '20px',
+    position: 'relative',
+    selectors: {
+        '&::before': {
+            content: '•',
+            position: 'absolute',
+            left: '0',
+            color: '#4CAF50',
+            fontWeight: 'bold',
+            fontSize: '20px',
+        }
+    }
+});
+
 const index = {
     container,
     startStopContainer,
     startButton,
     stopButton,
+
+    description,
+    descriptionTitle,
+    descriptionSection,
+    descriptionSectionTitle,
+    descriptionText,
+    descriptionList,
+    descriptionListItem,
 };
 
 export default index;

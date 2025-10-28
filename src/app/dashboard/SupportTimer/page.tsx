@@ -8,6 +8,7 @@ import HomePage from './components/homePage';
 import StatsPage from './components/statsPage';
 import HistoryPage from './components/historyPage';
 import SettingsPage from './components/settingPage';
+import { BackButton_Arrow } from '@/components/buttons/back-button2/BackButton_Arrow';
 
 const SupportTimer = () => {
     // タブの状態管理
@@ -15,6 +16,9 @@ const SupportTimer = () => {
 
     return (
         <div className={pageStyles.page}>
+            <div>
+                <BackButton_Arrow />
+            </div>
             <main className={pageStyles.mainContetns}>
                 {activeTab === 'home' && (<HomePage />)}
                 {activeTab === 'stats' && (<StatsPage />)}
