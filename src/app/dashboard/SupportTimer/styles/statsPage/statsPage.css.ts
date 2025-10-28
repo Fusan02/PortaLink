@@ -20,10 +20,57 @@ const summaryCard = style({
     marginTop: '24px',
 });
 
+const loadingContainer = style({
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    textAlign: 'center',
+    paddingTop: '100px',
+});
+
+const loading = style({
+    fontSize: '18px',
+    color: '#666',
+});
+
+const errorContainer = style({
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    textAlign: 'center',
+    paddingTop: '100px',
+});
+
+const error = style({
+    backgroundColor: '#FFEBEE',
+    color: '#C62828',
+    padding: '16px',
+    borderRadius: '8px',
+});
+
+const nonStatsContainer = style({
+    padding: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    textAlign: 'center',
+    paddingTop: '100px',
+});
+
+const nonStats = style({
+    fontSize: '18px',
+    color: '#666',
+});
+
 const statsPage = {
     page,
     h1,
     summaryCard,
+    loadingContainer,
+    loading,
+    errorContainer,
+    error,
+    nonStatsContainer,
+    nonStats,
 };
 
 export default statsPage;

@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useStats } from '../../hooks/useStats';
 import statsPage from '../../styles/statsPage/statsPage.css';
 import DailyBarChart from './DailyBarChart';
 import StreakBadge from './StreakBadge';
@@ -7,27 +9,59 @@ import SummaryCard from './SummaryCard';
 
 
 const StatsPage = () => {
-    // 仮データ (後でSupabaseから取得)
-    const weeklyData = [
-        { day: '日', minutes: 0 },
-        { day: '月', minutes: 45 },
-        { day: '火', minutes: 60 },
-        { day: '水', minutes: 75 },
-        { day: '木', minutes: 90 },
-        { day: '金', minutes: 120 },
-        { day: '土', minutes: 80 },
-    ];
+    const { stats, loading, error, fetchWeeklyStats} = useStats();
 
-    const streak = 7; // 連続日数
-    const totalMinutes = 470; // 合計作業時間 (分)
-    const bestMinutes = 150; // 過去最高 (分)
+    // 初回マウント次に統計を取得
+    useEffect(() => {
+        fetchWeeklyStats();
+    }, [fetchWeeklyStats]);
 
     const formatTime = (minutes: number): string => {
         const hours = Math.floor(minutes / 60);
         const mins = minutes % 60;
         return `${hours}時間${mins}分`;
     };
+
+    // ローディング中
+    if (loading) {
+        return (
+            <div className={statsPage.loadingContainer}>
+                <div className={statsPage.loading}>
+                    読み込み中...
+                </div>
+            </div>
+        );
+    }
+
+    // エラー時
+    if (error) {
+        return (
+            <div className={statsPage.errorContainer}>
+                <div className={statsPage.error}>
+                    ⚠️{error}
+                </div>
+            </div>
+        );
+    }
     
+
+    // データがない場合
+    if (!stats) {
+        return (
+            <div className={statsPage.nonStatsContainer}>
+                <div className={statsPage.nonStats}>
+                    データがありません
+                </div>
+            </div>
+        );
+    }
+
+    // 棒グラフ用のデータを変換
+    const chartData = stats.weekly.days.map((day, index) => ({
+        day: ['日', '月', '火', '水', '木', '金', '土'][index],
+        minutes: day.totalMinutes,
+    }));
+
     return (
         <div className={statsPage.page}>
             <h1 className={statsPage.h1}>
@@ -35,22 +69,32 @@ const StatsPage = () => {
             </h1>
 
             {/* 棒グラフ */}
-            <DailyBarChart data={weeklyData} />
+            <DailyBarChart data={chartData} />
 
             {/* 連続記録バッジ */}
-            <StreakBadge streak={streak} />
+            <StreakBadge streak={stats.weekly.streak} />
 
             {/* サマリーカード */}
             <div className={statsPage.summaryCard}>
                 <SummaryCard 
                     icon='📊'
-                    label='合計作業時間'
-                    value={formatTime(totalMinutes)}
+                    label='今週の合計作業時間'
+                    value={formatTime(stats.weekly.totalMinutes)}
                 />
                 <SummaryCard 
                     icon='🎖'
-                    label='過去最高'
-                    value={formatTime(bestMinutes)}
+                    label='今週の最高記録'
+                    value={formatTime(stats.weekly.bestDay.minutes)}
+                />
+                <SummaryCard 
+                    icon='⏱'
+                    label='累積作業時間'
+                    value={formatTime(stats.allTime.totalMinutes)}
+                />
+                <SummaryCard 
+                    icon='📈'
+                    label='累積セッション数'
+                    value={`${stats.allTime.totalSessions}回`}
                 />
             </div>
         </div>
