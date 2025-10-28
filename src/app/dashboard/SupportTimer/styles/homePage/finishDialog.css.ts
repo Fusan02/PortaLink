@@ -121,6 +121,15 @@ const buttonSave = recipe({
     },
 });
 
+const error = style({
+    backgroundColor: '#FFEBEE',
+    color: '#C62828',
+    padding: '12px',
+    borderRadius: '8px',
+    marginBottom: '16px',
+    fontSize: '14px',
+});
+
 const finishDialog = {
     place,
     container,
@@ -135,6 +144,7 @@ const finishDialog = {
     button,
     buttonClose,
     buttonSave,
+    error,
 };
 
 export default finishDialog;

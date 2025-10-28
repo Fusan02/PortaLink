@@ -7,9 +7,11 @@ interface FinishDialogProps {
     duration: number;
     onSave: (memo: string, tag?: string) => void;
     onClose: () => void;
+    loading?: boolean;
+    error?: string | null;
 }
 
-const FinishDialog = ({ duration, onSave, onClose }: FinishDialogProps) => {
+const FinishDialog = ({ duration, onSave, onClose, loading, error }: FinishDialogProps) => {
     const [memo, setMemo] = useState('');
     const [tag, setTag] = useState('');
 
@@ -35,6 +37,13 @@ const FinishDialog = ({ duration, onSave, onClose }: FinishDialogProps) => {
                 <div className={finishDialog.time}>
                     作業時間: {formatDuration(duration)}
                 </div>
+
+                {/* エラーメッセージ */}
+                {error && (
+                    <div className={finishDialog.error}>
+                        ⚠️{error}
+                    </div>
+                )}
 
                 {/* メモ入力 */}
                 <div className={finishDialog.memo}>
@@ -73,10 +82,10 @@ const FinishDialog = ({ duration, onSave, onClose }: FinishDialogProps) => {
                     </button>
                     <button
                         onClick={handleSave}
-                        disabled={!memo.trim()}
-                        className={finishDialog.buttonSave({ memo: !!memo.trim() })}
+                        disabled={!memo.trim() || loading}
+                        className={finishDialog.buttonSave({ memo: !!memo.trim() && !loading })}
                     >
-                        保存
+                        {loading ? '保存中...' : '保存'}
                     </button>
                 </div>
             </div>

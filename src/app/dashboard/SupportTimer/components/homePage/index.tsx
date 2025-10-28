@@ -6,10 +6,13 @@ import MotivationCard from './MotivationCard';
 import BigTimer from './BigTimer';
 import FinishDialog from './FinishDialog';
 import index from '../../styles/homePage/index.css';
+import { useSession } from '../../hooks/useSession';
 
 const HomePage = () => {
     const { seconds, isRunning, start, stop, reset } = useTimer();
+    const { createSession, loading: sessionLoading } = useSession();
     const [showFinishDialog, setShowFinishDialog] = useState(false);
+    const [saveError, setSaveError] = useState<string | null>(null);
 
     const handleStart = () => {
         start();
@@ -20,11 +23,24 @@ const HomePage = () => {
         setShowFinishDialog(true);
     };
 
-    const handleSaveSession = (memo: string, tag?: string) => {
-        // セッション保存処理は後ほど
-        console.log('保存:', { duration: seconds, memo: memo, tag: tag });
-        setShowFinishDialog(false);
-        reset();
+    const handleSaveSession = async (memo: string, tag?: string) => {
+        setSaveError(null);
+
+        // Supabaseに保存
+        const success = await createSession({
+            duration: seconds,
+            memo,
+            tag,
+        });
+
+        if (success) {
+            // 保存成功
+            setShowFinishDialog(false);
+            reset();
+        } else {
+            // 保存失敗
+            setSaveError('セッションの保存に失敗しました。もう一度お試しください。');
+        }
     };
 
     const handleCancel = () => {
@@ -69,6 +85,8 @@ const HomePage = () => {
                     duration={seconds}
                     onSave={handleSaveSession}
                     onClose={handleCancel}
+                    loading={sessionLoading}
+                    error={saveError}
                 />
             )}
         </div>
