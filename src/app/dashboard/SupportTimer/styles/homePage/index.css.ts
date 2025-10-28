@@ -48,14 +48,6 @@ const description = style({
     lineHeight: '1.8',
 });
 
-const descriptionTitle = style({
-    fontSize: '28px',
-    fontWeight: 'bold',
-    marginBottom: '30px',
-    color: '#1E362D',
-    textAlign: 'center',
-});
-
 const descriptionSection = style({
     marginBottom: '30px',
 });
@@ -106,7 +98,6 @@ const index = {
     stopButton,
 
     description,
-    descriptionTitle,
     descriptionSection,
     descriptionSectionTitle,
     descriptionText,
