@@ -3,12 +3,17 @@ import typescript from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import { FlatCompat } from '@eslint/eslintrc';
+
+const compat = new FlatCompat();
+const nextConfig = compat.extends('next/core-web-vitals');
 
 const eslintConfig = [
   {
     ignores: ['.next/**', 'node_modules/**', '.vercel/**', 'out/**', 'build/**'],
   },
   js.configs.recommended,
+  ...nextConfig,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
