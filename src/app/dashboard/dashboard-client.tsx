@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faCheckCircle, faCirclePlay, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faCat, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { Button, LogoutButton } from '@/components/buttons';
 import { toClassNames } from '@/utils/toClassNames_utils';
@@ -96,6 +96,15 @@ export const DashboardClient =({
             ])}>
               <FontAwesomeIcon icon={faClock} className={styles.icon} />
               SupportTimer
+            </div>
+          </Link>
+          <Link href='/dashboard/movieflix' className={styles.LinkSetting}>
+            <div className={toClassNames([
+              styles.serviceBox,
+              boxAnimation,
+            ])}>
+              <FontAwesomeIcon icon={faCirclePlay} className={styles.icon} />
+              MOVIEFLIX
             </div>
           </Link>
         </div>

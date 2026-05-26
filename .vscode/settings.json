@@ -1,4 +1,6 @@
 {
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -10,6 +12,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "javascript.preferences.quoteStyle": "single",
-  "typescript.preferences.quoteStyle": "single"
+  "js/ts.preferences.quoteStyle": "single"
 }
