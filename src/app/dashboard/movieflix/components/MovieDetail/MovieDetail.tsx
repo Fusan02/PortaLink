@@ -4,32 +4,9 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import './MovieDetail.css';
 import { ArrowLeft, Clock, Star } from 'lucide-react';
-import type { MovieDetailJson, Movie } from '../../types';
+import type { Movie } from '../../types';
 import { useEffect, useState } from 'react';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-
-async function fetchMovieDetail(movieId: string): Promise<Movie> {
-  const res = await fetch(`${BASE_URL}/movie/${movieId}?language=ja&append_to_response=credits`, {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-    }
-  });
-  const data = (await res.json()) as MovieDetailJson;
-  return {
-    id: data.id,
-    original_title: data.title,
-    poster_path: data.poster_path,
-    backdrop_path: data.backdrop_path,
-    overview: data.overview,
-    release_date: data.release_date,
-    year: Number(data.release_date.split('-')[0]),
-    rating: data.vote_average,
-    runtime: data.runtime,
-    voteCount: data.vote_count,
-    genres: data.genres.map(genre => genre.name)
-  };
-}
+import { fetchMovieDetail } from '../../api/movie';
 
 export default function MovieDetail() {
   const params = useParams();

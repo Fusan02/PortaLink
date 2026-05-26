@@ -1,30 +1,41 @@
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+import type { Movie, MovieJson, MovieDetailJson } from '../types';
 
-const headers = { Authorization: `Bearer ${API_KEY}` };
+const BASE_URL = 'https://api.themoviedb.org/3';
 
-export async function fetchPopularMovies() {
-    const res = await fetch(`${BASE_URL}/movie/popular?language=ja&page=1`, {
-        headers,
-    });
-    const data = await res.json();
-    return data.results;
+const headers = {
+  Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+};
+
+export async function fetchPopularMovies(): Promise<Movie[]> {
+  const res = await fetch(`${BASE_URL}/movie/popular?language=ja&page=1`, { headers });
+  const data = await res.json();
+  return data.results.map((movie: MovieJson) => ({
+    id: movie.id,
+    original_title: movie.original_title,
+    poster_path: movie.poster_path,
+    backdrop_path: movie.backdrop_path,
+    overview: movie.overview,
+    release_date: movie.release_date,
+  })) as Movie[];
 }
 
-export async function fetchMoviesByKeyword(keyword: string) {
-    const res = await fetch(
-        `${BASE_URL}/search/movie?query=${keyword}&language=ja&page=1`,
-        { headers },
-    );
-    const data = await res.json();
-    return data.results;
-}
-
-export async function fetchMovieDetail(movieId: string | undefined) {
-    const res = await fetch(
-        `${BASE_URL}/movie/${movieId}?language=ja&page=1&append_to_response=credits`,
-        { headers },
-    );
-    const data = await res.json();
-    return data;
+export async function fetchMovieDetail(movieId: string): Promise<Movie> {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}?language=ja&append_to_response=credits`,
+    { headers }
+  );
+  const data = (await res.json()) as MovieDetailJson;
+  return {
+    id: data.id,
+    original_title: data.title,
+    poster_path: data.poster_path,
+    backdrop_path: data.backdrop_path,
+    overview: data.overview,
+    release_date: data.release_date,
+    year: Number(data.release_date.split('-')[0]),
+    rating: data.vote_average,
+    runtime: data.runtime,
+    voteCount: data.vote_count,
+    genres: data.genres.map(genre => genre.name),
+  };
 }

@@ -2,28 +2,10 @@
 
 import './page.css';
 import MovieCard from './components/MovieCard/MovieCard';
-import type { Movie, MovieJson } from './types';
+import type { Movie } from './types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-
-async function fetchPopularMovies(): Promise<Movie[]> {
-  const res = await fetch(`${BASE_URL}/movie/popular?language=ja&page=1`, {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-    }
-  });
-  const data = await res.json();
-  return data.results.map((movie: MovieJson) => ({
-    id: movie.id,
-    original_title: movie.original_title,
-    poster_path: movie.poster_path,
-    backdrop_path: movie.backdrop_path,
-    overview: movie.overview,
-    release_date: movie.release_date
-  })) as Movie[];
-}
+import { fetchPopularMovies } from './api/movie';
 
 export default function MovieFlix() {
   const [movieList, setMovieList] = useState<Movie[]>([]);
