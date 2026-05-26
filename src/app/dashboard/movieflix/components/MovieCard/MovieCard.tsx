@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import '../../page.css';
 import type { Movie } from '../../types/index';
 
@@ -12,9 +13,11 @@ const MovieCard = (props: Props) => {
     return (
         <Link href={`/dashboard/movieflix/${movie.id}`} className='movie-card'>
             <div className='movie-card__imgwrap'>
-                <img
+                <Image
                     src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
                     alt={movie.original_title}
+                    width={300}
+                    height={450}
                     className='movie-card__image'
                 />
                 <div className='movie-card__overlay'>

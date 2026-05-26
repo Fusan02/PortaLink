@@ -4,6 +4,7 @@ import './page.css';
 import MovieCard from './components/MovieCard/MovieCard';
 import type { Movie } from './types';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from './api/movie';
 
@@ -35,7 +36,7 @@ export default function MovieFlix() {
       <section className='hero-section'>
         {heroImage && (
           <>
-            <img className='hero-section-bg' src={heroImage} alt={heroTitle} />
+            <Image className='hero-section-bg' src={heroImage} alt={heroTitle ?? ''} width={1920} height={1080} style={{ width: '100%', height: 'auto' }} />
             <div className='hero-section-gradient' />
           </>
         )}

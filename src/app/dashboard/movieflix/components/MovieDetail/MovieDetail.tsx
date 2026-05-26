@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import './MovieDetail.css';
 import { ArrowLeft, Clock, Star } from 'lucide-react';
@@ -45,7 +46,7 @@ export default function MovieDetail() {
             </Link>
             <div className='movie-detail-grid'>
               <div className='movie-detail-poster-wrap'>
-                <img src={'https://image.tmdb.org/t/p/w500' + movie.poster_path} alt={movie.original_title} className='movie-detail-poster-img' />
+                <Image src={'https://image.tmdb.org/t/p/w500' + movie.poster_path} alt={movie.original_title} width={500} height={750} className='movie-detail-poster-img' />
               </div>
               <div className='movie-detail-details'>
                 <h1 className='movie-detail-title'>{movie.original_title}</h1>
