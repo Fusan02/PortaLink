@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "PortaLink (root)",
+      "path": "."
+    },
+    {
+      "name": "movieflix",
+      "path": "src/app/dashboard/movieflix"
+    },
+    {
+      "name": "pfofile",
+      "path": "src/app/dashboard/profile"
+    }
+  ],
+  "settings": {
+    "js/ts.tsdk.path": "node_modules/typescript/lib"
+  }
+}

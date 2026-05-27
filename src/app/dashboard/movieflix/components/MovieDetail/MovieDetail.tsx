@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import './MovieDetail.css';
+import { toClassNames } from '@/utils/toClassNames_utils';
+import styles from './MovieDetail.css';
 import { ArrowLeft, Clock, Star } from 'lucide-react';
 import type { Movie } from '../../types';
 import { useEffect, useState } from 'react';
@@ -29,52 +30,70 @@ export default function MovieDetail() {
   if (isError) return <p>エラーが発生しました</p>;
 
   return (
-    <div className='movie-detail-root'>
+    <div className={toClassNames([styles.movieDetailRoot])}>
       {movie && (
         <>
           <div
-            className='movie-detail-backdrop'
+            className={toClassNames([styles.movieDetailBackdrop])}
             style={{
               backgroundImage: `url(${'https://image.tmdb.org/t/p/w500' + movie.poster_path})`
             }}
           />
-          <div className='movie-detail-backdrop-gradient' />
-          <div className='movie-detail-container'>
-            <Link href='/dashboard/movieflix' className='movie-detail-backlink'>
-              <ArrowLeft className='movie-detail-backlink-icon' />
+          <div className={toClassNames([styles.movieDetailBackdropGradient])} />
+          <div className={toClassNames([styles.movieDetailContainer])}>
+            <Link
+              href='/dashboard/movieflix'
+              className={toClassNames([styles.movieDetailBacklink])}
+            >
+              <ArrowLeft className={toClassNames([styles.movieDetailBacklinkIcon])} size={20} />
               Back to home
             </Link>
-            <div className='movie-detail-grid'>
-              <div className='movie-detail-poster-wrap'>
-                <Image src={'https://image.tmdb.org/t/p/w500' + movie.poster_path} alt={movie.original_title} width={500} height={750} className='movie-detail-poster-img' />
+            <div className={toClassNames([styles.movieDetailGrid])}>
+              <div className={toClassNames([styles.movieDetailPosterWrap])}>
+                <Image
+                  src={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
+                  alt={movie.original_title}
+                  width={500}
+                  height={750}
+                  className={toClassNames([styles.movieDetailPosterImg])}
+                />
               </div>
-              <div className='movie-detail-details'>
-                <h1 className='movie-detail-title'>{movie.original_title}</h1>
-                <div className='movie-detail-badges'>
-                  <span className='badges-outline'>{movie.year}</span>
-                  <span className='badges-outline'>PG-13</span>
-                  <span className='badges-outline'>
-                    <Clock className='badges-icon-svg' size={14} />
+              <div className={toClassNames([styles.movieDetailDetails])}>
+                <h1 className={toClassNames([styles.movieDetailTitle])}>{movie.original_title}</h1>
+                <div className={toClassNames([styles.movieDetailBadges])}>
+                  <span className={toClassNames([styles.badgesOutline])}>{movie.year}</span>
+                  <span className={toClassNames([styles.badgesOutline])}>PG-13</span>
+                  <span className={toClassNames([styles.badgesOutline])}>
+                    <Clock className={toClassNames([styles.badgesIconSvg])} size={14} />
                     {movie.runtime}分
                   </span>
-                  <span className='badges-outline'>
-                    <Star className='badges-icon-svg badges-star' size={14} />
+                  <span className={toClassNames([styles.badgesOutline])}>
+                    <Star
+                      className={toClassNames([styles.badgesIconSvg, styles.badgesStar])}
+                      size={14}
+                    />
                     {(movie.rating / 10).toFixed(1)}
                   </span>
                 </div>
-                <p className='movie-detail-overview'>{movie.overview}</p>
-                <div className='movie-detail-genres'>
+                <p className={toClassNames([styles.movieDetailOverview])}>{movie.overview}</p>
+                <div className={toClassNames([styles.movieDetailGenres])}>
                   {movie.genres.map(g => (
-                    <span key={g} className='badges-genre'>
+                    <span key={g} className={toClassNames([styles.badgesGenre])}>
                       {g}
                     </span>
                   ))}
                 </div>
-                <div className='movie-detail-actions'>
-                  <button onClick={() => alert('未実装です')} className='movie-detail-btn movie-detail-btn-primary'>
+                <div className={toClassNames([styles.movieDetailActions])}>
+                  <button
+                    onClick={() => alert('未実装です')}
+                    className={toClassNames([styles.movieDetailBtn, styles.movieDetailBtnPrimary])}
+                  >
                     ▶︎ Watch Now
                   </button>
-                  <button onClick={() => alert('未実装です')} className='movie-detail-btn'>
+                  <button
+                    onClick={() => alert('未実装です')}
+                    className={toClassNames([styles.movieDetailBtn])}
+                  >
                     + Add to My List
                   </button>
                 </div>

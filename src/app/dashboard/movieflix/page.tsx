@@ -1,6 +1,7 @@
 'use client';
 
-import './page.css';
+import { toClassNames } from '@/utils/toClassNames_utils';
+import styles from './movieflix.css';
 import MovieCard from './components/MovieCard/MovieCard';
 import type { Movie } from './types';
 import Link from 'next/link';
@@ -29,37 +30,55 @@ export default function MovieFlix() {
   const heroTitle = heroMovie?.original_title;
   const heroYear = heroMovie?.release_date;
   const heroOverview = heroMovie?.overview;
-  const heroImage = heroMovie?.backdrop_path ? `https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}` : null;
+  const heroImage = heroMovie?.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`
+    : null;
 
   return (
-    <div className='main-wrapper'>
-      <section className='hero-section'>
+    <div className={toClassNames([styles.mainWrapper])}>
+      <section className={toClassNames([styles.heroSection])}>
         {heroImage && (
           <>
-            <Image className='hero-section-bg' src={heroImage} alt={heroTitle ?? ''} width={1920} height={1080} style={{ width: '100%', height: 'auto' }} />
-            <div className='hero-section-gradient' />
+            <Image
+              className={toClassNames([styles.heroSectionBg])}
+              src={heroImage}
+              alt={heroTitle ?? ''}
+              width={1920}
+              height={1080}
+              style={{ width: '100%', height: 'auto' }}
+            />
+            <div className={toClassNames([styles.heroSectionGradient])} />
           </>
         )}
-        <div className='hero-section-content'>
-          <h1 className='hero-section-title'>{heroTitle}</h1>
-          <div className='hero-section-badges'>
-            <span className='hero-section-badge'>{heroYear}</span>
+        <div className={toClassNames([styles.heroSectionContent])}>
+          <h1 className={toClassNames([styles.heroSectionTitle])}>{heroTitle}</h1>
+          <div className={toClassNames([styles.heroSectionBadges])}>
+            <span className={toClassNames([styles.heroSectionBadge])}>{heroYear}</span>
           </div>
-          {heroOverview && <div className='hero-section-overview'>{heroOverview}</div>}
-          <div className='hero-section-actions'>
-            <button onClick={() => alert('未実装です')} className='hero-section-btn hero-section-btn-primary'>
+          {heroOverview && (
+            <div className={toClassNames([styles.heroSectionOverview])}>{heroOverview}</div>
+          )}
+          <div className={toClassNames([styles.heroSectionActions])}>
+            <button
+              onClick={() => alert('未実装です')}
+              className={toClassNames([styles.heroSectionBtn, styles.heroSectionBtnPrimary])}
+            >
               <span>▶︎</span>
               <span>Play</span>
             </button>
             <Link href={`/dashboard/movieflix/${heroId}`}>
-              <button className='hero-section-btn hero-section-btn-secondary'>More Info</button>
+              <button
+                className={toClassNames([styles.heroSectionBtn, styles.heroSectionBtnSecondary])}
+              >
+                More Info
+              </button>
             </Link>
           </div>
         </div>
       </section>
-      <section className='movie-row-section'>
-        <h2 className='movie-row-title'>人気映画</h2>
-        <div className='movie-row-scroll'>
+      <section className={toClassNames([styles.movieRowSection])}>
+        <h2 className={toClassNames([styles.movieRowTitle])}>人気映画</h2>
+        <div className={toClassNames([styles.movieRowScroll])}>
           {movieList.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
