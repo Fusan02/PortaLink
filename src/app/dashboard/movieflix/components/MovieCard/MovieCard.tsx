@@ -23,6 +23,7 @@ const MovieCard = (props: Props) => {
       <div className={toClassNames([styles.movieCardImgwrap])}>
         <Image
           src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
+          priority
           alt={movie.original_title}
           width={300}
           height={450}
