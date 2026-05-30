@@ -8,6 +8,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from './api/movie';
+import Loading from './components/Loading/loading';
+
+let isFirstLoad = true;
+// リロード時のローディング画面を表示させるかどうかのトリガー.
+let loadingTrigger = true;
 
 export default function MovieFlix() {
   const [movieList, setMovieList] = useState<Movie[]>([]);
@@ -16,13 +21,23 @@ export default function MovieFlix() {
   const [heroIndex] = useState(() => Math.floor(Math.random() * 20));
 
   useEffect(() => {
-    fetchPopularMovies()
-      .then(setMovieList)
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
+    if (loadingTrigger) {
+      const minDelay = isFirstLoad ? 2000 : 0;
+      isFirstLoad = false;
+
+      Promise.all([fetchPopularMovies(), new Promise(resolve => setTimeout(resolve, minDelay))])
+        .then(([data]) => setMovieList(data as Movie[]))
+        .catch(() => setIsError(true))
+        .finally(() => setIsLoading(false));
+    } else {
+      fetchPopularMovies()
+        .then(setMovieList)
+        .catch(() => setIsError(true))
+        .finally(() => setIsLoading(false));
+    }
   }, []);
 
-  if (isLoading) return <p>読み込み中...</p>;
+  if (isLoading) return <Loading />;
   if (isError) return <p>エラーが発生しました</p>;
 
   const heroMovie = movieList.length > 0 ? movieList[heroIndex % movieList.length] : null;

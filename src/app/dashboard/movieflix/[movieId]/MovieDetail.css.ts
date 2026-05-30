@@ -47,6 +47,9 @@ const movieDetailBacklink = style({
   marginBottom: '24px',
   textDecoration: 'none',
   transition: 'color 0.2s',
+  background: 'none',
+  border: 'none',
+  padding: '0',
   selectors: {
     '&:hover': {
       color: '#fff'
