@@ -10,9 +10,8 @@ import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from './api/movie';
 import Loading from './components/Loading/loading';
 
+// 初回ロードかのフラグ.
 let isFirstLoad = true;
-// リロード時のローディング画面を表示させるかどうかのトリガー.
-let loadingTrigger = true;
 
 export default function MovieFlix() {
   const [movieList, setMovieList] = useState<Movie[]>([]);
@@ -21,20 +20,15 @@ export default function MovieFlix() {
   const [heroIndex] = useState(() => Math.floor(Math.random() * 20));
 
   useEffect(() => {
-    if (loadingTrigger) {
-      const minDelay = isFirstLoad ? 2000 : 0;
-      isFirstLoad = false;
+    // 初回ロードだけロード画面を見せるための遅延.
+    const minDelay = isFirstLoad ? 2000 : 0;
+    isFirstLoad = false;
 
-      Promise.all([fetchPopularMovies(), new Promise(resolve => setTimeout(resolve, minDelay))])
-        .then(([data]) => setMovieList(data as Movie[]))
-        .catch(() => setIsError(true))
-        .finally(() => setIsLoading(false));
-    } else {
-      fetchPopularMovies()
-        .then(setMovieList)
-        .catch(() => setIsError(true))
-        .finally(() => setIsLoading(false));
-    }
+    // 次の配列内の各処理が終わるまで待つための Promise.
+    Promise.all([fetchPopularMovies(), new Promise(resolve => setTimeout(resolve, minDelay))])
+      .then(([data]) => setMovieList(data as Movie[]))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (isLoading) return <Loading />;

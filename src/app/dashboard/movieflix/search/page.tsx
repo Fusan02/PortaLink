@@ -8,11 +8,14 @@ import MovieCard from '../components/MovieCard/MovieCard';
 import { toClassNames } from '@/utils/toClassNames_utils';
 import styles from './search.css';
 import { Suspense } from 'react';
+import Loading from '../components/Loading/loading';
 
 function SearchContent() {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('q') ?? '';
   const [results, setResults] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (!keyword) return;
@@ -23,14 +26,21 @@ function SearchContent() {
 
     if (cached) {
       setResults(JSON.parse(cached));
+      setIsLoading(false);
       return;
-      // キャッシュがあればGETしない
+      // キャッシュがあればそこからデータを得る.
     }
-    fetchMoviesByKeyword(keyword).then(data => {
-      sessionStorage.setItem(cacheKey, JSON.stringify(data)); // 保存
-      setResults(data);
-    });
+    fetchMoviesByKeyword(keyword)
+      .then(data => {
+        sessionStorage.setItem(cacheKey, JSON.stringify(data)); // キャッシュを保存
+        setResults(data);
+      })
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, [keyword]);
+
+  if (isLoading) return <Loading />;
+  if (isError) return <p>エラーが発生しました</p>;
 
   return (
     <div>
