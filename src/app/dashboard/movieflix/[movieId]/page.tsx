@@ -44,7 +44,7 @@ export default function MovieDetail() {
           <div className={toClassNames([styles.movieDetailBackdropGradient])} />
           <div className={toClassNames([styles.movieDetailContainer])}>
             <button
-              onClick={() => router.back()}
+              onClick={() => router.replace('/dashboard/movieflix')}
               className={toClassNames([styles.movieDetailBacklink])}
             >
               <ArrowLeft className={toClassNames([styles.movieDetailBacklinkIcon])} size={20} />

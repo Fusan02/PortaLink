@@ -35,7 +35,7 @@ function Header() {
       // 検索欄に文字列がある時実行.
       if (keyword.trim()) {
         // キーワード入力時のパスを記録しておく. （search?q=... URLにいるときにセットすると ../search パスが保存されてしまい空文字検索のページに戻されてしまう）
-        if (!previousPath.current && !pathNameRef.current.includes('/search')) {
+        if (!pathNameRef.current.includes('/search')) {
           previousPath.current = pathNameRef.current; // 検索開始時のパスを保存
           sessionStorage.setItem('movieflix:previousPath', pathNameRef.current); // キャッシュにも保存
         }
