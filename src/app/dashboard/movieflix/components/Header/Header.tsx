@@ -51,7 +51,7 @@ function Header() {
         sessionStorage.removeItem('movieflix:previousPath'); // 使ったらキャッシュから削除
         router.replace(back);
       }
-    }, 200); // 入力が止まって200ms後にURL更新
+    }, 500); // 入力が止まって500ms後にURL更新
 
     // 200ms 以内の入力が連続した場合、前回のタイマーを消していき最後のタイマーだけ残して発火させる.
     return () => clearTimeout(timer);

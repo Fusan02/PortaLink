@@ -2,16 +2,13 @@
 
 import { toClassNames } from '@/utils/toClassNames_utils';
 import styles from './movieflix.css';
-import MovieCard from './components/MovieCard/MovieCard';
+import MovieRow from './components/MovieRow/MovieRow';
 import type { Movie } from './types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from './api/movie';
 import Loading from './components/Loading/loading';
-
-// 初回ロードかのフラグ.
-let isFirstLoad = true;
 
 export default function MovieFlix() {
   const [movieList, setMovieList] = useState<Movie[]>([]);
@@ -20,12 +17,8 @@ export default function MovieFlix() {
   const [heroIndex] = useState(() => Math.floor(Math.random() * 20));
 
   useEffect(() => {
-    // 初回ロードだけロード画面を見せるための遅延.
-    const minDelay = isFirstLoad ? 2000 : 0;
-    isFirstLoad = false;
-
     // 次の配列内の各処理が終わるまで待つための Promise.
-    Promise.all([fetchPopularMovies(), new Promise(resolve => setTimeout(resolve, minDelay))])
+    Promise.all([fetchPopularMovies()])
       .then(([data]) => setMovieList(data as Movie[]))
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
@@ -85,14 +78,7 @@ export default function MovieFlix() {
           </div>
         </div>
       </section>
-      <section className={toClassNames([styles.movieRowSection])}>
-        <h2 className={toClassNames([styles.movieRowTitle])}>人気映画</h2>
-        <div className={toClassNames([styles.movieRowScroll])}>
-          {movieList.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </div>
-      </section>
+      <MovieRow title='人気映画' movies={movieList} />
     </div>
   );
 }

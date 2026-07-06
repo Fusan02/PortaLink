@@ -15,9 +15,10 @@ const movieRowSection = style({
   width: '100%',
   maxWidth: '100%',
   boxSizing: 'border-box',
-  marginTop: '-10vw',
+  marginTop: '-5vw',
   position: 'relative',
   paddingLeft: '3.5vw',
+  paddingRight: '3.5vw',
   marginBottom: '150px',
   zIndex: 10
 });
@@ -31,7 +32,7 @@ const movieRowTitle = style({
 
 const movieRowScroll = style({
   display: 'flex',
-  gap: '1.92vw',
+  gap: '2.2vw',
   overflowX: 'auto',
   scrollbarWidth: 'none',
   selectors: {
