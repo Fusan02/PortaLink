@@ -4,16 +4,16 @@ const movieCard = style({
   display: 'block',
   position: 'relative',
   minWidth: '13.5vw',
-  borderRadius: '14px',
+  borderRadius: '1.3vw',
   overflow: 'hidden',
   background: '#232323',
-  boxShadow: '0 2px 18px rgba(0, 0, 0, 0.22)',
+  boxShadow: '0 0.18vw 1.6vw rgba(0, 0, 0, 0.22)',
   cursor: 'pointer',
   transition: 'transform 0.18s, box-shadow 0.18s',
   selectors: {
     '&:hover': {
       transform: 'scale(1.07)',
-      boxShadow: '0 8px 32px rgba(229, 9, 20, 0.18)',
+      boxShadow: '0 0.74vw 3.0vw rgba(229, 9, 20, 0.18)',
       zIndex: 2
     }
   }
@@ -33,7 +33,7 @@ const movieCardImage = style({
   height: '100%',
   objectFit: 'cover',
   display: 'block',
-  borderRadius: '14px',
+  borderRadius: '1.3vw',
   transition: 'filter 0.18s'
 });
 
@@ -54,9 +54,9 @@ const movieCardTitle = style({
   color: '#fff',
   fontSize: '1.2vw',
   fontWeight: 700,
-  letterSpacing: '0.5px',
+  letterSpacing: '0.05vw',
   margin: 0,
-  textShadow: '0 2px 12px rgba(0, 0, 0, 0.32)'
+  textShadow: '0 0.18vw 1.1vw rgba(0, 0, 0, 0.32)'
 });
 
 const styles = {

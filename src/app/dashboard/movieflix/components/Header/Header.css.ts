@@ -2,10 +2,10 @@ import { style } from '@vanilla-extract/css';
 
 const headerListWrap = style({
   display: 'flex',
-  gap: '20px',
-  fontSize: '16px',
+  gap: '1.8vw',
+  fontSize: '1.5vw',
   color: 'white',
-  paddingLeft: '2vw'
+  paddingLeft: '2.0vw'
 });
 
 const appHeader = style({
@@ -39,19 +39,19 @@ const appSearch = style({
   width: '17vw',
   fontSize: '0.8vw',
   padding: '0.3vw 1vw',
-  borderRadius: '8px',
+  borderRadius: '0.7vw',
   border: 'none',
   outline: 'none',
   background: '#232323',
   color: '#fff',
-  boxShadow: '0 2px 16px #0006',
+  boxShadow: '0 0.18vw 1.5vw #0006',
   fontWeight: 500,
   letterSpacing: '0.025vw',
   transition: 'box-shadow 0.2s, background 0.2s',
   selectors: {
     '&:focus': {
       background: '#333',
-      boxShadow: '0 4px 32px #000a'
+      boxShadow: '0 0.37vw 3.0vw #000a'
     }
   }
 });

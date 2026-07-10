@@ -19,7 +19,7 @@ const movieRowSection = style({
   position: 'relative',
   paddingLeft: '3.5vw',
   paddingRight: '3.5vw',
-  marginBottom: '150px',
+  marginBottom: '14vw',
   zIndex: 10
 });
 
@@ -27,7 +27,7 @@ const movieRowTitle = style({
   color: '#fff',
   fontSize: '1.56vw',
   fontWeight: 700,
-  letterSpacing: '1px'
+  letterSpacing: '0.1vw'
 });
 
 const movieRowScroll = style({
@@ -84,30 +84,30 @@ const heroSectionTitle = style({
   fontSize: '2.5vw',
   fontWeight: 800,
   margin: '0 0 0.5vw 0',
-  letterSpacing: '1px'
+  letterSpacing: '0.1vw'
 });
 
 const heroSectionBadges = style({
   display: 'flex',
   gap: '0.75vw',
-  marginBottom: '8px'
+  marginBottom: '0.74vw'
 });
 
 const heroSectionBadge = style({
   background: '#232323',
   color: '#fff',
-  borderRadius: '6px',
-  padding: '2px 12px',
+  borderRadius: '0.6vw',
+  padding: '0.18vw 1.1vw',
   fontSize: '0.8vw',
   fontWeight: 600,
-  letterSpacing: '0.5px'
+  letterSpacing: '0.05vw'
 });
 
 const heroSectionOverview = style({
   fontSize: '1.3vw',
   color: '#e4e4e4',
-  marginBottom: '20px',
-  textShadow: '0 2px 16px #000a',
+  marginBottom: '1.85vw',
+  textShadow: '0 0.18vw 1.5vw #000a',
   display: '-webkit-box',
   WebkitLineClamp: 4,
   WebkitBoxOrient: 'vertical',
@@ -123,7 +123,7 @@ const heroSectionActions = style({
 const heroSectionBtn = style({
   fontSize: '1vw',
   fontWeight: 700,
-  borderRadius: '6px',
+  borderRadius: '0.6vw',
   padding: '1.0vw 1.8vw',
   border: 'none',
   cursor: 'pointer',

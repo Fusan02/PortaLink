@@ -47,7 +47,10 @@ export default function MovieDetail() {
               onClick={() => router.replace('/dashboard/movieflix')}
               className={toClassNames([styles.movieDetailBacklink])}
             >
-              <ArrowLeft className={toClassNames([styles.movieDetailBacklinkIcon])} size={20} />
+              <ArrowLeft
+                className={toClassNames([styles.movieDetailBacklinkIcon])}
+                size={'1.8vw'}
+              />
               Back to home
             </button>
             <div className={toClassNames([styles.movieDetailGrid])}>

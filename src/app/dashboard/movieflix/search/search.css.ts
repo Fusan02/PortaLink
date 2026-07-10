@@ -5,7 +5,7 @@ const movieRowSection = style({
   boxSizing: 'border-box',
   marginTop: '4vw',
   paddingLeft: '3.5vw',
-  marginBottom: '150px'
+  marginBottom: '14vw'
 });
 
 const movieRowScroll = style({

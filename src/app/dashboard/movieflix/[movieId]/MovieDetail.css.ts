@@ -43,8 +43,8 @@ const movieDetailBacklink = style({
   display: 'inline-flex',
   alignItems: 'center',
   color: '#fff8',
-  fontSize: '16px',
-  marginBottom: '24px',
+  fontSize: '1.2vw',
+  marginBottom: '2.2vw',
   textDecoration: 'none',
   transition: 'color 0.2s',
   background: 'none',
@@ -58,20 +58,20 @@ const movieDetailBacklink = style({
 });
 
 const movieDetailBacklinkIcon = style({
-  marginRight: '8px'
+  marginRight: '0.7vw'
 });
 
 const movieDetailGrid = style({
   display: 'grid',
-  gridTemplateColumns: '300px 1fr',
-  gap: '40px',
+  gridTemplateColumns: '27.7vw 1fr',
+  gap: '3.7vw',
   alignItems: 'start'
 });
 
 const movieDetailPosterWrap = style({
   position: 'relative',
-  width: '17.54vw',
-  borderRadius: '12px',
+  width: '27.0vw',
+  borderRadius: '1.1vw',
   overflow: 'hidden',
   boxShadow: '0 8px 32px #000a'
 });
