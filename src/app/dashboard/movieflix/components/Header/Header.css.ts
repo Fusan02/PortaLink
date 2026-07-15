@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 const headerListWrap = style({
   display: 'flex',
   gap: '1.8vw',
-  fontSize: '1.5vw',
+  fontSize: '1.2vw',
   color: 'white',
   paddingLeft: '2.0vw'
 });

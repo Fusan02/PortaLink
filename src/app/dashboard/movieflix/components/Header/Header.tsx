@@ -69,7 +69,14 @@ const Header = () => {
         MOVIEFLIX
       </h1>
       <div className={toClassNames([styles.headerListWrap])}>
-        <p>ホーム</p>
+        <p
+          onClick={() => {
+            window.location.href = '/dashboard/movieflix';
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          ホーム
+        </p>
         <p>新作・人気</p>
         <p>マイリスト</p>
       </div>
