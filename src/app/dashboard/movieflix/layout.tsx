@@ -8,7 +8,6 @@ export default function MovieflixLayout({ children }: { children: React.ReactNod
       <Suspense fallback={null}>
         <Header />
       </Suspense>
-      <Header />
       {children}
       <Footer />
     </>
