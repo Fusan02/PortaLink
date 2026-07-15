@@ -35,7 +35,7 @@ const movieDetailContainer = style({
   width: '100vw',
   maxWidth: '100vw',
   margin: 0,
-  padding: '100px 100px',
+  padding: '6.0vw 6.0vw',
   boxSizing: 'border-box'
 });
 
@@ -63,17 +63,16 @@ const movieDetailBacklinkIcon = style({
 
 const movieDetailGrid = style({
   display: 'grid',
-  gridTemplateColumns: '27.7vw 1fr',
-  gap: '3.7vw',
+  gridTemplateColumns: '25.0vw 1fr',
   alignItems: 'start'
 });
 
 const movieDetailPosterWrap = style({
   position: 'relative',
-  width: '27.0vw',
+  width: '22.0vw',
   borderRadius: '1.1vw',
   overflow: 'hidden',
-  boxShadow: '0 8px 32px #000a'
+  boxShadow: '0 0.42vw 1.67vw #000a'
 });
 
 const movieDetailPosterImg = style({
@@ -86,25 +85,25 @@ const movieDetailPosterImg = style({
 const movieDetailDetails = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '24px',
+  gap: '1.25vw',
   paddingLeft: '2vw'
 });
 
 const movieDetailTitle = style({
-  fontSize: '18px',
+  fontSize: '1.5vw',
   fontWeight: 600,
-  marginBottom: '8px'
+  marginBottom: '0.42vw'
 });
 
 const movieDetailBadges = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '8px',
-  marginTop: '12px'
+  gap: '0.42vw',
+  marginTop: '0.63vw'
 });
 
 const badgesIconSvg = style({
-  marginRight: '2px',
+  marginRight: '0.10vw',
   verticalAlign: 'middle'
 });
 
@@ -114,22 +113,23 @@ const badgesStar = style({
 });
 
 const movieDetailOverview = style({
+  fontSize: '1.2vw',
   color: '#ccc',
-  lineHeight: 1.7
+  lineHeight: 1.4
 });
 
 const movieDetailGenres = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '8px'
+  gap: '0.42vw'
 });
 
 const badgesOutline = style({
   display: 'inline-block',
-  border: '1px solid #444',
-  borderRadius: '6px',
-  padding: '2px 10px',
-  fontSize: '13px',
+  border: '0.05vw solid #444',
+  borderRadius: '0.31vw',
+  padding: '0.10vw 0.52vw',
+  fontSize: '1.0vw',
   color: '#fff',
   background: 'transparent'
 });
@@ -137,22 +137,22 @@ const badgesOutline = style({
 const badgesGenre = style({
   display: 'inline-block',
   background: '#222',
-  borderRadius: '6px',
-  padding: '2px 10px',
-  fontSize: '13px',
+  borderRadius: '0.31vw',
+  padding: '0.10vw 0.52vw',
+  fontSize: '1.0vw',
   color: '#fff'
 });
 
 const movieDetailActions = style({
   display: 'flex',
-  gap: '16px',
-  paddingTop: '8px'
+  gap: '0.83vw',
+  paddingTop: '0.42vw'
 });
 
 const movieDetailBtn = style({
-  fontSize: '16px',
-  borderRadius: '6px',
-  padding: '10px 22px',
+  fontSize: '1.2vw',
+  borderRadius: '0.31vw',
+  padding: '0.52vw 1.15vw',
   fontWeight: 600,
   display: 'flex',
   alignItems: 'center',
@@ -180,6 +180,11 @@ const movieDetailBtnPrimary = style({
   }
 });
 
+const icon = style({
+  color: '#fff',
+  paddingRight: '0.5vw'
+});
+
 const styles = {
   movieDetailRoot,
   movieDetailBackdrop,
@@ -201,7 +206,8 @@ const styles = {
   badgesGenre,
   movieDetailActions,
   movieDetailBtn,
-  movieDetailBtnPrimary
+  movieDetailBtnPrimary,
+  icon
 };
 
 export default styles;
