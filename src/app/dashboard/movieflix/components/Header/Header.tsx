@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { toClassNames } from '@/utils/toClassNames_utils';
 import styles from './Header.css';
 
-function Header() {
+const Header = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -69,7 +69,14 @@ function Header() {
         MOVIEFLIX
       </h1>
       <div className={toClassNames([styles.headerListWrap])}>
-        <p>ホーム</p>
+        <p
+          onClick={() => {
+            window.location.href = '/dashboard/movieflix';
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          ホーム
+        </p>
         <p>新作・人気</p>
         <p>マイリスト</p>
       </div>
@@ -84,6 +91,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

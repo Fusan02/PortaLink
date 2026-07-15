@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from './api/movie';
 import Loading from './components/Loading/loading';
 
-export default function MovieFlix() {
+const MovieFlix = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -81,4 +81,6 @@ export default function MovieFlix() {
       <MovieRow title='人気映画' movies={movieList} />
     </div>
   );
-}
+};
+
+export default MovieFlix;

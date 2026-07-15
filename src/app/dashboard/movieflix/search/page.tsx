@@ -10,7 +10,7 @@ import styles from './search.css';
 import { Suspense } from 'react';
 import Loading from '../components/Loading/loading';
 
-function SearchContent() {
+const SearchContent = () => {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('q') ?? '';
   const [results, setResults] = useState<Movie[]>([]);
@@ -54,12 +54,14 @@ function SearchContent() {
       </div>
     </div>
   );
-}
+};
 
-export default function SearchPage() {
+const SearchPage = () => {
   return (
     <Suspense fallback={null}>
       <SearchContent />
     </Suspense>
   );
-}
+};
+
+export default SearchPage;

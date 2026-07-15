@@ -10,8 +10,10 @@ import { useEffect, useState } from 'react';
 import { fetchMovieDetail } from '../api/movie';
 import { useRouter } from 'next/navigation';
 import Loading from '../components/Loading/loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function MovieDetail() {
+const MovieDetail = () => {
   const router = useRouter();
   const params = useParams();
   const movieId = params?.movieId as string | undefined;
@@ -93,13 +95,28 @@ export default function MovieDetail() {
                     onClick={() => alert('未実装です')}
                     className={toClassNames([styles.movieDetailBtn, styles.movieDetailBtnPrimary])}
                   >
-                    ▶︎ Watch Now
+                    <FontAwesomeIcon icon={faPlay} className={styles.icon} />
+                    Watch Now
                   </button>
                   <button
                     onClick={() => alert('未実装です')}
                     className={toClassNames([styles.movieDetailBtn])}
                   >
-                    + Add to My List
+                    <FontAwesomeIcon icon={faPlus} className={styles.icon} />
+                    Add to My List
+                  </button>
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `https://www.themoviedb.org/movie/${movie.id}}?language=ja`,
+                        '_blank',
+                        'noopener,noreferrer'
+                      )
+                    }
+                    className={toClassNames([styles.movieDetailBtn])}
+                  >
+                    <FontAwesomeIcon icon={faPen} className={styles.icon} />
+                    概要を書く
                   </button>
                 </div>
               </div>
@@ -109,4 +126,6 @@ export default function MovieDetail() {
       )}
     </div>
   );
-}
+};
+
+export default MovieDetail;
