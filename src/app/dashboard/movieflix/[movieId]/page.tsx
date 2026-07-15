@@ -13,7 +13,7 @@ import Loading from '../components/Loading/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function MovieDetail() {
+const MovieDetail = () => {
   const router = useRouter();
   const params = useParams();
   const movieId = params?.movieId as string | undefined;
@@ -126,4 +126,6 @@ export default function MovieDetail() {
       )}
     </div>
   );
-}
+};
+
+export default MovieDetail;

@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { toClassNames } from '@/utils/toClassNames_utils';
 import styles from './Header.css';
 
-function Header() {
+const Header = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -84,6 +84,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

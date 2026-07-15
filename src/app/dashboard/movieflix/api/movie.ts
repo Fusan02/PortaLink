@@ -6,7 +6,7 @@ const headers = {
   Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
 };
 
-export async function fetchPopularMovies(): Promise<Movie[]> {
+const fetchPopularMovies = async (): Promise<Movie[]> => {
   const res = await fetch(`${BASE_URL}/movie/popular?language=ja&page=1`, { headers });
   const data = await res.json();
   return data.results.map((movie: MovieJson) => ({
@@ -17,9 +17,9 @@ export async function fetchPopularMovies(): Promise<Movie[]> {
     overview: movie.overview,
     release_date: movie.release_date
   })) as Movie[];
-}
+};
 
-export async function fetchMovieDetail(movieId: string): Promise<Movie> {
+const fetchMovieDetail = async (movieId: string): Promise<Movie> => {
   const res = await fetch(`${BASE_URL}/movie/${movieId}?language=ja&append_to_response=credits`, {
     headers
   });
@@ -37,9 +37,9 @@ export async function fetchMovieDetail(movieId: string): Promise<Movie> {
     voteCount: data.vote_count,
     genres: data.genres.map(genre => genre.name)
   };
-}
+};
 
-export async function fetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
+const fetchMoviesByKeyword = async (keyword: string): Promise<Movie[]> => {
   const res = await fetch(
     `${BASE_URL}/search/movie?query=${encodeURIComponent(keyword)}&language=ja&page=1`,
     {
@@ -55,4 +55,6 @@ export async function fetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
     overview: movie.overview,
     release_date: movie.release_date
   })) as Movie[];
-}
+};
+
+export { fetchPopularMovies, fetchMovieDetail, fetchMoviesByKeyword };
