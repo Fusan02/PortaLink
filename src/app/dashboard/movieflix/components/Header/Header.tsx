@@ -78,7 +78,14 @@ const Header = () => {
           ホーム
         </p>
         <p>新作・人気</p>
-        <p>マイリスト</p>
+        <p
+          onClick={() => {
+            window.location.href = '/dashboard/movieflix/myList';
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          マイリスト
+        </p>
       </div>
       <div className={toClassNames([styles.appSearchWrap])}>
         <input
