@@ -11,37 +11,6 @@ globalStyle('button', {
   cursor: 'pointer'
 });
 
-const movieRowSection = style({
-  width: '100%',
-  maxWidth: '100%',
-  boxSizing: 'border-box',
-  marginTop: '-5vw',
-  position: 'relative',
-  paddingLeft: '3.5vw',
-  paddingRight: '3.5vw',
-  marginBottom: '14vw',
-  zIndex: 10
-});
-
-const movieRowTitle = style({
-  color: '#fff',
-  fontSize: '1.56vw',
-  fontWeight: 700,
-  letterSpacing: '0.1vw'
-});
-
-const movieRowScroll = style({
-  display: 'flex',
-  gap: '2.2vw',
-  overflowX: 'auto',
-  scrollbarWidth: 'none',
-  selectors: {
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
-  }
-});
-
 const mainWrapper = style({
   width: '100%',
   overflow: 'hidden',
@@ -159,9 +128,6 @@ const heroSectionBtnSecondary = style({
 });
 
 const styles = {
-  movieRowSection,
-  movieRowTitle,
-  movieRowScroll,
   mainWrapper,
   heroSection,
   heroSectionBg,

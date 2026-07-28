@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import type { Movie } from '../../types';
 import { toClassNames } from '@/utils/toClassNames_utils';
-import rowStyles from './MovieRow.css';
-import pageStyles from '../../movieflix.css';
+import styles from './MovieRow.css';
 
 const SCROLL_AMOUNT = 900;
 
@@ -18,22 +17,22 @@ const MovieRow = ({ title, movies }: { title: string; movies: Movie[] }) => {
   };
 
   return (
-    <section className={pageStyles.movieRowSection}>
-      <h2 className={pageStyles.movieRowTitle}>{title}</h2>
-      <div className={rowStyles.wrapper}>
+    <section className={styles.movieRowSection}>
+      <h2 className={styles.movieRowTitle}>{title}</h2>
+      <div className={styles.wrapper}>
         <button
-          className={toClassNames([rowStyles.arrow, rowStyles.arrowLeft])}
+          className={toClassNames([styles.arrow, styles.arrowLeft])}
           onClick={() => scroll('left')}
         >
           ‹
         </button>
-        <div className={pageStyles.movieRowScroll} ref={scrollRef}>
+        <div className={styles.movieRowScroll} ref={scrollRef}>
           {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
         <button
-          className={toClassNames([rowStyles.arrow, rowStyles.arrowRight])}
+          className={toClassNames([styles.arrow, styles.arrowRight])}
           onClick={() => scroll('right')}
         >
           ›
