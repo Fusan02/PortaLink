@@ -12,15 +12,32 @@ import { useRouter } from 'next/navigation';
 import Loading from '../components/Loading/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useMyList } from '../hooks/useMyList';
 
 const MovieDetail = () => {
   const router = useRouter();
   const params = useParams();
   const movieId = params?.movieId as string | undefined;
+  const { addToMyList } = useMyList();
 
   const [movie, setMovie] = useState<Movie | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  const handleAddToMyList = async () => {
+    if (!movie) return;
+    const result = await addToMyList(movie.id);
+
+    if (result === 'duplicate') {
+      alert('既にマイリストに追加済みです');
+      setAdded(true);
+      return;
+    }
+    if (result === 'added') {
+      setAdded(true);
+    }
+  };
 
   useEffect(() => {
     if (!movieId) return;
@@ -99,11 +116,12 @@ const MovieDetail = () => {
                     Watch Now
                   </button>
                   <button
-                    onClick={() => alert('未実装です')}
+                    onClick={() => handleAddToMyList()}
+                    disabled={added}
                     className={toClassNames([styles.movieDetailBtn])}
                   >
-                    <FontAwesomeIcon icon={faPlus} className={styles.icon} />
-                    Add to My List
+                    {added ? '' : <FontAwesomeIcon icon={faPlus} className={styles.icon} />}
+                    {added ? '追加済み' : 'Add to My List'}
                   </button>
                   <button
                     onClick={() =>

@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { relative } from 'path';
 
 const wrapper = style({
   width: '100%',
@@ -28,11 +29,39 @@ const emptyMessage = style({
   marginTop: '1vw'
 });
 
+const cardWrap = style({
+  position: 'relative',
+  minWidth: '13.5vw'
+});
+
+const removeBtn = style({
+  position: 'absolute',
+  top: '0.5vw',
+  right: '0.5vw',
+  zIndex: '3',
+  border: 'none',
+  borderRadius: '0.5vw',
+  padding: '0.35vw 0.8vw',
+  fontSize: '0.85vw',
+  fontWeight: '600',
+  color: '#fff',
+  background: 'rgba(0, 0, 0, 0.65)',
+  cursor: 'pointer',
+  transition: 'background 0.18s',
+  selectors: {
+    '&:hover': {
+      background: '#e50914'
+    }
+  }
+});
+
 const styles = {
   wrapper,
   title,
   flexGrid,
-  emptyMessage
+  emptyMessage,
+  cardWrap,
+  removeBtn
 };
 
 export default styles;
