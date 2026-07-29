@@ -53,7 +53,8 @@ const arrow = style({
   cursor: 'pointer',
   ':hover': {
     fontSize: '3.5vw',
-    background: 'radial-gradient(ellipse, rgba(62, 62, 62, 0.7) 0%, transparent 70%)'
+    background:
+      'radial-gradient(ellipse, rgba(62, 62, 62, 0.7) 0%, transparent 70%)'
   },
   selectors: {
     [`${wrapper}:hover &`]: {

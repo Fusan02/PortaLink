@@ -9,7 +9,8 @@ const headerListWrap = style({
 });
 
 const appHeader = style({
-  background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%)',
+  background:
+    'linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%)',
   boxSizing: 'border-box',
   width: '100%',
   opacity: 0.8,

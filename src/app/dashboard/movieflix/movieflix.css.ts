@@ -1,4 +1,7 @@
-import { style, globalStyle } from '@vanilla-extract/css';
+import {
+  style,
+  globalStyle
+} from '@vanilla-extract/css';
 
 globalStyle('body', {
   background: 'hsl(0, 0%, 9%)',
@@ -34,7 +37,8 @@ const heroSectionGradient = style({
   left: 0,
   width: '100%',
   height: '100%',
-  background: 'linear-gradient(to bottom, transparent 50%, hsl(0, 0%, 9%) 100%)',
+  background:
+    'linear-gradient(to bottom, transparent 50%, hsl(0, 0%, 9%) 100%)',
   zIndex: 1
 });
 

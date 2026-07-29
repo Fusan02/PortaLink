@@ -26,7 +26,8 @@ const movieDetailBackdropGradient = style({
   width: '100%',
   height: '70vh',
   zIndex: 1,
-  background: 'linear-gradient(to top, #111 60%, transparent 100%)'
+  background:
+    'linear-gradient(to top, #111 60%, transparent 100%)'
 });
 
 const movieDetailContainer = style({

@@ -4,7 +4,8 @@ export const mockMyList: Movie[] = [
   {
     id: '550',
     original_title: 'Fight Club',
-    poster_path: '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
+    poster_path:
+      '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
     backdrop_path: null,
     overview: '',
     year: 1999,
@@ -17,7 +18,8 @@ export const mockMyList: Movie[] = [
   {
     id: '155',
     original_title: 'The Dark Knight',
-    poster_path: '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+    poster_path:
+      '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
     backdrop_path: null,
     overview: '',
     year: 2008,
@@ -30,7 +32,8 @@ export const mockMyList: Movie[] = [
   {
     id: '13',
     original_title: 'Forrest Gump',
-    poster_path: '/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
+    poster_path:
+      '/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
     backdrop_path: null,
     overview: '',
     year: 1994,
