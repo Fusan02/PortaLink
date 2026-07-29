@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import { relative } from 'path';
 
 const wrapper = style({
   width: '100%',
