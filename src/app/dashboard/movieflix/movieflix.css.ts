@@ -1,4 +1,7 @@
-import { style, globalStyle } from '@vanilla-extract/css';
+import {
+  style,
+  globalStyle
+} from '@vanilla-extract/css';
 
 globalStyle('body', {
   background: 'hsl(0, 0%, 9%)',
@@ -9,37 +12,6 @@ globalStyle('body', {
 
 globalStyle('button', {
   cursor: 'pointer'
-});
-
-const movieRowSection = style({
-  width: '100%',
-  maxWidth: '100%',
-  boxSizing: 'border-box',
-  marginTop: '-5vw',
-  position: 'relative',
-  paddingLeft: '3.5vw',
-  paddingRight: '3.5vw',
-  marginBottom: '14vw',
-  zIndex: 10
-});
-
-const movieRowTitle = style({
-  color: '#fff',
-  fontSize: '1.56vw',
-  fontWeight: 700,
-  letterSpacing: '0.1vw'
-});
-
-const movieRowScroll = style({
-  display: 'flex',
-  gap: '2.2vw',
-  overflowX: 'auto',
-  scrollbarWidth: 'none',
-  selectors: {
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
-  }
 });
 
 const mainWrapper = style({
@@ -65,7 +37,8 @@ const heroSectionGradient = style({
   left: 0,
   width: '100%',
   height: '100%',
-  background: 'linear-gradient(to bottom, transparent 50%, hsl(0, 0%, 9%) 100%)',
+  background:
+    'linear-gradient(to bottom, transparent 50%, hsl(0, 0%, 9%) 100%)',
   zIndex: 1
 });
 
@@ -159,9 +132,6 @@ const heroSectionBtnSecondary = style({
 });
 
 const styles = {
-  movieRowSection,
-  movieRowTitle,
-  movieRowScroll,
   mainWrapper,
   heroSection,
   heroSectionBg,

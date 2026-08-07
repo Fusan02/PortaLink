@@ -11,7 +11,8 @@ type Props = {
 
 const MovieCard = (props: Props) => {
   const { movie } = props;
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] =
+    useState(false);
 
   return (
     <Link
@@ -20,21 +21,42 @@ const MovieCard = (props: Props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={toClassNames([styles.movieCardImgwrap])}>
+      <div
+        className={toClassNames([
+          styles.movieCardImgwrap
+        ])}
+      >
         <Image
           src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
           priority
           alt={movie.original_title}
           width={300}
           height={450}
-          className={toClassNames([styles.movieCardImage])}
-          style={isHovered ? { filter: 'brightness(0.7) blur(1px)' } : {}}
+          className={toClassNames([
+            styles.movieCardImage
+          ])}
+          style={
+            isHovered
+              ? {
+                  filter:
+                    'brightness(0.7) blur(1px)'
+                }
+              : {}
+          }
         />
         <div
-          className={toClassNames([styles.movieCardOverlay])}
+          className={toClassNames([
+            styles.movieCardOverlay
+          ])}
           style={isHovered ? { opacity: 1 } : {}}
         >
-          <h3 className={toClassNames([styles.movieCardTitle])}>{movie.original_title}</h3>
+          <h3
+            className={toClassNames([
+              styles.movieCardTitle
+            ])}
+          >
+            {movie.original_title}
+          </h3>
         </div>
       </div>
     </Link>

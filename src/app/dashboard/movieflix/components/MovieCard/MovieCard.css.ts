@@ -13,7 +13,8 @@ const movieCard = style({
   selectors: {
     '&:hover': {
       transform: 'scale(1.07)',
-      boxShadow: '0 0.74vw 3.0vw rgba(229, 9, 20, 0.18)',
+      boxShadow:
+        '0 0.74vw 3.0vw rgba(229, 9, 20, 0.18)',
       zIndex: 2
     }
   }
@@ -43,7 +44,8 @@ const movieCardOverlay = style({
   display: 'flex',
   alignItems: 'flex-end',
   justifyContent: 'flex-start',
-  background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.85) 60%, transparent 100%)',
+  background:
+    'linear-gradient(0deg, rgba(0, 0, 0, 0.85) 60%, transparent 100%)',
   opacity: 0,
   transition: 'opacity 0.18s',
   padding: '1.1rem 1rem 1.3rem 1rem',
