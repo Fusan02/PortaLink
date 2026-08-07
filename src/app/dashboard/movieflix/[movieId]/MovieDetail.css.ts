@@ -26,8 +26,7 @@ const movieDetailBackdropGradient = style({
   width: '100%',
   height: '70vh',
   zIndex: 1,
-  background:
-    'linear-gradient(to top, #111 60%, transparent 100%)'
+  background: 'linear-gradient(to top, #111 60%, transparent 100%)'
 });
 
 const movieDetailContainer = style({
@@ -186,6 +185,55 @@ const icon = style({
   paddingRight: '0.5vw'
 });
 
+const addToListWrap = style({
+  display: 'flex',
+  position: 'relative'
+});
+
+const listPicker = style({
+  position: 'absolute',
+  top: 'calc(100% + 0.5vw)',
+  left: 0,
+  zIndex: 10,
+  minWidth: '14vw',
+  background: '#232323',
+  border: '0.05vw solid #444',
+  borderRadius: '0,42vw',
+  boxShadow: '0 0.42vw 1.67vw #000a',
+  padding: '0.6vw',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.2vw'
+});
+
+const listPickerItem = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.6vw',
+  padding: '0.5vw 0.6vw',
+  borderRadius: '0.31vw',
+  fontSize: '1.0vw',
+  color: '#fff',
+  cursor: 'pointer',
+  transition: 'background 0,15s',
+  selectors: {
+    '&:hover': {
+      background: '#333'
+    }
+  }
+});
+
+const listPickerCheckbox = style({
+  accentColor: '#e50914'
+});
+
+const listPickerEmpty = style({
+  fontSize: '0.9vw',
+  color: '#aaa',
+  padding: '0.5vw 0.6vw',
+  maxWidth: '13vw'
+});
+
 const styles = {
   movieDetailRoot,
   movieDetailBackdrop,
@@ -208,7 +256,12 @@ const styles = {
   movieDetailActions,
   movieDetailBtn,
   movieDetailBtnPrimary,
-  icon
+  icon,
+  addToListWrap,
+  listPicker,
+  listPickerItem,
+  listPickerCheckbox,
+  listPickerEmpty
 };
 
 export default styles;

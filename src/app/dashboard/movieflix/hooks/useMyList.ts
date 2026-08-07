@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import { Movie } from '../types';
 import { createClient } from '@/lib/supabase';
 import { fetchMovieDetail } from '../api/movie';
@@ -10,149 +10,71 @@ interface UseMyListReturn {
   loading: boolean;
   error: string | null;
   fetchMyList: () => Promise<void>;
-  addToMyList: (
-    movieId: string
-  ) => Promise<'added' | 'duplicate' | 'error'>;
-  removeFromMyList: (
-    movieId: string
-  ) => Promise<boolean>;
-  checkInMyList: (
-    movieId: string
-  ) => Promise<boolean>;
+  removeFromMyList: (movieId: string) => Promise<boolean>;
 }
 
-export const useMyList = (): UseMyListReturn => {
-  const [myList, setMyList] = useState<Movie[]>(
-    []
-  );
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<
-    string | null
-  >(null);
-  const supabase = createClient();
+export const useMyList = (listId: string | null): UseMyListReturn => {
+  const [myList, setMyList] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchMyList =
-    useCallback(async (): Promise<void> => {
-      setLoading(true);
-      setError(null);
+  // useMemo を使うことで、supabase が毎レンダー新しく作られることを防ぐ.
+  const supabase = useMemo(() => createClient(), []);
 
-      try {
-        const {
-          data: { user }
-        } = await supabase.auth.getUser();
+  const fetchMyList = useCallback(async (): Promise<void> => {
+    if (!listId) {
+      // リストが未選択（まだ読み込み中 or リストが一つもない）なら、その状態が確定したことを明示的に loading へ反映する.
+      setMyList([]);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    setError(null);
 
-        if (!user) {
-          setError(
-            'ユーザーが認証されていません'
-          );
-          return;
-        }
+    try {
+      // listId と一致するリストに入っている映画を選択する
+      const { data, error: fetchError } = await supabase
+        .from('list_items')
+        .select('movie_id')
+        .eq('list_id', listId);
 
-        // Supabase から自分の movie_id リストを取得
-        const { data, error: fetchError } =
-          await supabase
-            .from('movie_list')
-            .select('movie_id');
-
-        if (fetchError) {
-          setError(fetchError.message);
-          return;
-        }
-
-        // 各 movie_id を TMDB の詳細取得関数（fetchMovieDetail）に渡す.
-        const movies = await Promise.all(
-          (data ?? []).map(row =>
-            fetchMovieDetail(row.movie_id)
-          )
-        );
-
-        setMyList(movies);
-      } catch (err) {
-        setError(
-          err instanceof Error
-            ? err.message
-            : '不明なエラー'
-        );
-      } finally {
-        setLoading(false);
-      }
-    }, [supabase]);
-
-  const addToMyList = useCallback(
-    async (
-      movieId: string
-    ): Promise<
-      'added' | 'duplicate' | 'error'
-    > => {
-      const {
-        data: { user }
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        setError('ユーザーが認証されていません');
-        return 'error';
+      if (fetchError) {
+        setError(fetchError.message);
+        return;
       }
 
-      const { error: insertError } =
-        await supabase.from('movie_list').insert({
-          user_id: user.id,
-          movie_id: movieId
-        });
+      // 各 movie_id を TMDB の詳細取得関数（fetchMovieDetail）に渡す.
+      const movies = await Promise.all(
+        (data ?? []).map(row => fetchMovieDetail(row.movie_id))
+      );
 
-      if (insertError) {
-        if (insertError.code === '23505') {
-          return 'duplicate';
-        }
-        setError(insertError.message);
-        return 'error';
-      }
-
-      return 'added';
-    },
-    [supabase]
-  );
+      setMyList(movies);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '不明なエラー');
+    } finally {
+      setLoading(false);
+    }
+  }, [supabase, listId]);
 
   const removeFromMyList = useCallback(
     async (movieId: string): Promise<boolean> => {
-      const { error: deleteError } =
-        await supabase
-          .from('movie_list')
-          .delete()
-          .eq('movie_id', movieId);
+      if (!listId) return false;
+
+      const { error: deleteError } = await supabase
+        .from('list_items')
+        .delete()
+        .eq('list_id', listId)
+        .eq('movie_id', movieId);
 
       if (deleteError) {
         setError(deleteError.message);
         return false;
       }
 
-      setMyList(prev =>
-        prev.filter(movie => movie.id !== movieId)
-      );
+      setMyList(prev => prev.filter(movie => movie.id !== movieId));
       return true;
     },
-    [supabase]
-  );
-
-  const checkInMyList = useCallback(
-    async (movieId: string): Promise<boolean> => {
-      const {
-        data: { user }
-      } = await supabase.auth.getUser();
-
-      if (!user) return false;
-
-      const { data, error: fetchError } =
-        await supabase
-          .from('movie_list')
-          .select('movie_id')
-          .eq('user_id', user.id)
-          .eq('movie_id', movieId)
-          .maybeSingle();
-
-      if (fetchError) return false;
-      return !!data;
-    },
-    [supabase]
+    [supabase, listId]
   );
 
   return {
@@ -160,8 +82,6 @@ export const useMyList = (): UseMyListReturn => {
     loading,
     error,
     fetchMyList,
-    addToMyList,
-    removeFromMyList,
-    checkInMyList
+    removeFromMyList
   };
 };

@@ -4,185 +4,154 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { toClassNames } from '@/utils/toClassNames_utils';
 import styles from './MovieDetail.css';
-import {
-  ArrowLeft,
-  Clock,
-  Star
-} from 'lucide-react';
+import { ArrowLeft, Clock, Star } from 'lucide-react';
 import type { Movie } from '../types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchMovieDetail } from '../api/movie';
 import { useRouter } from 'next/navigation';
 import Loading from '../components/Loading/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPen,
-  faPlay,
-  faPlus
-} from '@fortawesome/free-solid-svg-icons';
-import { useMyList } from '../hooks/useMyList';
+import { faPen, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useLists } from '../hooks/useLists';
 
 const MovieDetail = () => {
   const router = useRouter();
   const params = useParams();
-  const movieId = params?.movieId as
-    | string
-    | undefined;
-  const { addToMyList, checkInMyList } =
-    useMyList();
+  const movieId = params?.movieId as string | undefined;
+  const {
+    lists,
+    loading: listsLoading,
+    fetchLists,
+    addMovieToList,
+    removeMovieFromList,
+    fetchListIdsContainingMovie
+  } = useLists();
 
-  const [movie, setMovie] =
-    useState<Movie | null>(null);
-  const [isLoading, setIsLoading] =
-    useState(true);
+  const [movie, setMovie] = useState<Movie | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [added, setAdded] = useState(false);
+  const [isCheckingLists, setIsCheckingLists] = useState(true);
+  const [checkedListIds, setCheckedListIds] = useState<Set<string>>(
+    new Set()
+  );
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
-  const handleAddToMyList = async () => {
-    if (!movie) return;
-    const result = await addToMyList(movie.id);
+  const pickerRef = useRef<HTMLDivElement>(null);
 
-    if (result === 'duplicate') {
-      alert('既にマイリストに追加済みです');
-      setAdded(true);
-      return;
-    }
-    if (result === 'added') {
-      setAdded(true);
-    }
-  };
+  useEffect(() => {
+    fetchLists();
+  }, [fetchLists]);
 
   useEffect(() => {
     if (!movieId) return;
 
     fetchMovieDetail(movieId)
       .then(setMovie)
-      .catch(() => setIsError(true));
-
-    checkInMyList(movieId)
-      .then(result => setAdded(result))
+      .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
-  }, [movieId, checkInMyList]);
 
-  if (isLoading) return <Loading />;
+    fetchListIdsContainingMovie(movieId)
+      .then(ids => setCheckedListIds(new Set(ids)))
+      .finally(() => setIsCheckingLists(false));
+  }, [movieId, fetchListIdsContainingMovie]);
+
+  useEffect(() => {
+    if (!isPickerOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(event.target as Node)
+      ) {
+        setIsPickerOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () =>
+      document.removeEventListener('mousedown', handleClickOutside);
+  }, [isPickerOpen]);
+
+  const handleToggleList = async (listId: string) => {
+    if (!movieId) return;
+
+    if (checkedListIds.has(listId)) {
+      const success = await removeMovieFromList(listId, movieId);
+      if (success) {
+        setCheckedListIds(prev => {
+          const next = new Set(prev);
+          next.delete(listId);
+          return next;
+        });
+      }
+    } else {
+      const result = await addMovieToList(listId, movieId);
+      if (result === 'added' || result === 'dupulicate') {
+        setCheckedListIds(prev => new Set(prev).add(listId));
+      }
+    }
+  };
+
+  if (isLoading || listsLoading || isCheckingLists) return <Loading />;
   if (isError) return <p>エラーが発生しました</p>;
 
   return (
-    <div
-      className={toClassNames([
-        styles.movieDetailRoot
-      ])}
-    >
+    <div className={toClassNames([styles.movieDetailRoot])}>
       {movie && (
         <>
           <div
-            className={toClassNames([
-              styles.movieDetailBackdrop
-            ])}
+            className={toClassNames([styles.movieDetailBackdrop])}
             style={{
               backgroundImage: `url(${'https://image.tmdb.org/t/p/w500' + movie.poster_path})`
             }}
           />
           <div
-            className={toClassNames([
-              styles.movieDetailBackdropGradient
-            ])}
+            className={toClassNames([styles.movieDetailBackdropGradient])}
           />
-          <div
-            className={toClassNames([
-              styles.movieDetailContainer
-            ])}
-          >
+          <div className={toClassNames([styles.movieDetailContainer])}>
             <button
-              onClick={() =>
-                router.replace(
-                  '/dashboard/movieflix'
-                )
-              }
-              className={toClassNames([
-                styles.movieDetailBacklink
-              ])}
+              onClick={() => router.replace('/dashboard/movieflix')}
+              className={toClassNames([styles.movieDetailBacklink])}
             >
               <ArrowLeft
-                className={toClassNames([
-                  styles.movieDetailBacklinkIcon
-                ])}
+                className={toClassNames([styles.movieDetailBacklinkIcon])}
                 size={'1.8vw'}
               />
               Back to home
             </button>
-            <div
-              className={toClassNames([
-                styles.movieDetailGrid
-              ])}
-            >
+            <div className={toClassNames([styles.movieDetailGrid])}>
               <div
-                className={toClassNames([
-                  styles.movieDetailPosterWrap
-                ])}
+                className={toClassNames([styles.movieDetailPosterWrap])}
               >
                 <Image
                   src={
-                    'https://image.tmdb.org/t/p/w500' +
-                    movie.poster_path
+                    'https://image.tmdb.org/t/p/w500' + movie.poster_path
                   }
                   alt={movie.original_title}
                   width={500}
                   height={750}
-                  className={toClassNames([
-                    styles.movieDetailPosterImg
-                  ])}
+                  className={toClassNames([styles.movieDetailPosterImg])}
                 />
               </div>
-              <div
-                className={toClassNames([
-                  styles.movieDetailDetails
-                ])}
-              >
-                <h1
-                  className={toClassNames([
-                    styles.movieDetailTitle
-                  ])}
-                >
+              <div className={toClassNames([styles.movieDetailDetails])}>
+                <h1 className={toClassNames([styles.movieDetailTitle])}>
                   {movie.original_title}
                 </h1>
-                <div
-                  className={toClassNames([
-                    styles.movieDetailBadges
-                  ])}
-                >
-                  <span
-                    className={toClassNames([
-                      styles.badgesOutline
-                    ])}
-                  >
+                <div className={toClassNames([styles.movieDetailBadges])}>
+                  <span className={toClassNames([styles.badgesOutline])}>
                     {movie.year}
                   </span>
-                  <span
-                    className={toClassNames([
-                      styles.badgesOutline
-                    ])}
-                  >
+                  <span className={toClassNames([styles.badgesOutline])}>
                     PG-13
                   </span>
-                  <span
-                    className={toClassNames([
-                      styles.badgesOutline
-                    ])}
-                  >
+                  <span className={toClassNames([styles.badgesOutline])}>
                     <Clock
-                      className={toClassNames([
-                        styles.badgesIconSvg
-                      ])}
+                      className={toClassNames([styles.badgesIconSvg])}
                       size={14}
                     />
                     {movie.runtime}分
                   </span>
-                  <span
-                    className={toClassNames([
-                      styles.badgesOutline
-                    ])}
-                  >
+                  <span className={toClassNames([styles.badgesOutline])}>
                     <Star
                       className={toClassNames([
                         styles.badgesIconSvg,
@@ -190,43 +159,25 @@ const MovieDetail = () => {
                       ])}
                       size={14}
                     />
-                    {(movie.rating / 10).toFixed(
-                      1
-                    )}
+                    {(movie.rating / 10).toFixed(1)}
                   </span>
                 </div>
-                <p
-                  className={toClassNames([
-                    styles.movieDetailOverview
-                  ])}
-                >
+                <p className={toClassNames([styles.movieDetailOverview])}>
                   {movie.overview}
                 </p>
-                <div
-                  className={toClassNames([
-                    styles.movieDetailGenres
-                  ])}
-                >
+                <div className={toClassNames([styles.movieDetailGenres])}>
                   {movie.genres.map(g => (
                     <span
                       key={g}
-                      className={toClassNames([
-                        styles.badgesGenre
-                      ])}
+                      className={toClassNames([styles.badgesGenre])}
                     >
                       {g}
                     </span>
                   ))}
                 </div>
-                <div
-                  className={toClassNames([
-                    styles.movieDetailActions
-                  ])}
-                >
+                <div className={toClassNames([styles.movieDetailActions])}>
                   <button
-                    onClick={() =>
-                      alert('未実装です')
-                    }
+                    onClick={() => alert('未実装です')}
                     className={toClassNames([
                       styles.movieDetailBtn,
                       styles.movieDetailBtnPrimary
@@ -238,27 +189,46 @@ const MovieDetail = () => {
                     />
                     Watch Now
                   </button>
-                  <button
-                    onClick={() =>
-                      handleAddToMyList()
-                    }
-                    disabled={added}
-                    className={toClassNames([
-                      styles.movieDetailBtn
-                    ])}
-                  >
-                    {added ? (
-                      ''
-                    ) : (
+                  <div className={styles.addToListWrap} ref={pickerRef}>
+                    <button
+                      onClick={() => setIsPickerOpen(prev => !prev)}
+                      className={toClassNames([styles.movieDetailBtn])}
+                    >
                       <FontAwesomeIcon
                         icon={faPlus}
                         className={styles.icon}
                       />
+                      {checkedListIds.size > 0
+                        ? `追加済み (${checkedListIds.size})`
+                        : 'Add to My List'}
+                    </button>
+
+                    {isPickerOpen && (
+                      <div className={styles.listPicker}>
+                        {lists.length === 0 ? (
+                          <p className={styles.listPickerEmpty}>
+                            リストがありません.
+                            マイリストページで作成してください.
+                          </p>
+                        ) : (
+                          lists.map(list => (
+                            <label
+                              key={list.id}
+                              className={styles.listPickerItem}
+                            >
+                              <input
+                                type='checkbox'
+                                checked={checkedListIds.has(list.id)}
+                                onChange={() => handleToggleList(list.id)}
+                                className={styles.listPickerCheckbox}
+                              />
+                              {list.name}
+                            </label>
+                          ))
+                        )}
+                      </div>
                     )}
-                    {added
-                      ? '追加済み'
-                      : 'Add to My List'}
-                  </button>
+                  </div>
                   <button
                     onClick={() =>
                       window.open(
@@ -267,9 +237,7 @@ const MovieDetail = () => {
                         'noopener,noreferrer'
                       )
                     }
-                    className={toClassNames([
-                      styles.movieDetailBtn
-                    ])}
+                    className={toClassNames([styles.movieDetailBtn])}
                   >
                     <FontAwesomeIcon
                       icon={faPen}
