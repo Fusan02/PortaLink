@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
 const wrapper = style({
   width: '100%',
@@ -17,7 +17,7 @@ const title = style({
 });
 
 const flexGrid = style({
-  marginTop: '1vw',
+  marginTop: '3vw',
   display: 'flex',
   flexWrap: 'wrap',
   gap: '3.5vw'
@@ -65,56 +65,47 @@ const listTabs = style({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
-  gap: '0.8vw',
+  gap: '2.5vw',
   marginBottom: '2vw'
 });
 
-const listTab = style({
-  fontSize: '1vw',
-  fontWeight: 600,
-  borderRadius: '0.4vw',
-  padding: '0.5vw 1.2vw',
-  border: 'none',
-  cursor: 'pointer',
-  background: '#333',
-  color: '#fff',
-  transition: 'background 0.18s',
-  selectors: {
-    '&:hover': {
-      background: '#444'
-    }
-  }
-});
-
-const listTabWrap = style({
+const listTabEntry = style({
   display: 'flex',
-  gap: '0.2vw',
-  background: '#333',
-  borderRadius: '0.4vw'
+  alignItems: 'center',
+  gap: '1vw',
+  flex: '0 0 auto'
 });
 
-const listTabDelete = style({
-  fontSize: '0.9vw',
+const listTabEntryExpanded = style({
+  flex: '1 1 100%',
+  minWidth: 0
+});
+
+const expandOpen = keyframes({
+  from: { transform: 'scaleX(0.3)', opacity: 0 },
+  to: { transform: 'scaleX(1)', opacity: 1 }
+});
+
+const expandedRow = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1vw',
+  flex: '1 1 auto',
+  overflowX: 'auto',
+  transformOrigin: 'left center', // カード側（左端）を軸に広がる
+  animation: `${expandOpen} 0.25s ease-out`,
+  scrollbarWidth: 'none',
+  selectors: {
+    '&:=webkit-scrollbar': {
+      display: 'none'
+    }
+  }
+});
+
+const expandedLoading = style({
   color: '#aaa',
-  background: 'none',
-  border: 'none',
-  cursor: 'pointer',
-  padding: '0 0.6vw',
-  transition: 'color 0.15s',
-  selectors: {
-    '&:hover': {
-      backgroundColor: '#e50914'
-    }
-  }
-});
-
-const listTabActive = style({
-  background: '#e50914',
-  selectors: {
-    '&:hover': {
-      background: '#b0060f'
-    }
-  }
+  fontSize: '0.95vw',
+  paddingLeft: '1vw'
 });
 
 const newListInput = style({
@@ -161,10 +152,10 @@ const styles = {
   removeBtn,
   inputDiv,
   listTabs,
-  listTab,
-  listTabWrap,
-  listTabDelete,
-  listTabActive,
+  listTabEntry,
+  listTabEntryExpanded,
+  expandedRow,
+  expandedLoading,
   newListInput,
   newListBtn
 };

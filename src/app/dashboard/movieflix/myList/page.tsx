@@ -7,6 +7,7 @@ import MovieCard from '../components/MovieCard/MovieCard';
 import { useMyList } from '../hooks/useMyList';
 import { useLists } from '../hooks/useLists';
 import Loading from '../components/Loading/loading';
+import ListCard from './components/ListCard/ListCard';
 
 const MyList = () => {
   const {
@@ -30,6 +31,14 @@ const MyList = () => {
   } = useMyList(selectedListId);
 
   const isCreatingRef = useRef(false);
+
+  // 展開中のリストが常に先頭に来るよう並べ替える
+  const orderdLists = selectedListId
+    ? [
+        ...lists.filter(list => list.id === selectedListId),
+        ...lists.filter(list => list.id !== selectedListId)
+      ]
+    : lists;
 
   useEffect(() => {
     fetchLists();
@@ -80,7 +89,7 @@ const MyList = () => {
     }
   };
 
-  if (listsLoading || myListLoading) return <Loading />;
+  if (listsLoading) return <Loading />;
   if (error) return <p>エラーが発生しました</p>;
 
   return (
@@ -97,54 +106,69 @@ const MyList = () => {
         </button>
       </div>
       <div className={styles.listTabs}>
-        {lists.map(list => (
-          <div key={list.id} className={styles.listTabWrap}>
-            <button
+        {orderdLists.map(list => {
+          const isExpanded = list.id === selectedListId;
+
+          return (
+            <div
               key={list.id}
-              onClick={() => setSelectedListId(list.id)}
               className={
-                list.id === selectedListId
-                  ? toClassNames([styles.listTab, styles.listTabActive])
-                  : styles.listTab
+                isExpanded
+                  ? toClassNames([
+                      styles.listTabEntry,
+                      styles.listTabEntryExpanded
+                    ])
+                  : styles.listTabEntry
               }
             >
-              {list.name}
-            </button>
-            <button
-              onClick={() => handleDeleteList(list.id)}
-              className={styles.listTabDelete}
-              aria-label={`${list.name}を削除`}
-            >
-              ×
-            </button>
-          </div>
-        ))}
+              <ListCard
+                name={list.name}
+                itemCount={list.itemCount}
+                isExpanded={isExpanded}
+                isFolded={selectedListId !== null && !isExpanded}
+                onClick={() =>
+                  setSelectedListId(prev =>
+                    prev === list.id ? null : list.id
+                  )
+                }
+                onDelete={() => handleDeleteList(list.id)}
+              />
+
+              {isExpanded &&
+                (myListLoading ? (
+                  <div>
+                    <p className={styles.expandedLoading}>読み込み中...</p>
+                  </div>
+                ) : (
+                  <div className={styles.expandedRow}>
+                    {myList.length === 0 ? (
+                      <p className={styles.emptyMessage}>
+                        このリストに追加された作品はありせん
+                      </p>
+                    ) : (
+                      myList.map(movie => (
+                        <div key={movie.id} className={styles.cardWrap}>
+                          <MovieCard movie={movie} />
+                          <button
+                            onClick={() => removeFromMyList(movie.id)}
+                            className={styles.removeBtn}
+                          >
+                            削除
+                          </button>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                ))}
+            </div>
+          );
+        })}
       </div>
 
-      {lists.length === 0 ? (
+      {lists.length === 0 && (
         <p className={styles.emptyMessage}>
           まだリストがありません。上の欄から新しいリストを作成してください
         </p>
-      ) : selectedListId === null ? (
-        <p className={styles.emptyMessage}>リストを選択してください</p>
-      ) : myList.length === 0 ? (
-        <p className={styles.emptyMessage}>
-          このリストに追加された作品はありません
-        </p>
-      ) : (
-        <div className={styles.flexGrid}>
-          {myList.map(movie => (
-            <div key={movie.id} className={styles.cardWrap}>
-              <MovieCard movie={movie} />
-              <button
-                onClick={() => removeFromMyList(movie.id)}
-                className={styles.removeBtn}
-              >
-                削除
-              </button>
-            </div>
-          ))}
-        </div>
       )}
     </div>
   );

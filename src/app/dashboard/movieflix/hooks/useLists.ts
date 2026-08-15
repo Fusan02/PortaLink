@@ -44,7 +44,7 @@ export const useLists = (): UseListsReturn => {
         return;
       }
 
-      const { data, error: fetchError } = await supabase
+      const { data: listsData, error: listsError } = await supabase
         .from('lists')
         .select('id, name, created_at')
         .eq('user_id', user.id)
@@ -52,16 +52,37 @@ export const useLists = (): UseListsReturn => {
           ascending: true
         });
 
-      if (fetchError) {
-        setError(fetchError.message);
+      if (listsError) {
+        setError(listsError.message);
         return;
       }
 
+      const listIds = (listsData ?? []).map(row => row.id);
+      const itemCounts: Record<string, number> = {};
+
+      // リストが1件以上ある時に、中身の件数をまとめて取得する
+      if (listIds.length > 0) {
+        const { data: itemsData, error: itemsError } = await supabase
+          .from('list_items')
+          .select('list_id')
+          .in('list_id', listIds);
+
+        if (itemsError) {
+          setError(itemsError.message);
+          return;
+        }
+
+        itemsData?.forEach(row => {
+          itemCounts[row.list_id] = (itemCounts[row.list_id] ?? 0) + 1;
+        });
+      }
+
       setLists(
-        (data ?? []).map(row => ({
+        (listsData ?? []).map(row => ({
           id: row.id,
           name: row.name,
-          createdAt: row.created_at
+          createdAt: row.created_at,
+          itemCount: itemCounts[row.id] ?? 0
         }))
       );
     } catch (err) {
