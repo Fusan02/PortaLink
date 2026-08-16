@@ -26,7 +26,7 @@ const expandedRow = style({
   animation: `${expandOpen} 0.25s ease-out`,
   scrollbarWidth: 'none',
   selectors: {
-    '&::=webkit-scrollbar': {
+    '&::-webkit-scrollbar': {
       display: 'none'
     }
   }
