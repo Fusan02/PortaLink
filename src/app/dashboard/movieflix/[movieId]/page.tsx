@@ -130,6 +130,7 @@ const MovieDetail = () => {
                   alt={movie.original_title}
                   width={500}
                   height={750}
+                  priority
                   className={toClassNames([styles.movieDetailPosterImg])}
                 />
               </div>
