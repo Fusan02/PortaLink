@@ -3,7 +3,6 @@ import { style } from '@vanilla-extract/css';
 const wrap = style({
   position: 'relative',
   display: 'inline-flex',
-  alignItems: 'center',
   transition: 'opacity 0.25s ease-out'
 });
 
@@ -90,6 +89,7 @@ const deleteBtn = style({
   position: 'absolute',
   top: '0.3vw',
   right: '0.3vw',
+  zIndex: 2,
   fontSize: '0.9vw',
   color: '#aaa',
   background: 'none',
