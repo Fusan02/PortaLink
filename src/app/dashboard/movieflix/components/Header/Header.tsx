@@ -88,8 +88,7 @@ const Header = () => {
     >
       <h1
         onClick={() => {
-          window.location.href =
-            '/dashboard/movieflix';
+          router.push('/dashboard/movieflix');
         }}
         className={toClassNames([
           styles.appTitle
@@ -105,8 +104,7 @@ const Header = () => {
       >
         <p
           onClick={() => {
-            window.location.href =
-              '/dashboard/movieflix';
+            router.push('/dashboard/movieflix');
           }}
           style={{ cursor: 'pointer' }}
         >
@@ -115,8 +113,7 @@ const Header = () => {
         <p>新作・人気</p>
         <p
           onClick={() => {
-            window.location.href =
-              '/dashboard/movieflix/myList';
+            router.push('/dashboard/movieflix/myList');
           }}
           style={{ cursor: 'pointer' }}
         >
