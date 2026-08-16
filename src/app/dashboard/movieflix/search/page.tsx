@@ -23,27 +23,34 @@ const SearchContent = () => {
   useEffect(() => {
     if (!keyword) return;
 
-    // 同じ検索はキャッシュしておき、同じリクエスト送信を防ぐ.
-    const cacheKey = `search:${keyword}`;
-    const cached =
-      sessionStorage.getItem(cacheKey);
+    async function run() {
+      // 同じ検索はキャッシュしておき、同じリクエスト送信を防ぐ.
+      const cacheKey = `search:${keyword}`;
+      const cached =
+        sessionStorage.getItem(cacheKey);
 
-    if (cached) {
-      setResults(JSON.parse(cached));
-      setIsLoading(false);
-      return;
-      // キャッシュがあればそこからデータを得る.
-    }
-    fetchMoviesByKeyword(keyword)
-      .then(data => {
+      if (cached) {
+        // キャッシュがあればそこからデータを得る.
+        setResults(JSON.parse(cached));
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const data =
+          await fetchMoviesByKeyword(keyword);
         sessionStorage.setItem(
           cacheKey,
           JSON.stringify(data)
         ); // キャッシュを保存
         setResults(data);
-      })
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    run();
   }, [keyword]);
 
   if (isLoading) return <Loading />;
