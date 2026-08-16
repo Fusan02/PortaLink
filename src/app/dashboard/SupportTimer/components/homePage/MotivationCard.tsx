@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import motivationCard from '../../styles/homePage/MotivationCard.css';
 
 // メッセージリスト（コンポーネント外に定義）
@@ -19,13 +19,10 @@ const MESSAGES = [
 ];
 
 const MotivationCard = () => {
-    // ランダムなメッセージを選択
-    const [message, setMessage] = useState('');
-
-    useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * MESSAGES.length);
-        setMessage(MESSAGES[randomIndex]);
-    }, []);
+    // ランダムなメッセージを選択（マウント時に1回だけ選ぶので遅延初期化で十分）
+    const [message] = useState(
+        () => MESSAGES[Math.floor(Math.random() * MESSAGES.length)]
+    );
 
     return (
         <div className={motivationCard.container}>

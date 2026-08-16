@@ -33,7 +33,10 @@ const useProfile = () => {
     }, []);
 
     useEffect(() => {
-        reload();
+        async function run() {
+            await reload();
+        }
+        run();
     }, [reload]);
 
     return { profile, username, email, loading, error, reload };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSession } from '../../hooks/useSession';
 import tagColorEditor from '../../styles/settingPage/tagColorEditot.css';
 
@@ -11,25 +11,24 @@ interface TagColorEditorProps {
 
 const TagColorEditor = ({ tagColors, onColorChange }: TagColorEditorProps) => {
     const { sessions, fetchSessions } = useSession();
-    const [allTags, setAllTags] = useState<string[]>([]);
 
     // 初回マウント時にセッションを取得
     useEffect(() => {
         fetchSessions();
     }, [fetchSessions]);
 
-    // セッションから使用されているタグのみを取得
-    useEffect(() => {
-        const sessionTags = Array.from(
-            new Set(
-                sessions
-                    .map((s) => s.tag)
-                    .filter((tag): tag is string => tag !== undefined)
-            )
-        );
-
-        setAllTags(sessionTags);
-    }, [sessions]);
+    // セッションから使用されているタグのみを取得（sessions からの派生値なので state 化せず算出する）
+    const allTags = useMemo(
+        () =>
+            Array.from(
+                new Set(
+                    sessions
+                        .map((s) => s.tag)
+                        .filter((tag): tag is string => tag !== undefined)
+                )
+            ),
+        [sessions]
+    );
 
     return (
         <div className={tagColorEditor.container}>

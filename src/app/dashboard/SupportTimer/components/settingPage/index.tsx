@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Settings } from '../../types';
 // import ToneSelector from './ToneSelector';
 import GoalInput from './GoalInput';
@@ -12,13 +12,17 @@ import TagColorEditor from './TagColorEditor';
 const SettingsPage = () => {
     const { settings, loading, error, saveSettings } = useSettings();
 
+    // settings がフェッチ／保存で新しくなったら localSettings をリセットする
+    // （useEffect ではなくレンダー中に検知することで余分な再レンダーを避ける）
+    const [prevSettings, setPrevSettings] = useState(settings);
     const [localSettings, setLocalSettings] = useState<Settings>(settings);
+    if (settings !== prevSettings) {
+        setPrevSettings(settings);
+        setLocalSettings(settings);
+    }
+
     const [showToast, setShowToast] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
-
-    useEffect(() => {
-        setLocalSettings(settings);
-    }, [settings]);
 
     {/*
     const handleToneChange = (tone: AITone) => {

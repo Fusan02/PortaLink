@@ -136,7 +136,10 @@ export const useSettings = (): UseSettingsReturn => {
 
     // 初回マウント時に設定を取得
     useEffect(() => {
-        fetchSettings();
+        async function run() {
+            await fetchSettings();
+        }
+        run();
     }, [fetchSettings]);
 
     return {
