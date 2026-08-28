@@ -13,9 +13,7 @@ export default function MovieflixLayout({
       <Suspense fallback={null}>
         <Header />
       </Suspense>
-      <div className={styles.content}>
-        {children}
-      </div>
+      <div className={styles.content}>{children}</div>
       <Footer />
     </div>
   );
