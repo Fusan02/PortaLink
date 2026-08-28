@@ -7,12 +7,13 @@ import styles from './MovieDetail.css';
 import { ArrowLeft, Clock, Star } from 'lucide-react';
 import type { Movie } from '../types';
 import { useEffect, useRef, useState } from 'react';
-import { fetchMovieDetail } from '../api/movie';
+import { fetchMovieDetail, fetchMovieVideos } from '../api/movie';
 import { useRouter } from 'next/navigation';
 import Loading from '../components/Loading/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useLists } from '../hooks/useLists';
+import TrailerModal from '../components/TrailerModal/TrailerModal';
 
 const MovieDetail = () => {
   const router = useRouter();
@@ -35,8 +36,27 @@ const MovieDetail = () => {
     new Set()
   );
   const [isPickerOpen, setIsPickerOpen] = useState(false);
-
   const pickerRef = useRef<HTMLDivElement>(null);
+  const [trailerKey, setTrailerKey] = useState<string | null>(null);
+  const [isTrailerLoading, setIsTrailerLoading] = useState(false);
+
+  const handlePlayClick = async () => {
+    if (!movieId) return;
+
+    setIsTrailerLoading(true);
+    try {
+      const video = await fetchMovieVideos(movieId);
+      if (video) {
+        setTrailerKey(video.key);
+      } else {
+        alert('予告動画が見つかりませんでした');
+      }
+    } catch {
+      alert('予告動画の取得に失敗しました');
+    } finally {
+      setIsTrailerLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchLists();
@@ -178,7 +198,8 @@ const MovieDetail = () => {
                 </div>
                 <div className={toClassNames([styles.movieDetailActions])}>
                   <button
-                    onClick={() => alert('未実装です')}
+                    onClick={handlePlayClick}
+                    disabled={isTrailerLoading}
                     className={toClassNames([
                       styles.movieDetailBtn,
                       styles.movieDetailBtnPrimary
@@ -188,7 +209,7 @@ const MovieDetail = () => {
                       icon={faPlay}
                       className={styles.icon}
                     />
-                    Watch Now
+                    Play Trailer
                   </button>
                   <div className={styles.addToListWrap} ref={pickerRef}>
                     <button
@@ -251,6 +272,12 @@ const MovieDetail = () => {
             </div>
           </div>
         </>
+      )}
+      {trailerKey && (
+        <TrailerModal
+          videoKey={trailerKey}
+          onClose={() => setTrailerKey(null)}
+        />
       )}
     </div>
   );

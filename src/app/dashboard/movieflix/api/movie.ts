@@ -1,4 +1,10 @@
-import type { Movie, MovieJson, MovieDetailJson } from '../types';
+import type {
+  Movie,
+  MovieJson,
+  MovieDetailJson,
+  Video,
+  VideoJson
+} from '../types';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -62,4 +68,48 @@ const fetchMoviesByKeyword = async (keyword: string): Promise<Movie[]> => {
   })) as Movie[];
 };
 
-export { fetchPopularMovies, fetchMovieDetail, fetchMoviesByKeyword };
+const fetchMovieVideos = async (
+  movieId: string
+): Promise<Video | null> => {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}/videos?language=ja-JP`,
+    { headers }
+  );
+  const data = await res.json();
+  let results = data.results as VideoJson[];
+
+  if (results.length === 0) {
+    const fallbackRes = await fetch(
+      `${BASE_URL}/movie/${movieId}/videos`,
+      { headers }
+    );
+    const fallbackData = await fallbackRes.json();
+    results = fallbackData.results as VideoJson[];
+  }
+
+  const trailer =
+    results.find(
+      v => v.site === 'YouTube' && v.type === 'Trailer' && v.official
+    ) ??
+    results.find(v => v.site === 'YouTube' && v.type === 'Trailer') ??
+    results.find(v => v.site === 'YouTube' && v.type === 'Teaser') ??
+    null;
+
+  if (!trailer) return null;
+
+  return {
+    id: trailer.id,
+    key: trailer.key,
+    name: trailer.name,
+    site: trailer.site,
+    type: trailer.type,
+    official: trailer.official
+  };
+};
+
+export {
+  fetchPopularMovies,
+  fetchMovieDetail,
+  fetchMoviesByKeyword,
+  fetchMovieVideos
+};

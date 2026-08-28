@@ -7,14 +7,17 @@ import type { Movie } from './types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { fetchPopularMovies } from './api/movie';
+import { fetchMovieVideos, fetchPopularMovies } from './api/movie';
 import Loading from './components/Loading/loading';
+import TrailerModal from './components/TrailerModal/TrailerModal';
 
 const MovieFlix = () => {
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [heroIndex] = useState(() => Math.floor(Math.random() * 20));
+  const [trailerKey, setTrailerKey] = useState<string | null>(null);
+  const [isTrailerLoading, setIsTrailerLoading] = useState(false);
 
   useEffect(() => {
     // 次の配列内の各処理が終わるまで待つための Promise.
@@ -23,6 +26,24 @@ const MovieFlix = () => {
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
+
+  const handlePlayClick = async () => {
+    if (!heroId) return;
+
+    setIsTrailerLoading(true);
+    try {
+      const video = await fetchMovieVideos(heroId);
+      if (video) {
+        setTrailerKey(video.key);
+      } else {
+        alert('予告動画が見つかりませんでした');
+      }
+    } catch {
+      alert('予告動画の取得に失敗しました');
+    } finally {
+      setIsTrailerLoading(false);
+    }
+  };
 
   if (isLoading) return <Loading />;
   if (isError) return <p>エラーが発生しました</p>;
@@ -73,7 +94,8 @@ const MovieFlix = () => {
           )}
           <div className={toClassNames([styles.heroSectionActions])}>
             <button
-              onClick={() => alert('未実装です')}
+              onClick={handlePlayClick}
+              disabled={isTrailerLoading}
               className={toClassNames([
                 styles.heroSectionBtn,
                 styles.heroSectionBtnPrimary
@@ -96,6 +118,13 @@ const MovieFlix = () => {
         </div>
       </section>
       <MovieRow title='人気映画' movies={movieList} />
+
+      {trailerKey && (
+        <TrailerModal
+          videoKey={trailerKey}
+          onClose={() => setTrailerKey(null)}
+        />
+      )}
     </div>
   );
 };
