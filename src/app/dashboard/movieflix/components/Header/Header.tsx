@@ -91,6 +91,7 @@ const Header = () => {
         >
           マイリスト
         </p>
+        <p>絞り込み検索</p>
       </div>
       <div className={toClassNames([styles.appSearchWrap])}>
         <input
