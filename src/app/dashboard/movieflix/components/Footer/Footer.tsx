@@ -13,8 +13,8 @@ const Footer = () => {
             height={30}
             className='tmdb-logo'
           />
-          This product uses the TMDB API but is
-          not endorsed or certified by TMDB.
+          This product uses the TMDB API but is not endorsed or certified
+          by TMDB.
         </div>
         <div className={styles.mfCrefit}>
           &copy; 2026 Fusan. All rights reserved.

@@ -13,44 +13,29 @@ import Loading from '../components/Loading/loading';
 const SearchContent = () => {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('q') ?? '';
-  const [results, setResults] = useState<Movie[]>(
-    []
-  );
-  const [isLoading, setIsLoading] =
-    useState(true);
+  const [results, setResults] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (!keyword) return;
 
-    async function run() {
-      // 同じ検索はキャッシュしておき、同じリクエスト送信を防ぐ.
-      const cacheKey = `search:${keyword}`;
-      const cached =
-        sessionStorage.getItem(cacheKey);
+    // 同じ検索はキャッシュしておき、同じリクエスト送信を防ぐ.
+    const cacheKey = `search:${keyword}`;
+    const cached = sessionStorage.getItem(cacheKey);
 
-      if (cached) {
-        // キャッシュがあればそこからデータを得る.
-        setResults(JSON.parse(cached));
-        setIsLoading(false);
-        return;
-      }
+    // キャッシュがあればそこから、なければAPIから取得する（setStateは常にコールバック内で行う）.
+    const resultsPromise = cached
+      ? Promise.resolve(JSON.parse(cached) as Movie[])
+      : fetchMoviesByKeyword(keyword).then(data => {
+          sessionStorage.setItem(cacheKey, JSON.stringify(data)); // キャッシュを保存
+          return data;
+        });
 
-      try {
-        const data =
-          await fetchMoviesByKeyword(keyword);
-        sessionStorage.setItem(
-          cacheKey,
-          JSON.stringify(data)
-        ); // キャッシュを保存
-        setResults(data);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    run();
+    resultsPromise
+      .then(data => setResults(data))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, [keyword]);
 
   if (isLoading) return <Loading />;
@@ -58,22 +43,11 @@ const SearchContent = () => {
 
   return (
     <div>
-      <div
-        className={toClassNames([
-          styles.movieRowSection
-        ])}
-      >
+      <div className={toClassNames([styles.movieRowSection])}>
         <h2>「{keyword.trim()}」の検索結果</h2>
-        <div
-          className={toClassNames([
-            styles.movieRowScroll
-          ])}
-        >
+        <div className={toClassNames([styles.movieRowScroll])}>
           {results.map(movie => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-            />
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       </div>
