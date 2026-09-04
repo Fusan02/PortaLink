@@ -4,17 +4,17 @@ import { Suspense } from 'react';
 import styles from './layout.css';
 
 export default function MovieflixLayout({
-  children
+    children
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <div className={styles.layoutWrapper}>
-      <Suspense fallback={null}>
-        <Header />
-      </Suspense>
-      <div className={styles.content}>{children}</div>
-      <Footer />
-    </div>
-  );
+    return (
+        <div className={styles.layoutWrapper}>
+            <Suspense fallback={null}>
+                <Header />
+            </Suspense>
+            <div className={styles.content}>{children}</div>
+            <Footer />
+        </div>
+    );
 }

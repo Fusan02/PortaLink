@@ -2,25 +2,25 @@ import { ReactNode } from 'react';
 import { toClassNames } from '@/utils/toClassNames_utils';
 
 export const SideOutAnimation = ({
-  className,
-  onAnimationStart,
-  onAnimationComplete,
+    className,
+    onAnimationStart,
+    onAnimationComplete,
 
-  children
+    children
 }: {
-  className?: string;
-  onAnimationStart?: () => void;
-  onAnimationComplete?: () => void;
+    className?: string;
+    onAnimationStart?: () => void;
+    onAnimationComplete?: () => void;
 
-  children: ReactNode;
+    children: ReactNode;
 }) => {
-  return (
-    <div
-      className={toClassNames([className])}
-      onAnimationStart={onAnimationStart}
-      onAnimationEnd={onAnimationComplete}
-    >
-      {children}
-    </div>
-  );
+    return (
+        <div
+            className={toClassNames([className])}
+            onAnimationStart={onAnimationStart}
+            onAnimationEnd={onAnimationComplete}
+        >
+            {children}
+        </div>
+    );
 };

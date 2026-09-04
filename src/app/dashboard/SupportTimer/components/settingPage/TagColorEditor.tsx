@@ -5,71 +5,79 @@ import { useSession } from '../../hooks/useSession';
 import tagColorEditor from '../../styles/settingPage/tagColorEditot.css';
 
 interface TagColorEditorProps {
-  tagColors: { [key: string]: string };
-  onColorChange: (tagName: string, color: string) => void;
+    tagColors: { [key: string]: string };
+    onColorChange: (tagName: string, color: string) => void;
 }
 
 const TagColorEditor = ({
-  tagColors,
-  onColorChange
+    tagColors,
+    onColorChange
 }: TagColorEditorProps) => {
-  const { sessions, fetchSessions } = useSession();
+    const { sessions, fetchSessions } = useSession();
 
-  // 初回マウント時にセッションを取得
-  useEffect(() => {
-    fetchSessions();
-  }, [fetchSessions]);
+    // 初回マウント時にセッションを取得
+    useEffect(() => {
+        fetchSessions();
+    }, [fetchSessions]);
 
-  // セッションから使用されているタグのみを取得（sessions からの派生値なので state 化せず算出する）
-  const allTags = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          sessions
-            .map(s => s.tag)
-            .filter((tag): tag is string => tag !== undefined)
-        )
-      ),
-    [sessions]
-  );
+    // セッションから使用されているタグのみを取得（sessions からの派生値なので state 化せず算出する）
+    const allTags = useMemo(
+        () =>
+            Array.from(
+                new Set(
+                    sessions
+                        .map(s => s.tag)
+                        .filter((tag): tag is string => tag !== undefined)
+                )
+            ),
+        [sessions]
+    );
 
-  return (
-    <div className={tagColorEditor.container}>
-      <div className={tagColorEditor.title}>🎨 タグの色設定</div>
+    return (
+        <div className={tagColorEditor.container}>
+            <div className={tagColorEditor.title}>🎨 タグの色設定</div>
 
-      {allTags.length === 0 ? (
-        <div className={tagColorEditor.nonTag}>
-          まだタグが使用されていません
-        </div>
-      ) : (
-        <div className={tagColorEditor.tags}>
-          {allTags
-            .filter(tag => tag && tag.trim() !== '')
-            .map(tag => (
-              <div key={tag} className={tagColorEditor.tagContainer}>
-                <div
-                  className={tagColorEditor.tag}
-                  style={{ backgroundColor: tagColors[tag] || '#757575' }}
-                >
-                  {tag}
+            {allTags.length === 0 ? (
+                <div className={tagColorEditor.nonTag}>
+                    まだタグが使用されていません
                 </div>
+            ) : (
+                <div className={tagColorEditor.tags}>
+                    {allTags
+                        .filter(tag => tag && tag.trim() !== '')
+                        .map(tag => (
+                            <div
+                                key={tag}
+                                className={tagColorEditor.tagContainer}
+                            >
+                                <div
+                                    className={tagColorEditor.tag}
+                                    style={{
+                                        backgroundColor:
+                                            tagColors[tag] || '#757575'
+                                    }}
+                                >
+                                    {tag}
+                                </div>
 
-                <input
-                  type='color'
-                  value={tagColors[tag] || '#757575'}
-                  onChange={e => onColorChange(tag, e.target.value)}
-                  className={tagColorEditor.input}
-                />
+                                <input
+                                    type='color'
+                                    value={tagColors[tag] || '#757575'}
+                                    onChange={e =>
+                                        onColorChange(tag, e.target.value)
+                                    }
+                                    className={tagColorEditor.input}
+                                />
 
-                <span className={tagColorEditor.span}>
-                  {tagColors[tag]}
-                </span>
-              </div>
-            ))}
+                                <span className={tagColorEditor.span}>
+                                    {tagColors[tag]}
+                                </span>
+                            </div>
+                        ))}
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default TagColorEditor;

@@ -1,6 +1,6 @@
 export type List = {
-  id: string;
-  name: string;
-  createdAt: string;
-  itemCount: number;
+    id: string;
+    name: string;
+    createdAt: string;
+    itemCount: number;
 };
