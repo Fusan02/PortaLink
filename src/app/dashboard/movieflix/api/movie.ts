@@ -13,12 +13,9 @@ const headers = {
 };
 
 const fetchPopularMovies = async (): Promise<Movie[]> => {
-    const res = await fetch(
-        `${BASE_URL}/movie/popular?language=ja&page=1`,
-        {
-            headers
-        }
-    );
+    const res = await fetch(`${BASE_URL}/movie/popular?language=ja&page=1`, {
+        headers
+    });
     const data = await res.json();
     return data.results.map((movie: MovieJson) => ({
         id: movie.id,
@@ -71,9 +68,7 @@ const fetchMoviesByKeyword = async (keyword: string): Promise<Movie[]> => {
     })) as Movie[];
 };
 
-const fetchMovieVideos = async (
-    movieId: string
-): Promise<Video | null> => {
+const fetchMovieVideos = async (movieId: string): Promise<Video | null> => {
     const res = await fetch(
         `${BASE_URL}/movie/${movieId}/videos?language=ja-JP`,
         { headers }
@@ -82,10 +77,9 @@ const fetchMovieVideos = async (
     let results = data.results as VideoJson[];
 
     if (results.length === 0) {
-        const fallbackRes = await fetch(
-            `${BASE_URL}/movie/${movieId}/videos`,
-            { headers }
-        );
+        const fallbackRes = await fetch(`${BASE_URL}/movie/${movieId}/videos`, {
+            headers
+        });
         const fallbackData = await fallbackRes.json();
         results = fallbackData.results as VideoJson[];
     }

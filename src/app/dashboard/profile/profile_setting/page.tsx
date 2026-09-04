@@ -15,10 +15,7 @@ const Profile_Setting = () => {
     return (
         <div className={page}>
             <div>
-                <TilteText
-                    className={styles.title}
-                    text='Profile Setting'
-                />
+                <TilteText className={styles.title} text='Profile Setting' />
                 <TextLabel
                     className={setting_styles.label}
                     text='User Name'

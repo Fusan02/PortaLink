@@ -6,13 +6,7 @@ import styles from './MovieRow.css';
 
 const SCROLL_AMOUNT = 900;
 
-const MovieRow = ({
-    title,
-    movies
-}: {
-    title: string;
-    movies: Movie[];
-}) => {
+const MovieRow = ({ title, movies }: { title: string; movies: Movie[] }) => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const scroll = (dir: 'left' | 'right') => {
@@ -27,10 +21,7 @@ const MovieRow = ({
             <h2 className={styles.movieRowTitle}>{title}</h2>
             <div className={styles.wrapper}>
                 <button
-                    className={toClassNames([
-                        styles.arrow,
-                        styles.arrowLeft
-                    ])}
+                    className={toClassNames([styles.arrow, styles.arrowLeft])}
                     onClick={() => scroll('left')}
                 >
                     ‹
@@ -41,10 +32,7 @@ const MovieRow = ({
                     ))}
                 </div>
                 <button
-                    className={toClassNames([
-                        styles.arrow,
-                        styles.arrowRight
-                    ])}
+                    className={toClassNames([styles.arrow, styles.arrowRight])}
                     onClick={() => scroll('right')}
                 >
                     ›

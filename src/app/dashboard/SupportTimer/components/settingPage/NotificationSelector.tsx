@@ -22,9 +22,7 @@ const NotificationSelector = ({
             <div className={notificationSelector.presets}>
                 {/* 開始時刻 */}
                 <div>
-                    <label
-                        className={notificationSelector.presetStartLabel}
-                    >
+                    <label className={notificationSelector.presetStartLabel}>
                         開始時刻
                     </label>
                     <input

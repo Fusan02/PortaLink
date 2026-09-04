@@ -29,10 +29,7 @@ const Profile = () => {
                 <Texts className={styles.name} text={`${username} さん`} />
                 <div className={styles.contentInfo}>
                     <Texts className={styles.content} text={'User Name'} />
-                    <Texts
-                        className={styles.contentText}
-                        text={username}
-                    />
+                    <Texts className={styles.contentText} text={username} />
                 </div>
                 <div className={styles.contentInfo}>
                     <Texts className={styles.content} text={'Email'} />

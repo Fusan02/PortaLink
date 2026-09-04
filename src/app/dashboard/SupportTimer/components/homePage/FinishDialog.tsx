@@ -36,18 +36,14 @@ const FinishDialog = ({
         <div className={finishDialog.place}>
             <div className={finishDialog.container}>
                 {/* 称賛メッセージ */}
-                <div className={finishDialog.praise}>
-                    👏 よく頑張った！
-                </div>
+                <div className={finishDialog.praise}>👏 よく頑張った！</div>
 
                 <div className={finishDialog.time}>
                     作業時間: {formatDuration(duration)}
                 </div>
 
                 {/* エラーメッセージ */}
-                {error && (
-                    <div className={finishDialog.error}>⚠️{error}</div>
-                )}
+                {error && <div className={finishDialog.error}>⚠️{error}</div>}
 
                 {/* メモ入力 */}
                 <div className={finishDialog.memo}>
@@ -64,9 +60,7 @@ const FinishDialog = ({
 
                 {/* タグ入力（オプション） */}
                 <div className={finishDialog.tag}>
-                    <label className={finishDialog.tagLabel}>
-                        🏷️ タグ
-                    </label>
+                    <label className={finishDialog.tagLabel}>🏷️ タグ</label>
                     <input
                         type='text'
                         value={tag}

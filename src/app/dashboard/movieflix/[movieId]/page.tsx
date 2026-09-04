@@ -104,9 +104,7 @@ const MovieDetail = () => {
             {movie && (
                 <>
                     <div
-                        className={toClassNames([
-                            styles.movieDetailBackdrop
-                        ])}
+                        className={toClassNames([styles.movieDetailBackdrop])}
                         style={{
                             backgroundImage: `url(${'https://image.tmdb.org/t/p/w500' + movie.poster_path})`
                         }}
@@ -117,9 +115,7 @@ const MovieDetail = () => {
                         ])}
                     />
                     <div
-                        className={toClassNames([
-                            styles.movieDetailContainer
-                        ])}
+                        className={toClassNames([styles.movieDetailContainer])}
                     >
                         <button
                             onClick={() =>
@@ -137,11 +133,7 @@ const MovieDetail = () => {
                             />
                             Back to home
                         </button>
-                        <div
-                            className={toClassNames([
-                                styles.movieDetailGrid
-                            ])}
-                        >
+                        <div className={toClassNames([styles.movieDetailGrid])}>
                             <div
                                 className={toClassNames([
                                     styles.movieDetailPosterWrap
@@ -270,9 +262,7 @@ const MovieDetail = () => {
                                     >
                                         <button
                                             onClick={() =>
-                                                setIsPickerOpen(
-                                                    prev => !prev
-                                                )
+                                                setIsPickerOpen(prev => !prev)
                                             }
                                             className={toClassNames([
                                                 styles.movieDetailBtn
@@ -288,11 +278,7 @@ const MovieDetail = () => {
                                         </button>
 
                                         {isPickerOpen && (
-                                            <div
-                                                className={
-                                                    styles.listPicker
-                                                }
-                                            >
+                                            <div className={styles.listPicker}>
                                                 {lists.length === 0 ? (
                                                     <p
                                                         className={
@@ -356,10 +342,7 @@ const MovieDetail = () => {
                 </>
             )}
             {trailerKey && (
-                <TrailerModal
-                    videoKey={trailerKey}
-                    onClose={closeTrailer}
-                />
+                <TrailerModal videoKey={trailerKey} onClose={closeTrailer} />
             )}
         </div>
     );

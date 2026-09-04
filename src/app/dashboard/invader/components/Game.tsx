@@ -20,10 +20,7 @@ export default function Game() {
     const [difficulty, setDifficulty] = useState(1);
     const [ischeating, setIsCheating] = useState(false);
 
-    const handleStart = (
-        selectedDifficulty: number,
-        IsCheating: boolean
-    ) => {
+    const handleStart = (selectedDifficulty: number, IsCheating: boolean) => {
         setGameState(GameState.PLAYING);
         setScore(0);
         setLives(3);
@@ -68,14 +65,11 @@ export default function Game() {
             for (let col = 0; col < GAME_CONFIG.enemy.cols; col++) {
                 const x =
                     GAME_CONFIG.enemy.offsetX +
-                    col *
-                        (GAME_CONFIG.enemy.width +
-                            GAME_CONFIG.enemy.spacing);
+                    col * (GAME_CONFIG.enemy.width + GAME_CONFIG.enemy.spacing);
                 const y =
                     GAME_CONFIG.enemy.offsetY +
                     row *
-                        (GAME_CONFIG.enemy.height +
-                            GAME_CONFIG.enemy.spacing);
+                        (GAME_CONFIG.enemy.height + GAME_CONFIG.enemy.spacing);
                 // 位置の決まったEnemy型の要素を配列にpush
                 enemies.push(new Enemy(x, y));
             }
@@ -154,9 +148,7 @@ export default function Game() {
 
                 // UI表示
                 ctx.fillStyle =
-                    currentGameState === GameState.GAME_OVER
-                        ? 'red'
-                        : 'yellow';
+                    currentGameState === GameState.GAME_OVER ? 'red' : 'yellow';
                 ctx.font = '48px Arial';
                 const message =
                     currentGameState === GameState.GAME_OVER
@@ -205,8 +197,7 @@ export default function Game() {
             if (isCheating) {
                 if (
                     keys[' '] ||
-                    (keys['Enter'] &&
-                        currentGameState === GameState.PLAYING)
+                    (keys['Enter'] && currentGameState === GameState.PLAYING)
                 ) {
                     bullets.push(player.shoot());
                 }
@@ -283,8 +274,7 @@ export default function Game() {
             const enemyReachedBottom = enemies.some(
                 enemy =>
                     enemy.isAlive &&
-                    enemy.position.y + enemy.size.height >=
-                        player.position.y
+                    enemy.position.y + enemy.size.height >= player.position.y
             );
             if (enemyReachedBottom) {
                 currentGameState = GameState.GAME_OVER;
@@ -312,9 +302,7 @@ export default function Game() {
             bullets.length = 0;
             bullets.push(...activeBullets);
 
-            const activeEnemyBullets = enemyBullets.filter(
-                b => b.isActive
-            );
+            const activeEnemyBullets = enemyBullets.filter(b => b.isActive);
             enemyBullets.length = 0;
             enemyBullets.push(...activeEnemyBullets);
 

@@ -10,18 +10,13 @@ interface UseListsReturn {
     error: string | null;
     fetchLists: () => Promise<void>;
     fetchListIdsContainingMovie: (movieId: string) => Promise<string[]>;
-    createList: (
-        name: string
-    ) => Promise<'created' | 'duplicate' | 'error'>;
+    createList: (name: string) => Promise<'created' | 'duplicate' | 'error'>;
     deleteList: (listId: string) => Promise<boolean>;
     addMovieToList: (
         listId: string,
         movieId: string
     ) => Promise<'added' | 'dupulicate' | 'error'>;
-    removeMovieFromList: (
-        listId: string,
-        movieId: string
-    ) => Promise<boolean>;
+    removeMovieFromList: (listId: string, movieId: string) => Promise<boolean>;
 }
 
 export const useLists = (): UseListsReturn => {
@@ -64,11 +59,10 @@ export const useLists = (): UseListsReturn => {
 
             // リストが1件以上ある時に、中身の件数をまとめて取得する
             if (listIds.length > 0) {
-                const { data: itemsData, error: itemsError } =
-                    await supabase
-                        .from('list_items')
-                        .select('list_id')
-                        .in('list_id', listIds);
+                const { data: itemsData, error: itemsError } = await supabase
+                    .from('list_items')
+                    .select('list_id')
+                    .in('list_id', listIds);
 
                 if (itemsError) {
                     setError(itemsError.message);
@@ -111,9 +105,7 @@ export const useLists = (): UseListsReturn => {
 
     // リストを作成する関数
     const createList = useCallback(
-        async (
-            name: string
-        ): Promise<'created' | 'duplicate' | 'error'> => {
+        async (name: string): Promise<'created' | 'duplicate' | 'error'> => {
             setError(null);
             setLoading(true);
 
@@ -140,9 +132,7 @@ export const useLists = (): UseListsReturn => {
                 await fetchLists();
                 return 'created';
             } catch (err) {
-                setError(
-                    err instanceof Error ? err.message : '不明なエラー'
-                );
+                setError(err instanceof Error ? err.message : '不明なエラー');
                 return 'error';
             } finally {
                 setLoading(false);

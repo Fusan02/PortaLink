@@ -10,10 +10,7 @@ interface UseSessionReturn {
     error: string | null;
     createSession: (input: SessionInput) => Promise<boolean>;
     fetchSessions: (limit?: number) => Promise<void>;
-    fetchSessionsByDateRange: (
-        startDate: Date,
-        endDate: Date
-    ) => Promise<void>;
+    fetchSessionsByDateRange: (startDate: Date, endDate: Date) => Promise<void>;
     deleteSession: (id: string) => Promise<boolean>;
 }
 
@@ -52,23 +49,19 @@ export const useSession = (): UseSessionReturn => {
                 }
 
                 // データを型変換
-                const formattedSessions: Session[] = (data || []).map(
-                    row => ({
-                        id: row.id,
-                        startTime: new Date(row.start_time),
-                        endTime: new Date(row.end_time),
-                        duration: row.duration,
-                        memo: row.memo,
-                        tag: row.tag,
-                        aiComment: row.ai_comment
-                    })
-                );
+                const formattedSessions: Session[] = (data || []).map(row => ({
+                    id: row.id,
+                    startTime: new Date(row.start_time),
+                    endTime: new Date(row.end_time),
+                    duration: row.duration,
+                    memo: row.memo,
+                    tag: row.tag,
+                    aiComment: row.ai_comment
+                }));
 
                 setSessions(formattedSessions);
             } catch (err) {
-                setError(
-                    err instanceof Error ? err.message : '不明なエラー'
-                );
+                setError(err instanceof Error ? err.message : '不明なエラー');
             } finally {
                 setLoading(false);
             }
@@ -118,9 +111,7 @@ export const useSession = (): UseSessionReturn => {
                 await fetchSessions();
                 return true;
             } catch (err) {
-                setError(
-                    err instanceof Error ? err.message : '不明なエラー'
-                );
+                setError(err instanceof Error ? err.message : '不明なエラー');
                 return false;
             } finally {
                 setLoading(false);
@@ -158,23 +149,19 @@ export const useSession = (): UseSessionReturn => {
                     return;
                 }
 
-                const formattedSessions: Session[] = (data || []).map(
-                    row => ({
-                        id: row.id,
-                        startTime: new Date(row.start_time),
-                        endTime: new Date(row.end_time),
-                        duration: row.duration,
-                        memo: row.memo,
-                        tag: row.tag,
-                        aiComment: row.ai_comment
-                    })
-                );
+                const formattedSessions: Session[] = (data || []).map(row => ({
+                    id: row.id,
+                    startTime: new Date(row.start_time),
+                    endTime: new Date(row.end_time),
+                    duration: row.duration,
+                    memo: row.memo,
+                    tag: row.tag,
+                    aiComment: row.ai_comment
+                }));
 
                 setSessions(formattedSessions);
             } catch (err) {
-                setError(
-                    err instanceof Error ? err.message : '不明なエラー'
-                );
+                setError(err instanceof Error ? err.message : '不明なエラー');
             } finally {
                 setLoading(false);
             }
@@ -203,9 +190,7 @@ export const useSession = (): UseSessionReturn => {
                 await fetchSessions();
                 return true;
             } catch (err) {
-                setError(
-                    err instanceof Error ? err.message : '不明なエラー'
-                );
+                setError(err instanceof Error ? err.message : '不明なエラー');
                 return false;
             } finally {
                 setLoading(false);

@@ -18,8 +18,7 @@ import styles from './styles/dashboard.css';
 import { page } from './styles/view.css';
 
 export const DashboardClient = ({ username }: { username: string }) => {
-    const [sideMenuModalVisible, setSideMenuModalVisible] =
-        useState(false);
+    const [sideMenuModalVisible, setSideMenuModalVisible] = useState(false);
 
     return (
         <div className={`${page} ${styles.pageAdd}`}>
@@ -55,10 +54,7 @@ export const DashboardClient = ({ username }: { username: string }) => {
             </div>
             <div className={styles.contents}>
                 {/* プロフォール */}
-                <Link
-                    href='/dashboard/profile'
-                    className={styles.LinkSetting}
-                >
+                <Link href='/dashboard/profile' className={styles.LinkSetting}>
                     <div
                         className={toClassNames([
                             styles.prifileBox,

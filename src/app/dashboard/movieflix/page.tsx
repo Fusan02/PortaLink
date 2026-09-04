@@ -32,9 +32,7 @@ const MovieFlix = () => {
     if (isError) return <p>エラーが発生しました</p>;
 
     const heroMovie =
-        movieList.length > 0
-            ? movieList[heroIndex % movieList.length]
-            : null;
+        movieList.length > 0 ? movieList[heroIndex % movieList.length] : null;
     const heroId = heroMovie?.id;
     const heroTitle = heroMovie?.original_title;
     const heroYear = heroMovie?.release_date;
@@ -49,9 +47,7 @@ const MovieFlix = () => {
                 {heroImage && (
                     <>
                         <Image
-                            className={toClassNames([
-                                styles.heroSectionBg
-                            ])}
+                            className={toClassNames([styles.heroSectionBg])}
                             src={heroImage}
                             alt={heroTitle ?? ''}
                             width={1920}
@@ -70,20 +66,12 @@ const MovieFlix = () => {
                     </>
                 )}
                 <div className={toClassNames([styles.heroSectionContent])}>
-                    <h1
-                        className={toClassNames([styles.heroSectionTitle])}
-                    >
+                    <h1 className={toClassNames([styles.heroSectionTitle])}>
                         {heroTitle}
                     </h1>
-                    <div
-                        className={toClassNames([
-                            styles.heroSectionBadges
-                        ])}
-                    >
+                    <div className={toClassNames([styles.heroSectionBadges])}>
                         <span
-                            className={toClassNames([
-                                styles.heroSectionBadge
-                            ])}
+                            className={toClassNames([styles.heroSectionBadge])}
                         >
                             {heroYear}
                         </span>
@@ -97,11 +85,7 @@ const MovieFlix = () => {
                             {heroOverview}
                         </div>
                     )}
-                    <div
-                        className={toClassNames([
-                            styles.heroSectionActions
-                        ])}
-                    >
+                    <div className={toClassNames([styles.heroSectionActions])}>
                         <button
                             onClick={() => heroId && openTrailer(heroId)}
                             disabled={isTrailerLoading}
@@ -129,10 +113,7 @@ const MovieFlix = () => {
             <MovieRow title='人気映画' movies={movieList} />
 
             {trailerKey && (
-                <TrailerModal
-                    videoKey={trailerKey}
-                    onClose={closeTrailer}
-                />
+                <TrailerModal videoKey={trailerKey} onClose={closeTrailer} />
             )}
         </div>
     );

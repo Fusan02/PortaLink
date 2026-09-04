@@ -44,9 +44,7 @@ export const useStats = (): UseStatsReturn => {
             const uniqueDates = new Set(
                 sessionData.map(
                     session =>
-                        new Date(session.start_time)
-                            .toISOString()
-                            .split('T')[0]
+                        new Date(session.start_time).toISOString().split('T')[0]
                 )
             );
 
@@ -159,8 +157,7 @@ export const useStats = (): UseStatsReturn => {
 
             // 最高記録を取得
             const bestDay = days.reduce(
-                (max, day) =>
-                    day.totalMinutes > max.totalMinutes ? day : max,
+                (max, day) => (day.totalMinutes > max.totalMinutes ? day : max),
                 days[0]
             );
 

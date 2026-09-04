@@ -68,9 +68,7 @@ const HistoryPage = () => {
             {/* セッション一覧 */}
             {sessions.length === 0 ? (
                 <div className={index.nonSessionContainer}>
-                    <div
-                        style={{ fontSize: '48px', marginBottom: '16px' }}
-                    >
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>
                         📝
                     </div>
                     <div style={{ fontSize: '16px' }}>

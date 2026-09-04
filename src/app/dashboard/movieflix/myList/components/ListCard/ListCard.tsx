@@ -31,10 +31,7 @@ const ListCard = ({
 
     return (
         <div className={toClassNames(wrapClassNames)}>
-            <button
-                onClick={onClick}
-                className={toClassNames(cardClassNames)}
-            >
+            <button onClick={onClick} className={toClassNames(cardClassNames)}>
                 <span className={toClassNames(faceClassNames)}>
                     <span className={styles.name}>{name}</span>
                 </span>

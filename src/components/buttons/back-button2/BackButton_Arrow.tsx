@@ -5,11 +5,7 @@ import React from 'react';
 import { button } from './styles/backbutton.css';
 import { toClassNames } from '@/utils/toClassNames_utils';
 
-export const BackButton_Arrow = ({
-    className
-}: {
-    className?: string;
-}) => {
+export const BackButton_Arrow = ({ className }: { className?: string }) => {
     const router = useRouter();
     return (
         <div>

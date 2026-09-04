@@ -9,8 +9,6 @@ export const TilteText = ({
     text: string;
 }) => {
     return (
-        <h1 className={toClassNames([styles.textTitle, className])}>
-            {text}
-        </h1>
+        <h1 className={toClassNames([styles.textTitle, className])}>{text}</h1>
     );
 };

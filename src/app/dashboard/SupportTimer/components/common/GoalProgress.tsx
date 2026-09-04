@@ -18,9 +18,7 @@ const GoalProgress = ({
 
     return (
         <div className={goalProgress.container}>
-            <div className={goalProgress.header}>
-                🎯 今日の目標達成状況
-            </div>
+            <div className={goalProgress.header}>🎯 今日の目標達成状況</div>
 
             {isGoalAchieved && showAchievementBanner && (
                 <div className={goalProgress.achievementBanner}>
@@ -29,13 +27,9 @@ const GoalProgress = ({
             )}
 
             <div className={goalProgress.stats}>
-                <span className={goalProgress.current}>
-                    {currentMinutes}分
-                </span>
+                <span className={goalProgress.current}>{currentMinutes}分</span>
                 <span className={goalProgress.separator}>/</span>
-                <span className={goalProgress.target}>
-                    {goalMinutes}分
-                </span>
+                <span className={goalProgress.target}>{goalMinutes}分</span>
             </div>
 
             <div className={goalProgress.progressBarContainer}>
@@ -43,9 +37,7 @@ const GoalProgress = ({
                     className={goalProgress.progressBarFill}
                     style={{
                         width: `${progress}%`,
-                        backgroundColor: isGoalAchieved
-                            ? '#4CAF50'
-                            : '#2196F3'
+                        backgroundColor: isGoalAchieved ? '#4CAF50' : '#2196F3'
                     }}
                 />
             </div>

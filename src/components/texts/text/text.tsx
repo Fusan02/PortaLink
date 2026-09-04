@@ -8,7 +8,5 @@ export const Texts = ({
     className?: string;
     text: string;
 }) => {
-    return (
-        <p className={toClassNames([styles.text, className])}>{text}</p>
-    );
+    return <p className={toClassNames([styles.text, className])}>{text}</p>;
 };

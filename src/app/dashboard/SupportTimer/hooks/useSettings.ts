@@ -44,8 +44,7 @@ export const useSettings = (): UseSettingsReturn => {
                         {
                             user_id: user.id,
                             ai_tone: newSettings.aiTone,
-                            daily_goal_minutes:
-                                newSettings.dailyGoalMinutes,
+                            daily_goal_minutes: newSettings.dailyGoalMinutes,
                             notification_start_time:
                                 newSettings.notificationStartTime,
                             notification_end_time:
@@ -66,9 +65,7 @@ export const useSettings = (): UseSettingsReturn => {
                 setSettings(newSettings);
                 return true;
             } catch (err) {
-                setError(
-                    err instanceof Error ? err.message : '不明なエラー'
-                );
+                setError(err instanceof Error ? err.message : '不明なエラー');
                 return false;
             } finally {
                 setLoading(false);

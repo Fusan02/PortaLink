@@ -48,9 +48,7 @@ export default function LoginPage() {
             if (data.user && data.user.identities?.length === 0) {
                 alert('このメールアドレスは既に登録されています。');
             } else {
-                alert(
-                    '確認メールを送信しました。メールを確認してください。'
-                );
+                alert('確認メールを送信しました。メールを確認してください。');
             }
         } else {
             alert(`エラー: ${error.message}`);

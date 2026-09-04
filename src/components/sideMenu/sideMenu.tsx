@@ -71,12 +71,7 @@ const SideMenu = ({
     onClick: () => void;
 }) => {
     return (
-        <div
-            className={toClassNames([
-                styles.menuPosition,
-                styles.menuBack
-            ])}
-        >
+        <div className={toClassNames([styles.menuPosition, styles.menuBack])}>
             <Button
                 text='Close'
                 onClick={onClick}

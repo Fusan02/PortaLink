@@ -8,10 +8,7 @@ interface ToneSelectorProps {
     onToneChange: (tone: AITone) => void;
 }
 
-const ToneSelector = ({
-    selectedTone,
-    onToneChange
-}: ToneSelectorProps) => {
+const ToneSelector = ({ selectedTone, onToneChange }: ToneSelectorProps) => {
     const tones: Array<{
         value: AITone;
         label: string;

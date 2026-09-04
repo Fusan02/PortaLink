@@ -70,8 +70,7 @@ const HomePage = () => {
                                     'scale(0.95)')
                             }
                             onMouseUp={e =>
-                                (e.currentTarget.style.transform =
-                                    'scale(1)')
+                                (e.currentTarget.style.transform = 'scale(1)')
                             }
                         >
                             ▶︎ Start
@@ -85,8 +84,7 @@ const HomePage = () => {
                                     'scale(0.95)')
                             }
                             onMouseUp={e =>
-                                (e.currentTarget.style.transform =
-                                    'scale(1)')
+                                (e.currentTarget.style.transform = 'scale(1)')
                             }
                         >
                             ◽️ Stop

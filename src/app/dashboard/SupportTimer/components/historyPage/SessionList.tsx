@@ -45,9 +45,7 @@ const SessionList = ({ sessions }: SessionListProps) => {
                             <div
                                 className={sessionList.tag}
                                 style={{
-                                    backgroundColor: getTagColor(
-                                        session.tag
-                                    )
+                                    backgroundColor: getTagColor(session.tag)
                                 }}
                             >
                                 {session.tag}
@@ -56,9 +54,7 @@ const SessionList = ({ sessions }: SessionListProps) => {
                     </div>
 
                     {/* メモ */}
-                    <div className={sessionList.memo}>
-                        「{session.memo}」
-                    </div>
+                    <div className={sessionList.memo}>「{session.memo}」</div>
 
                     {/* コメント */}
                     {session.aiComment && (

@@ -18,15 +18,11 @@ const DailyBarChart = ({ data }: DailyBarChartProps) => {
         <div className={dailyBarChart.page}>
             <div className={dailyBarChart.container}>
                 {data.map(item => {
-                    const heightPx =
-                        (item.minutes / maxMinutes) * maxHeight;
+                    const heightPx = (item.minutes / maxMinutes) * maxHeight;
                     const hasData = item.minutes > 0;
 
                     return (
-                        <div
-                            key={item.day}
-                            className={dailyBarChart.itemDay}
-                        >
+                        <div key={item.day} className={dailyBarChart.itemDay}>
                             {/* 時間表示 */}
                             <div className={dailyBarChart.time}>
                                 {item.minutes}分
@@ -36,16 +32,12 @@ const DailyBarChart = ({ data }: DailyBarChartProps) => {
                             <div
                                 className={dailyBarChart.bar({ hasData })}
                                 style={{
-                                    height: hasData
-                                        ? `${heightPx}px`
-                                        : '0px'
+                                    height: hasData ? `${heightPx}px` : '0px'
                                 }}
                             />
 
                             {/* 曜日ラベル */}
-                            <div className={dailyBarChart.day}>
-                                {item.day}
-                            </div>
+                            <div className={dailyBarChart.day}>{item.day}</div>
                         </div>
                     );
                 })}

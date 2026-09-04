@@ -29,10 +29,7 @@ const CatImage = ({ url }: CatImageProps) => {
 
     return (
         <div className={page}>
-            <button
-                onClick={refreshImage}
-                className={`${button} ${catButton}`}
-            >
+            <button onClick={refreshImage} className={`${button} ${catButton}`}>
                 他のニャンコも見る
             </button>
             <div className={`${frame} ${frame_cat}`}>

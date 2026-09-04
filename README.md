@@ -10,31 +10,31 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
 - **React 19.1.0** - UIライブラリ
 - **TypeScript 5** - 型安全な開発
 - **Vanilla Extract** - タイプセーフなCSS-in-JS
-  - `@vanilla-extract/css` - スタイル定義
-  - `@vanilla-extract/next-plugin` - Next.js統合
+    - `@vanilla-extract/css` - スタイル定義
+    - `@vanilla-extract/next-plugin` - Next.js統合
 
 ### バックエンド・認証
 
 - **Supabase** - バックエンドサービス
-  - `@supabase/supabase-js` - Supabase JavaScript クライアント
-  - `@supabase/ssr` - サーバーサイドレンダリング対応
-  - PostgreSQLデータベース
-  - 認証・認可機能
+    - `@supabase/supabase-js` - Supabase JavaScript クライアント
+    - `@supabase/ssr` - サーバーサイドレンダリング対応
+    - PostgreSQLデータベース
+    - 認証・認可機能
 
 ### アイコン
 
 - **Font Awesome** - アイコンライブラリ
-  - `@fortawesome/fontawesome-svg-core` - コアライブラリ
-  - `@fortawesome/free-solid-svg-icons` - ソリッドアイコン
-  - `@fortawesome/free-regular-svg-icons` - レギュラーアイコン
-  - `@fortawesome/react-fontawesome` - React統合
+    - `@fortawesome/fontawesome-svg-core` - コアライブラリ
+    - `@fortawesome/free-solid-svg-icons` - ソリッドアイコン
+    - `@fortawesome/free-regular-svg-icons` - レギュラーアイコン
+    - `@fortawesome/react-fontawesome` - React統合
 
 ### 開発ツール
 
 - **ESLint** - コードリンター
-  - `eslint-config-next` - Next.js用設定
-  - `@typescript-eslint/eslint-plugin` - TypeScript対応
-  - `eslint-plugin-react` - React対応
+    - `eslint-config-next` - Next.js用設定
+    - `@typescript-eslint/eslint-plugin` - TypeScript対応
+    - `eslint-plugin-react` - React対応
 - **Prettier** - コードフォーマッター
 
 ## 主な機能

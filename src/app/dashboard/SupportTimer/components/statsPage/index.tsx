@@ -46,9 +46,7 @@ const StatsPage = () => {
     if (!stats) {
         return (
             <div className={statsPage.nonStatsContainer}>
-                <div className={statsPage.nonStats}>
-                    データがありません
-                </div>
+                <div className={statsPage.nonStats}>データがありません</div>
             </div>
         );
     }
@@ -64,9 +62,7 @@ const StatsPage = () => {
     const todayDateStr = now.toISOString().split('T')[0];
 
     // 今日のデータを日付文字列で検索
-    const todayData = stats.weekly.days.find(
-        day => day.date === todayDateStr
-    );
+    const todayData = stats.weekly.days.find(day => day.date === todayDateStr);
     const todayMinutes = todayData?.totalMinutes || 0;
 
     return (

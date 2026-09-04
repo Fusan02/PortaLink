@@ -9,10 +9,7 @@ interface TagColorEditorProps {
     onColorChange: (tagName: string, color: string) => void;
 }
 
-const TagColorEditor = ({
-    tagColors,
-    onColorChange
-}: TagColorEditorProps) => {
+const TagColorEditor = ({ tagColors, onColorChange }: TagColorEditorProps) => {
     const { sessions, fetchSessions } = useSession();
 
     // 初回マウント時にセッションを取得
