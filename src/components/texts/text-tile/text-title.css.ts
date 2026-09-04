@@ -1,11 +1,11 @@
 import { style } from '@vanilla-extract/css';
 
 const textTitle = style({
-    //fontFamily: 'serif'
+  //fontFamily: 'serif'
 });
 
 const styles = {
-    textTitle,
+  textTitle
 };
 
 export default styles;

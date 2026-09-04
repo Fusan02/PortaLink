@@ -12,11 +12,13 @@
 ## 📱 機能一覧
 
 ### 🏠 Home画面
+
 - **ランダムひとこと**: 11種類のメッセージからランダムに表示
 - **タイマー機能**: Start/Stopボタンで作業時間を計測
 - **セッション記録**: 作業終了後にメモ・タグを追加してSupabaseに保存
 
 ### 📊 Stats画面
+
 - **目標達成状況**: 今日の作業時間と目標時間の進捗バー
   - リアルタイムで進捗率を表示
 - **週間棒グラフ**: 日曜日〜土曜日の作業時間を可視化
@@ -28,6 +30,7 @@
   - 累積セッション数
 
 ### 🕐 History画面
+
 - **セッション一覧**: 過去の作業履歴を時系列で表示
 - **検索・フィルタ機能**:
   - メモ内容でテキスト検索
@@ -35,6 +38,7 @@
 - **タグ表示**: タグごとにカスタマイズ可能な色で表示
 
 ### ⚙️ Settings画面
+
 - **1日の目標時間**: プリセット(30/60/90/120分)またはカスタム入力
 - **タグの色設定**: 使用中のタグの色をカラーピッカーでカスタマイズ
   - セッションで使用されているタグのみ表示
@@ -46,18 +50,21 @@
 ## 🏗️ 技術スタック
 
 ### フロントエンド
+
 - **Next.js 14** (App Router)
 - **TypeScript**
 - **Vanilla Extract** (CSS-in-JS)
 - **React Hooks** (カスタムフック活用)
 
 ### バックエンド
+
 - **Supabase**
   - PostgreSQL データベース
   - 認証機能
   - リアルタイムデータベース
 
 ### 主要なカスタムフック
+
 - `useTimer`: タイマーロジック
 - `useSession`: セッションデータのCRUD操作
 - `useStats`: 統計データの計算と取得
@@ -108,6 +115,7 @@ src/app/dashboard/SupportTimer/
 ## 🗄️ データベース構造
 
 ### テーブル: `sessions`
+
 ```sql
 - id: uuid (primary key)
 - user_id: uuid (外部キー)
@@ -120,6 +128,7 @@ src/app/dashboard/SupportTimer/
 ```
 
 ### テーブル: `user_settings`
+
 ```sql
 - user_id: uuid (primary key)
 - ai_tone: text ('gentle' | 'normal' | 'energetic')
@@ -134,6 +143,7 @@ src/app/dashboard/SupportTimer/
 ## 🚀 実装済み機能
 
 ### v1.0 (現在)
+
 - ✅ タイマー機能（開始/停止/リセット）
 - ✅ セッション記録（メモ・タグ付き）
 - ✅ Supabase連携
@@ -150,10 +160,12 @@ src/app/dashboard/SupportTimer/
 ## 🔮 今後の拡張案
 
 ### v2.0
+
 - [ ] 通知機能の実装
 - [ ] AIコメント生成（セッション保存時）
 
 ## 💡 UXのポイント
+
 1. **ランダムひとこと**: 11種類のメッセージで毎回新鮮な気持ちで開始
 2. **視覚的フィードバック**: 目標達成時のバナー、プログレスバー
 3. **1タップで開始**: 最小限の操作で作業開始
@@ -165,11 +177,13 @@ src/app/dashboard/SupportTimer/
 ## 📝 開発メモ
 
 ### 日付計算の注意点
+
 - `new Date().getDay()`は曜日インデックス（0=日曜）
 - 統計データは日付文字列（YYYY-MM-DD）で比較するのが確実
 - タイムゾーンの違いに注意
 
 ### カスタムフックの設計
+
 - ローディング・エラー状態を統一的に管理
 - useCallbackでメモ化して不要な再レンダリングを防止
 - 初回マウント時にuseEffectでデータ取得
@@ -177,4 +191,5 @@ src/app/dashboard/SupportTimer/
 ---
 
 ## 🙏 クレジット
+
 Developed with using Next.js, TypeScript, and Supabase

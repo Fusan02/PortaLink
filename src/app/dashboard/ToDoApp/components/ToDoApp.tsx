@@ -6,10 +6,10 @@ page;
 const ToDoApp = () => {
   return (
     <section className={`${page} ${extends_view}`}>
-        <h3>Supabase ToDo App</h3>
-        <form >
-            <input type='text' className={input} />
-        </form>
+      <h3>Supabase ToDo App</h3>
+      <form>
+        <input type='text' className={input} />
+      </form>
     </section>
   );
 };

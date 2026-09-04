@@ -5,25 +5,25 @@ export const app = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '100%',
+  width: '100%'
 });
 
 export const inputText = style({
-  padding: '10px',
+  padding: '10px'
 });
 
 export const submitButton = style({
   padding: '8px 15px',
-  cursor: 'pointer',
+  cursor: 'pointer'
 });
 
 export const todoItem = style({
   width: '10%',
   display: 'flex',
   alignItems: 'center',
-  marginBottom: '10px',
+  marginBottom: '10px'
 });
 
 export const todoItemInput = style({
-  padding: '7px',
+  padding: '7px'
 });

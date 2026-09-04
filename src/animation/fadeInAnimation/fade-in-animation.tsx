@@ -7,7 +7,7 @@ export const FadeInAnimation = ({
   onAnimationStart,
   onAnimationComplete,
 
-  children,
+  children
 }: {
   className?: string;
   onAnimationStart?: () => void;
@@ -17,10 +17,7 @@ export const FadeInAnimation = ({
 }) => {
   return (
     <div
-      className={toClassNames([
-        className,
-        styles.fadeInAnimation,
-      ])}
+      className={toClassNames([className, styles.fadeInAnimation])}
       onAnimationStart={onAnimationStart}
       onAnimationEnd={onAnimationComplete}
     >

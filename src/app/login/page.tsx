@@ -18,7 +18,7 @@ export default function LoginPage() {
     e.preventDefault();
     const { error } = await supabase.auth.signInWithPassword({
       email,
-      password,
+      password
     });
     if (!error) {
       router.push('/dashboard');
@@ -41,7 +41,7 @@ export default function LoginPage() {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: `${window.location.origin}/auth/callback`
       }
     });
     if (!error) {
@@ -65,11 +65,14 @@ export default function LoginPage() {
     <div className={styles.page}>
       <div className={styles.container}>
         <h2 className={styles.title}>Login</h2>
-        <form onSubmit={isSignUp ? handleSignUp : handleLogin} className={styles.form}>
+        <form
+          onSubmit={isSignUp ? handleSignUp : handleLogin}
+          className={styles.form}
+        >
           <input
             type='email'
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             placeholder='Email'
             className={styles.input}
             required
@@ -77,16 +80,21 @@ export default function LoginPage() {
           <input
             type='password'
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
             placeholder='Password'
             className={styles.input}
             required
           />
-          <button type='submit' className={styles.button}>{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+          <button type='submit' className={styles.button}>
+            {isSignUp ? 'Sign Up' : 'Sign In'}
+          </button>
           {/* ローディングモーダルようのテストボタン↓ 必要に応じて使用して。*/}
           {/* <button onClick={() => setVisible(true)}>テスト</button> */}
         </form>
-        <a onClick={() => setIsSignUp(!isSignUp)} className={styles.RegisterButton}>
+        <a
+          onClick={() => setIsSignUp(!isSignUp)}
+          className={styles.RegisterButton}
+        >
           {isSignUp ? 'Sign In' : 'Sign Up'}
         </a>
         <div className={styles.testLoginBox}>
@@ -99,31 +107,23 @@ export default function LoginPage() {
             Click to Try
           </button>
           <p className={styles.pAccount}>
-            Email: testuser@test.com<br/>
+            Email: testuser@test.com
+            <br />
             Password: test123
           </p>
         </div>
       </div>
-      <LoadingModal 
-        visible={visible}
-      />
+      <LoadingModal visible={visible} />
     </div>
   );
 }
 
-
 // ローディング画面のモーダル
-const LoadingModal = ({
-  visible,
-}: {
-  visible: boolean;
-}) => {
+const LoadingModal = ({ visible }: { visible: boolean }) => {
   if (visible) {
     return (
       <div className={styles.loadingBox}>
-        <div className={styles.loadingText}>
-          Loading
-        </div>
+        <div className={styles.loadingText}>Loading</div>
       </div>
     );
   }

@@ -3,7 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faCirclePlay, faClock, faUser } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCheckCircle,
+  faCirclePlay,
+  faClock,
+  faUser
+} from '@fortawesome/free-regular-svg-icons';
 import { faCat, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { Button, LogoutButton } from '@/components/buttons';
 import { toClassNames } from '@/utils/toClassNames_utils';
@@ -12,23 +17,21 @@ import { SideMenuModal } from '@/components/sideMenu/sideMenu';
 import styles from './styles/dashboard.css';
 import { page } from './styles/view.css';
 
-export const DashboardClient =({
-  username 
-}: { 
-  username: string 
-}) => {
+export const DashboardClient = ({ username }: { username: string }) => {
   const [sideMenuModalVisible, setSideMenuModalVisible] = useState(false);
 
   return (
     <div className={`${page} ${styles.pageAdd}`}>
       <h1>DashBoard</h1>
-      <p>ようこそ、<span className={styles.username}>{username}</span>さん</p>
+      <p>
+        ようこそ、<span className={styles.username}>{username}</span>さん
+      </p>
       <div className={styles.sideMenu}>
-        { /* サイドメニュー */ }
+        {/* サイドメニュー */}
         <Button
           className={styles.menuButton}
           onClick={() => {
-            setSideMenuModalVisible((prev) => {
+            setSideMenuModalVisible(prev => {
               return !prev;
             });
           }}
@@ -39,77 +42,77 @@ export const DashboardClient =({
         </Button>
 
         <SideMenuModal
-          className={sideMenuModalVisible ? styles.sideMenuModal : styles.hide}
-          visible={sideMenuModalVisible}
-          onClose={() => 
-            setSideMenuModalVisible(false)
+          className={
+            sideMenuModalVisible ? styles.sideMenuModal : styles.hide
           }
+          visible={sideMenuModalVisible}
+          onClose={() => setSideMenuModalVisible(false)}
         />
       </div>
       <div className={styles.contents}>
-        { /* プロフォール */ }
+        {/* プロフォール */}
         <Link href='/dashboard/profile' className={styles.LinkSetting}>
-          <div className={toClassNames([
-            styles.prifileBox,
-            boxAnimation
-          ])}>
+          <div className={toClassNames([styles.prifileBox, boxAnimation])}>
             <FontAwesomeIcon icon={faUser} className={styles.icon} />
             Profile
           </div>
         </Link>
 
         <h2>App Services</h2>
-        { /* サービス一覧 */ }
+        {/* サービス一覧 */}
         <div className={styles.services}>
           <Link href='/dashboard/ToDoApp' className={styles.LinkSetting}>
             <div
-              className={toClassNames([
-                styles.serviceBox,
-                boxAnimation,
-            ])}>
-              <FontAwesomeIcon icon={faCheckCircle} className={styles.icon} />
+              className={toClassNames([styles.serviceBox, boxAnimation])}
+            >
+              <FontAwesomeIcon
+                icon={faCheckCircle}
+                className={styles.icon}
+              />
               ToDoApp
             </div>
           </Link>
           <Link href='/dashboard/catgen' className={styles.LinkSetting}>
-            <div className={toClassNames([
-              styles.serviceBox,
-              boxAnimation,
-            ])}>
+            <div
+              className={toClassNames([styles.serviceBox, boxAnimation])}
+            >
               <FontAwesomeIcon icon={faCat} className={styles.icon} />
               Cat Imgae Generator
             </div>
           </Link>
           <Link href='/dashboard/invader' className={styles.LinkSetting}>
-            <div className={toClassNames([
-              styles.serviceBox,
-              boxAnimation,
-            ])}>
+            <div
+              className={toClassNames([styles.serviceBox, boxAnimation])}
+            >
               <FontAwesomeIcon icon={faGamepad} className={styles.icon} />
               Invader
             </div>
           </Link>
-          <Link href='/dashboard/SupportTimer' className={styles.LinkSetting}>
-            <div className={toClassNames([
-              styles.serviceBox,
-              boxAnimation,
-            ])}>
+          <Link
+            href='/dashboard/SupportTimer'
+            className={styles.LinkSetting}
+          >
+            <div
+              className={toClassNames([styles.serviceBox, boxAnimation])}
+            >
               <FontAwesomeIcon icon={faClock} className={styles.icon} />
               SupportTimer
             </div>
           </Link>
           <Link href='/dashboard/movieflix' className={styles.LinkSetting}>
-            <div className={toClassNames([
-              styles.serviceBox,
-              boxAnimation,
-            ])}>
-              <FontAwesomeIcon icon={faCirclePlay} className={styles.icon} />
+            <div
+              className={toClassNames([styles.serviceBox, boxAnimation])}
+            >
+              <FontAwesomeIcon
+                icon={faCirclePlay}
+                className={styles.icon}
+              />
               MOVIEFLIX
             </div>
           </Link>
         </div>
       </div>
-      <LogoutButton className={boxAnimation}/>
+      <LogoutButton className={boxAnimation} />
     </div>
   );
 };

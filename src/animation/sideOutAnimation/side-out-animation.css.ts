@@ -2,21 +2,21 @@ import { keyframes, style } from '@vanilla-extract/css';
 
 const fadeOutKeyframes = keyframes({
   '0%': {
-    opacity: '1',
+    opacity: '1'
   },
   '100%': {
     opacity: '0',
-    pointerEvents: 'none',
-  },
+    pointerEvents: 'none'
+  }
 });
 
 const fadeOutAnimation = style({
   animationName: fadeOutKeyframes,
   animationDuration: '1s',
-  animationFillMode: 'forwards',
+  animationFillMode: 'forwards'
 });
 
 const styles = {
-  fadeOutAnimation,
+  fadeOutAnimation
 };
 export default styles;

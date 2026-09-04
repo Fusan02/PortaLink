@@ -1,7 +1,4 @@
-import {
-  style,
-  globalStyle
-} from '@vanilla-extract/css';
+import { style, globalStyle } from '@vanilla-extract/css';
 
 globalStyle('body', {
   background: 'hsl(0, 0%, 9%)',

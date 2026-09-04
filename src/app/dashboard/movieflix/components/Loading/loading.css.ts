@@ -1,7 +1,4 @@
-import {
-  style,
-  keyframes
-} from '@vanilla-extract/css';
+import { style, keyframes } from '@vanilla-extract/css';
 
 const spin = keyframes({
   '0%': { transform: 'rotate(0deg)' },

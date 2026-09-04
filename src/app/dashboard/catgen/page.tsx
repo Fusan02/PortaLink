@@ -7,7 +7,7 @@ const CatGenerator = async () => {
   const catimage = await fetchImage();
   return (
     <div>
-      <CatImage url={catimage.url}/>
+      <CatImage url={catimage.url} />
     </div>
   );
 };

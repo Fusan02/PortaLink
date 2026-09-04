@@ -1,5 +1,5 @@
 export const toClassNames = (classNames: (string | undefined)[]) => {
-  const names = classNames.filter((val) => {
+  const names = classNames.filter(val => {
     return val !== '' && val !== undefined;
   });
 

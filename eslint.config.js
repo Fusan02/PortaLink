@@ -1,10 +1,18 @@
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
 import nextConfig from 'eslint-config-next';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 const eslintConfig = [
   {
-    ignores: ['.next/**', 'node_modules/**', '.vercel/**', 'out/**', 'build/**'],
+    ignores: [
+      '.next/**',
+      'node_modules/**',
+      '.vercel/**',
+      'out/**',
+      'build/**',
+      'coverage/**'
+    ]
   },
   js.configs.recommended,
   ...nextConfig,
@@ -16,8 +24,8 @@ const eslintConfig = [
       parser: tsParser,
       parserOptions: {
         ecmaFeatures: {
-          jsx: true,
-        },
+          jsx: true
+        }
       },
       globals: {
         window: 'readonly',
@@ -38,32 +46,30 @@ const eslintConfig = [
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly',
-        jest: 'readonly',
-      },
+        jest: 'readonly'
+      }
     },
     rules: {
-      'quotes': ['error', 'single', { 'avoidEscape': true }],
-      'semi': ['error', 'always'],
-      'jsx-quotes': ['error', 'prefer-single'],
       'no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/set-state-in-effect': 'warn'
     },
     settings: {
       react: {
-        version: 'detect',
-      },
-    },
+        version: 'detect'
+      }
+    }
   },
   {
     files: ['**/*.{ts,tsx}'],
     rules: {
-      '@typescript-eslint/no-unused-vars': ['warn'],
-    },
+      '@typescript-eslint/no-unused-vars': ['warn']
+    }
   },
+  eslintPluginPrettierRecommended
 ];
 
 export default eslintConfig;

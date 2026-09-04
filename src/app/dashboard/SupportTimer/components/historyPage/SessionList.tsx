@@ -5,72 +5,67 @@ import type { Session } from '../../types';
 import { useSettings } from '../../hooks/useSettings';
 
 interface SessionListProps {
-    sessions: Session[];
+  sessions: Session[];
 }
 
 const SessionList = ({ sessions }: SessionListProps) => {
-    const { getTagColor } = useSettings();
-    
-    const formatDate = (date: Date): string => {
-        return new Intl.DateTimeFormat('ja-JP', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-        }).format(date);
-    };
+  const { getTagColor } = useSettings();
 
-    const formatDuration = (seconds: number): string => {
-        const minutes = Math.floor(seconds / 60);
-        return `${minutes}分`;
-    };
+  const formatDate = (date: Date): string => {
+    return new Intl.DateTimeFormat('ja-JP', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(date);
+  };
 
-    return (
-        <div className={sessionList.container}>
-            {sessions.map((session) => (
-                <div
-                    key={session.id}
-                    className={sessionList.sessions}
-                >
-                    {/* 日付 */}
-                    <div className={sessionList.date}>
-                        📅 {formatDate(session.startTime)}
-                    </div>
+  const formatDuration = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    return `${minutes}分`;
+  };
 
-                    {/* メイン情報 */}
-                    <div className={sessionList.mainInfo}>
-                        {/* 時間 */}
-                        <div className={sessionList.time}>
-                            {formatDuration(session.duration)}
-                        </div>
+  return (
+    <div className={sessionList.container}>
+      {sessions.map(session => (
+        <div key={session.id} className={sessionList.sessions}>
+          {/* 日付 */}
+          <div className={sessionList.date}>
+            📅 {formatDate(session.startTime)}
+          </div>
 
-                        {/* タグ */}
-                        {session.tag && (
-                            <div
-                                className={sessionList.tag}
-                                style={{
-                                    backgroundColor: getTagColor(session.tag),
-                                }}
-                            >
-                                {session.tag}
-                            </div>
-                        )}
-                    </div>
+          {/* メイン情報 */}
+          <div className={sessionList.mainInfo}>
+            {/* 時間 */}
+            <div className={sessionList.time}>
+              {formatDuration(session.duration)}
+            </div>
 
-                    {/* メモ */}
-                    <div className={sessionList.memo}>
-                        「{session.memo}」
-                    </div>
+            {/* タグ */}
+            {session.tag && (
+              <div
+                className={sessionList.tag}
+                style={{
+                  backgroundColor: getTagColor(session.tag)
+                }}
+              >
+                {session.tag}
+              </div>
+            )}
+          </div>
 
-                    {/* コメント */}
-                    {session.aiComment && (
-                        <div className={sessionList.comment}>
-                            💬 {session.aiComment}
-                        </div>
-                    )}
-                </div>
-            ))}
+          {/* メモ */}
+          <div className={sessionList.memo}>「{session.memo}」</div>
+
+          {/* コメント */}
+          {session.aiComment && (
+            <div className={sessionList.comment}>
+              💬 {session.aiComment}
+            </div>
+          )}
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default SessionList;

@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+
+# oh-my-claudecode local state
+.omc
+
+# build outputs
+.next
+out
+build
+.vercel
+
+# testing
+coverage
+
+# generated / misc
+*.tsbuildinfo
+next-env.d.ts
+package-lock.json

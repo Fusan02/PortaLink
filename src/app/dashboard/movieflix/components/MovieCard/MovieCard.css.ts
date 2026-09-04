@@ -13,8 +13,7 @@ const movieCard = style({
   selectors: {
     '&:hover': {
       transform: 'scale(1.07)',
-      boxShadow:
-        '0 0.74vw 3.0vw rgba(229, 9, 20, 0.18)',
+      boxShadow: '0 0.74vw 3.0vw rgba(229, 9, 20, 0.18)',
       zIndex: 2
     }
   }

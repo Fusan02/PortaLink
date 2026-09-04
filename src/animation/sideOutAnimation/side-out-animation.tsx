@@ -6,7 +6,7 @@ export const SideOutAnimation = ({
   onAnimationStart,
   onAnimationComplete,
 
-  children,
+  children
 }: {
   className?: string;
   onAnimationStart?: () => void;
@@ -16,9 +16,7 @@ export const SideOutAnimation = ({
 }) => {
   return (
     <div
-      className={toClassNames([
-        className,
-      ])}
+      className={toClassNames([className])}
       onAnimationStart={onAnimationStart}
       onAnimationEnd={onAnimationComplete}
     >

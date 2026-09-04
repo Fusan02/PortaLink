@@ -1,12 +1,12 @@
 import { style } from '@vanilla-extract/css';
 
 const canvas = style({
-    border: '1px solid white',
-    display: 'block',
+  border: '1px solid white',
+  display: 'block'
 });
 
 const styles = {
-    canvas,
+  canvas
 };
 
 export default styles;

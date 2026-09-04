@@ -5,6 +5,7 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
 ## 技術スタック
 
 ### フロントエンド
+
 - **Next.js 15.5.0** - Reactベースのフルスタックフレームワーク
 - **React 19.1.0** - UIライブラリ
 - **TypeScript 5** - 型安全な開発
@@ -13,6 +14,7 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
   - `@vanilla-extract/next-plugin` - Next.js統合
 
 ### バックエンド・認証
+
 - **Supabase** - バックエンドサービス
   - `@supabase/supabase-js` - Supabase JavaScript クライアント
   - `@supabase/ssr` - サーバーサイドレンダリング対応
@@ -20,6 +22,7 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
   - 認証・認可機能
 
 ### アイコン
+
 - **Font Awesome** - アイコンライブラリ
   - `@fortawesome/fontawesome-svg-core` - コアライブラリ
   - `@fortawesome/free-solid-svg-icons` - ソリッドアイコン
@@ -27,6 +30,7 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
   - `@fortawesome/react-fontawesome` - React統合
 
 ### 開発ツール
+
 - **ESLint** - コードリンター
   - `eslint-config-next` - Next.js用設定
   - `@typescript-eslint/eslint-plugin` - TypeScript対応
@@ -36,25 +40,30 @@ Next.jsとSupabaseを使用したフルスタックWebアプリケーション�
 ## 主な機能
 
 ### 1. 認証システム
+
 - メール認証によるユーザー登録・ログイン
 - Supabase Authを使用したセキュアな認証
 - プロフィール管理
 
 ### 2. ToDoアプリ (開発中)
+
 - タスクの作成・編集・削除
 - リアルタイムデータ同期（Supabase）
 - ユーザーごとのタスク管理
 
 ### 3. 猫画像ジェネレーター
+
 - The Cat APIを使用したランダム猫画像生成
 
 ### 4. インベーダーゲーム
+
 - HTML5 Canvasを使用したレトロゲーム
 - 3段階の難易度設定（Easy/Normal/Hard）
 - 連射モード（チートモード）搭載
 - スコアシステム
 
 ### 5. SupportTImer
+
 - 作業時間を記録してくれるタイマー
 - メインページには11種の応援メッセージがランダムに表示（モチベーション用）
 - 作業内容とタグを追加して記録することが可能

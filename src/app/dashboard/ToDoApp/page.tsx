@@ -1,9 +1,7 @@
 import ToDoApp from './components/ToDoApp';
 
 const page = () => {
-  return (
-    <ToDoApp />
-  );
+  return <ToDoApp />;
 };
 
 export default page;

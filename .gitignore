@@ -44,3 +44,6 @@ next-env.d.ts
 /jest.setup.ts
 /src/test/*
 /tsconfig.test.json
+
+#omc
+.omc

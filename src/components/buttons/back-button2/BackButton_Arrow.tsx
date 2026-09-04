@@ -6,7 +6,7 @@ import { button } from './styles/backbutton.css';
 import { toClassNames } from '@/utils/toClassNames_utils';
 
 export const BackButton_Arrow = ({
-  className,
+  className
 }: {
   className?: string;
 }) => {
@@ -15,10 +15,7 @@ export const BackButton_Arrow = ({
     <div>
       <button
         onClick={() => router.back()}
-        className={toClassNames([
-          className,
-          button,
-        ])}
+        className={toClassNames([className, button])}
       >
         ←
       </button>
